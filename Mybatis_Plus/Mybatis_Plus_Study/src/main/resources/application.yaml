@@ -1,0 +1,24 @@
+# 连接池配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: ${zsh.jdbc.url}
+      username: ${zsh.jdbc.username}
+      password: ${zsh.jdbc.password}
+      driver-class-name: ${zsh.jdbc.driver}
+  profiles:
+    active: dev
+server:
+  port: 8083
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.it.pojo
+  global-config:
+    db-config:
+      # 配置MyBatis-Plus操作表的默认前缀
+      #      table-prefix: t_
+      # 配置MyBatis-Plus的主键策略
+      # assign_id : 雪花算法 -->
+      id-type: assign_id

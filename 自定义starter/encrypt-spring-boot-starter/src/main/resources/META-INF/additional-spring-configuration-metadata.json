@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "sourceType": "org.example.conf.settings",
+      "name": "zsh.service.type",
+      "defaultValue": "MD5",
+      "description": "加密API调用类型",
+      "type": "java.lang.String"
+    }
+  ]
+}

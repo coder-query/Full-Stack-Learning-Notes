@@ -1,0 +1,10 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 123.56.89.181:8848 #配置Nacos地址

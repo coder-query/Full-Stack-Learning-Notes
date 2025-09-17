@@ -1,0 +1,49 @@
+server:
+  port: 8010
+spring:
+  profiles:
+    active: dev
+    include: feign
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      config:
+        import-check:
+          enabled: false
+        server-addr: 127.0.0.1:8848
+        namespace: ${spring.profiles.active}
+logging:
+  level:
+    com.it.feign: debug
+---
+# dev环境
+spring:
+  config:
+    import:
+      - optional:nacos:common.properties?group=service-order
+      - optional:nacos:dataResource.properties?group=service-order
+    activate:
+      on-profile: dev
+
+
+---
+# test环境
+spring:
+  config:
+    import:
+      - optional:nacos:common.properties?group=service-order
+      - optional:nacos:dataResource.properties?group=service-order
+      - optional:nacos:styles.properties?group=service-order
+    activate:
+      on-profile: test
+
+
+---
+# prod环境
+spring:
+  config:
+    import:
+      - optional:nacos:dataResource.properties?group=service-order
+    activate:
+      on-profile: prod

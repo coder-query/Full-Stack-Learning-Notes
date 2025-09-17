@@ -1,0 +1,37 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order-openfeign
+  #======== Spring Cloud Consul for Service Discovery =======================
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true #优先使用服务ip进行注册
+    # =============== Spring Cloud OpenFeign 超时配置 ======================
+    openfeign:
+      client:
+        config:
+          # ====== 全局超时配置 单位(毫秒ms) ========
+          #default:
+          #connectTimeout: 4000 #连接超时时间
+          #readTimeout: 4000 #读取超时时间
+          # ====== 单个服务调用超时配置 单位(毫秒ms) ========
+          cloud-payment-service:
+            connectTimeout: 8000 #连接超时时间
+            readTimeout: 8000 #读取超时时间
+      # ======  Apache HttpClient5 配置开启 =====
+      httpclient:
+        hc5:
+          enabled: true
+          # ========开启open feign 的请求和响应压缩 ,减少网络传输中的性能消耗 =====
+      compression:
+        request:
+          enabled: true
+          min-request-size: 2048 #最小触发压缩的大小
+          mime-types: text/xml,application/xml,application/json #触发压缩数据类型
+        response:
+          enabled: true

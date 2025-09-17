@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--    引入外部配置文件-->
+    <properties resource="localhost-jdbc-config.properties"/>
+
+    <!--    <properties resource="aliyun-jdbc-config.properties"/>-->
+
+    <!--    设置-->
+    <settings>
+        <!--        开启控制台日志打印-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--        开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 将xxx_xxx这样的列名自动映射到xxXxx这样驼峰式命名的属性名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--        开启ResultMap映射级别为FULL-->
+        <!--        <setting name="autoMappingBehavior" value="FULL"/>-->
+    </settings>
+
+    <!--    给类的全限定符起别名-->
+    <typeAliases>
+        <package name="com.it.pojo"/>
+    </typeAliases>
+
+    <!--    开启PageHelper分页插件的功能-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+
+    <!--    配置环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--    mapping映射-->
+    <mappers>
+        <!--                配置方式一 : 使用相对于类路径的资源引用-->
+        <!--        <mapper resource="com/it/mapper/*.xml"/>-->
+        <!--        <mapper class="com.it.mapper.UserMapper"/>-->
+
+        <!--        &lt;!&ndash;    配置方式二 :  将包内的映射器接口全部注册为映射器  &ndash;&gt;-->
+        <!--        批量Mapper指定
+                       1. 要求xxxMapper.xml文件和xxxMapper接口的命名必须相同
+                       2. 最终打包后的位置要在一起,所以xxxMapper.xml文件和xxxMapper接口的包命名都一样即可
+        -->
+        <package name="com.it.mapper"/>
+    </mappers>
+
+</configuration>
