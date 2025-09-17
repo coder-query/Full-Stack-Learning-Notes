@@ -6,6 +6,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Boot_MongoDB_Study_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/java_io_code/pom.xml" />
+        <option value="$PROJECT_DIR$/Java_Io流/java_io_code/pom.xml" />
       </list>
     </option>
   </component>
