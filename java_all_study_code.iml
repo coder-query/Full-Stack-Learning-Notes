@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="GENERAL_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/target/classes/A-spring-context.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-Xml-Ioc/target/classes/test-spring-ioc.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-mybatis/target/classes/beans.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/classes/spring-service.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-AOP/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/target/classes/B-spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-04-fastjson/target/classes/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_02_Study/spring-tx-study/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/src/main/resources/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/SpringCloud/Dubbo-Spring/client-simple/target/classes/META-INF/spring/application.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-02-HelloSpringMVC/src/main/resources/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/src/main/resources/C-spring-context-datasource.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-mybatis/src/main/resources/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-mybatis/src/main/resources/beans.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-04-fastjson/target/springmvc-04-fastjson-1.0-SNAPSHOT/WEB-INF/classes/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-aop/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-Xml-Ioc/src/main/resources/test-spring-ioc.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/src/main/resources/spring-service.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_02_Study/spring-tx-propagation-test/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/src/main/resources/test-spring-ioc.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/src/main/resources/B-spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_02_Study/spring-aop-study/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/target/classes/test-spring-ioc.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/SSM-01-start-1.0-SNAPSHOT/WEB-INF/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-Xml-Annotation-Ioc/src/main/resources/test-spring-ioc.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-ioc-xml/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_02_Study/spring-tx-study/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/src/main/resources/spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-transaction/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-ioc-xml/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SpringCloud/Dubbo-Spring/server-simple/target/classes/META-INF/spring/application.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-Transaction/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/src/main/resources/A-spring-context.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-Transaction/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-AOP/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/SSM-01-start-1.0-SNAPSHOT/WEB-INF/classes/spring-service.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-02-HelloSpringMVC/target/springmvc-02-HelloSpringMVC-1.0-SNAPSHOT/WEB-INF/classes/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/Spring-Xml-Annotation-Ioc/target/classes/test-spring-ioc.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/classes/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_02_Study/spring-tx-propagation-test/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/Study_Test/SSM_Test/target/classes/C-spring-context-datasource.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/SSM-01-start-1.0-SNAPSHOT/WEB-INF/classes/spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_02_Study/spring-aop-study/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-03-annotation/src/main/resources/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-aop/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-02-HelloSpringMVC/target/classes/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/classes/spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-04-fastjson/src/main/resources/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/SpringCloud/Dubbo-Spring/client-simple/src/main/resources/META-INF/spring/application.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/SSM-01-start-1.0-SNAPSHOT/WEB-INF/classes/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-03-annotation/target/springmvc-03-annotation-1.0-SNAPSHOT/WEB-INF/classes/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/SpringCloud/Dubbo-Spring/server-simple/src/main/resources/META-INF/spring/application.xml</file>
+          <file>file://$MODULE_DIR$/SpringMVC/SpringMVC_01_Study/springmvc-03-annotation/target/classes/springmvc-servlet.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-mybatis/target/classes/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/SSM/SSM_Study/SSM-01-start/target/classes/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/Spring5/Spring5_01_Study/spring5-transaction/src/main/resources/applicationContext.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
