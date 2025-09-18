@@ -11,6 +11,7 @@
         <module name="Mybatis_Plus_Study" />
         <module name="MongoDB_Client_Code" />
         <module name="java_io_code" />
+        <module name="Boot_MongoDB_Spring_Data_Code" />
       </profile>
       <profile name="Annotation profile for Boot_MongoDB_MongoPlus_Code" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />

@@ -6,7 +6,7 @@ spring:
             host: 192.168.211.166
             port: 27017
             username: zsh
-            password: 123456
+            password: '123456'
             authentication-database: admin
             database: zsh_db
 server:

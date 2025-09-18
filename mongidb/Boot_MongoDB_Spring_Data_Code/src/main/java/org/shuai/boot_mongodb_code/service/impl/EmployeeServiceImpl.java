@@ -98,9 +98,9 @@ public class EmployeeServiceImpl implements EmployeeService {
    */
   @Override
   public List<Employee> select() {
-    // 第一种方式，直接继承xxxRepository接口
-    List<Employee> employeeList = employeeRepository.findAll();
-    System.out.println("第一种方式，employeeList：" + employeeList);
+    //    // 第一种方式，直接继承xxxRepository接口
+    //    List<Employee> employeeList = employeeRepository.findAll();
+    //    System.out.println("第一种方式，employeeList：" + employeeList);
 
     // 第二种方式，直接使用xxxTemplate
     List<Employee> employeeLists = this.mongoTemplate.findAll(Employee.class);
