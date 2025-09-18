@@ -8,12 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 员工控制器
- *
- * @author zrj
- * @since 2022/3/29
- */
+/** 员工控制器 */
 @Slf4j
 @RestController
 @RequestMapping("/employee")

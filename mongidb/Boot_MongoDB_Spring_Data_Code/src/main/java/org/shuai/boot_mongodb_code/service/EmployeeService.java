@@ -3,10 +3,7 @@ package org.shuai.boot_mongodb_code.service;
 import java.util.List;
 import org.shuai.boot_mongodb_code.model.entity.Employee;
 
-/**
- * @author zrj
- * @since 2022/3/29
- */
+/** */
 public interface EmployeeService {
   /**
    * 新增

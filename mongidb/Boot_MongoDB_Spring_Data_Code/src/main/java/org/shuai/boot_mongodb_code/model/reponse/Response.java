@@ -3,12 +3,7 @@ package org.shuai.boot_mongodb_code.model.reponse;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-/**
- * 响应对象
- *
- * @author zrj
- * @since 2022/3/23
- */
+/** 响应对象 */
 @Data
 @Component
 public class Response<T> {
