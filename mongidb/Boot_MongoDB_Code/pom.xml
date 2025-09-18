@@ -11,16 +11,14 @@
 	</parent>
 	
 	<groupId>org.shuai</groupId>
-	<artifactId>MongoDB_Client_Study</artifactId>
+	<artifactId>Boot_MongoDB_Code</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>Boot_MongoDB_Code</name>
+	<description>Boot_MongoDB_Code</description>
 
-	<name>MongoDB_Client_Study</name>
-	<description>MongoDB_Client_Study</description>
-	
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -30,7 +28,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-
+			<scope>test</scope>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync -->
@@ -39,6 +37,10 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>5.2.1</version>
         </dependency>
+        <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        	</dependency>
 	</dependencies>
 
 	<build>
@@ -46,7 +48,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.4.5</version>
 			</plugin>
 		</plugins>
 	</build>
