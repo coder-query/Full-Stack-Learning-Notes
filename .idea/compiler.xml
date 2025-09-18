@@ -3,20 +3,33 @@
   <component name="CompilerConfiguration">
     <option name="BUILD_PROCESS_HEAP_SIZE" value="2048" />
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="MongoDB_Client_Study" />
+        <module name="Mybatis_Plus_Study" />
+        <module name="MongoDB_Client_Code" />
         <module name="java_io_code" />
         <module name="Boot_MongoDB_Code" />
+      </profile>
+      <profile name="Annotation profile for Boot_MongoDB_MongoPlus_Code" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="D:/Maven/apache-maven-3.9.9/maven-repo/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="Boot_MongoDB_MongoPlus_Code" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Boot_MongoDB_Code" options="-parameters" />
-      <module name="MongoDB_Client_Study" options="-parameters" />
+      <module name="Boot_MongoDB_MongoPlus_Code" options="-parameters" />
+      <module name="MongoDB_Client_Code" options="-parameters" />
+      <module name="Mybatis_Plus_Study" options="-parameters" />
     </option>
   </component>
 </project>

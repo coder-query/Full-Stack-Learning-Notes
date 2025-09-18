@@ -2,12 +2,15 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/Boot_MongoDB_Code/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Boot_MongoDB_MongoPlus_Code/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Java_Io流/java_io_code/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Java_Io流/java_io_code/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Java_Io流/java_io_code/temp/GBK-zsh.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Java_Io流/java_io_code/temp/UTF-8-zsh.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Java_Io流/java_io_code/temp/print-zsh.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Mybatis_Plus/Mybatis_Plus_Study/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mongidb/Boot_MongoDB_Code/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/mongidb/MongoDB_Client_Study/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mongidb/Boot_MongoDB_MongoPlus_Code/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mongidb/MongoDB_Client_Code/src/main/java" charset="UTF-8" />
   </component>
 </project>
