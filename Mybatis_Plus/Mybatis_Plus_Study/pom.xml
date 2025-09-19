@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.5</version>
+        <version>2.7.18</version>
     </parent>
     <groupId>org.example</groupId>
     <artifactId>Mybatis_Plus_Study</artifactId>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.12</version>
+            <version>3.5.5</version>
         </dependency>
 
         <dependency>

@@ -1,4 +1,4 @@
-package org.example.redis_client;
+package org.example.jedis_client;
 
 import java.util.List;
 import redis.clients.jedis.Jedis;

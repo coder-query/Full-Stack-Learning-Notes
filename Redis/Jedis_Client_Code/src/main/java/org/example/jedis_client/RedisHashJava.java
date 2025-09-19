@@ -1,8 +1,8 @@
-package org.example.redis_client;
+package org.example.jedis_client;
 
 import redis.clients.jedis.Jedis;
 
-public class RedisZSetJava {
+public class RedisHashJava {
   public static void main(String[] args) {
     String redisHost = "192.168.211.166";
     int redisPort = 6379;
@@ -12,12 +12,10 @@ public class RedisZSetJava {
     jedis.auth("123456");
     System.out.println("连接成功");
 
-    jedis.zadd("myZSet", 1, "张三");
-    jedis.zadd("myZSet", 2, "李四");
-    jedis.zadd("myZSet", 3, "王五");
-    jedis.zadd("myZSet", 4, "小姐");
-    jedis.zadd("myZSet", 5, "小哥");
-    System.out.println(jedis.zrange("myZSet", 0, -1));
-    System.out.println(jedis.zrangeByScore("myZSet", 1, 4));
+    jedis.hset("user", "name", "zhangsan");
+    jedis.hset("user", "age", "18");
+    jedis.hset("user", "sex", "man");
+    System.out.println(jedis.hget("user", "name"));
+    System.out.println(jedis.hgetAll("user"));
   }
 }
