@@ -8,21 +8,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Jedis_Client_Code" />
         <module name="Mybatis_Plus_Study" />
-        <module name="MongoDB_Client_Code" />
         <module name="java_io_code" />
-        <module name="Boot_MongoDB_Spring_Data_Code" />
-      </profile>
-      <profile name="Annotation profile for Boot_MongoDB_MongoPlus_Code" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="D:/Maven/apache-maven-3.9.9/maven-repo/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="Boot_MongoDB_MongoPlus_Code" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Boot_MongoDB_MongoPlus_Code" target="17" />
+      <module name="Boot_MongoDB_Spring_Data_Code" target="17" />
+      <module name="MongoDB_Client_Code" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

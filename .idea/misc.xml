@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="KubernetesApiProvider">{}</component>
+  <component name="KubernetesApiProvider"><![CDATA[{}]]></component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -16,6 +16,8 @@
         <option value="$PROJECT_DIR$/mongidb/Boot_MongoDB_MongoPlus_Code/pom.xml" />
         <option value="$PROJECT_DIR$/Mybatis_Plus/Mybatis_Plus_Study/pom.xml" />
         <option value="$PROJECT_DIR$/mongidb/Boot_MongoDB_Spring_Data_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/Jedis_Client_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/Redis/Jedis_Client_Code/pom.xml" />
       </list>
     </option>
   </component>
