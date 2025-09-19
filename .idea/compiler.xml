@@ -9,8 +9,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Jedis_Client_Code" />
+        <module name="Lettuce_Client_Code" />
         <module name="Mybatis_Plus_Study" />
         <module name="java_io_code" />
+        <module name="Boot_Redis_Template_Code" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Boot_MongoDB_MongoPlus_Code" options="-parameters" />
       <module name="Boot_MongoDB_Spring_Data_Code" options="-parameters" />
+      <module name="Boot_Redis_Template_Code" options="-parameters" />
       <module name="MongoDB_Client_Code" options="-parameters" />
       <module name="Mybatis_Plus_Study" options="-parameters" />
     </option>

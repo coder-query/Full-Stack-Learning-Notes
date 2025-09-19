@@ -18,6 +18,10 @@
         <option value="$PROJECT_DIR$/mongidb/Boot_MongoDB_Spring_Data_Code/pom.xml" />
         <option value="$PROJECT_DIR$/Jedis_Client_Code/pom.xml" />
         <option value="$PROJECT_DIR$/Redis/Jedis_Client_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/Lettuce_Client_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/Redis/Lettuce_Client_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/Boot_Redis_Template_Code/pom.xml" />
+        <option value="$PROJECT_DIR$/Redis/Boot_Redis_Template_Code/pom.xml" />
       </list>
     </option>
   </component>
