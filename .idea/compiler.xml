@@ -9,15 +9,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Jedis_Client_Code" />
+        <module name="Zookeeper_Client_Code" />
+        <module name="java_io_code" />
+        <module name="Boot_MongoDB_Spring_Data_Code" />
         <module name="Lettuce_Client_Code" />
         <module name="Mybatis_Plus_Study" />
-        <module name="java_io_code" />
         <module name="Boot_Redis_Template_Code" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Boot_MongoDB_MongoPlus_Code" target="17" />
-      <module name="Boot_MongoDB_Spring_Data_Code" target="17" />
       <module name="MongoDB_Client_Code" target="17" />
     </bytecodeTargetLevel>
   </component>
