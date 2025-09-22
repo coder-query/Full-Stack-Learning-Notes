@@ -1,4 +1,4 @@
-package com.itheima.servlet;
+package com.shuai.servlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SetInfoServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = this.getServletContext();
-        context.setAttribute("msg","hello servletContext---数据成功~!");
-    }
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    ServletContext context = this.getServletContext();
+    context.setAttribute("msg", "hello servletContext---数据成功~!");
+  }
 }

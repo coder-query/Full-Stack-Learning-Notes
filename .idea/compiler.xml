@@ -9,7 +9,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Jedis_Client_Code" />
+        <module name="Factory_Pattern" />
         <module name="Zookeeper_Client_Code" />
+        <module name="Singleton_Pattern" />
         <module name="java_io_code" />
         <module name="Boot_MongoDB_Spring_Data_Code" />
         <module name="Lettuce_Client_Code" />
