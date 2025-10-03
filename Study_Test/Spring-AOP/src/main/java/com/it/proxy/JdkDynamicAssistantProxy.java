@@ -14,9 +14,9 @@ public class JdkDynamicAssistantProxy {
 				target.getClass().getInterfaces(),
 				(proxy, method, args) -> {
 					String methodName = method.getName();
-					System.out.println("动态代理-----[日志]:" + "[" + methodName + "]" + "开始执行, 参数->>" + Arrays.toString(args));
+					System.out.println("jdk动态代理-----[日志]:" + "[" + methodName + "]" + "开始执行, 参数->>" + Arrays.toString(args));
 					Object res = method.invoke(target, args);
-					System.out.println("动态代理-----[日志]:" + "[" + methodName + "]" + "结束执行, 参数->>" + Arrays.toString(args));
+					System.out.println("jdk动态代理-----[日志]:" + "[" + methodName + "]" + "结束执行, 参数->>" + Arrays.toString(args));
 					return res;
 				});
 	}

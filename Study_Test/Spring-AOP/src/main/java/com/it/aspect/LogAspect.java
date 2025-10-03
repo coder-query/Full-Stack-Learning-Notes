@@ -25,7 +25,7 @@ public class LogAspect {
 
 	@After("pointcut()")
 	public void afterMeeting(JoinPoint joinPoint) {
-		System.out.println("我是老板秘书,会议开完了，有什么问题跟我提，我向我们老板转达");
+		System.out.println("我是老板秘书,现在没我事了,我先走了哈,你们开会...");
 	}
 
 //	@Around("pointcut()")
