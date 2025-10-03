@@ -1,5 +1,6 @@
 package com;
 
+import com.it.proxy.CglibDynamicAssistantProxy;
 import com.it.proxy.JdkDynamicAssistantProxy;
 import com.it.proxy.StaticAssistantProxy;
 import com.it.service.Boss;
@@ -12,6 +13,9 @@ import com.it.service.Impl.BossImpl;
  */
 public class AOP_Test {
 	public static void main(String[] args) {
+
+		System.out.println("================================================================================");
+
 		/**
 		 * 静态代理测试
 		 */
@@ -23,8 +27,18 @@ public class AOP_Test {
 		/**
 		 * JDK动态代理测试
 		 */
-		Boss proxyInstance = (Boss) JdkDynamicAssistantProxy.getProxyInstance(new BossImpl());
-		proxyInstance.startMeeting();
+		Boss jdkProxyInstance = (Boss) JdkDynamicAssistantProxy.getProxyInstance(new BossImpl());
+		jdkProxyInstance.startMeeting();
 
+
+		System.out.println("================================================================================");
+
+		/**
+		 * CGLIB动态代理测试
+		 */
+		Boss cglibProxyInstance = (Boss) CglibDynamicAssistantProxy.getProxyInstance(new BossImpl());
+		cglibProxyInstance.startMeeting();
+
+		System.out.println("================================================================================");
 	}
 }
