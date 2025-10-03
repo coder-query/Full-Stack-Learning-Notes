@@ -14,7 +14,7 @@ public class Spring_AOP_Test {
         ClassPathXmlApplicationContext IOC =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        Boss boss = IOC.getBean(BossImpl.class); // 拿的到吗? ---> 拿到的是代理对象
+        Boss boss = IOC.getBean(Boss.class); // 拿的到吗? ---> 拿到的是代理对象
 
         // 如果这个bean没有被Spring AOP 代理, 那么这个类的对象直接放入IOC
 
