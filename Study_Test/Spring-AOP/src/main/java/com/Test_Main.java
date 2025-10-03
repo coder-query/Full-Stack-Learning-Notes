@@ -1,6 +1,4 @@
-package com.it;
-
-import com.Test_Interface;
+package com;
 
 public class Test_Main {
     public static void main(String[] args) {
