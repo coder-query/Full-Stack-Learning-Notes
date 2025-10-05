@@ -1,0 +1,22 @@
+spring:
+    application:
+        # Nacos帮助文档: https://nacos.io/zh-cn/docs/concepts.html
+        name: nacos-service-consumer-rest-template
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+                namespace: public
+                group: DEFAULT_GROUP
+management:
+    endpoint:
+        web:
+            exposure:
+                include: '*'
+server:
+    port: 7002
+
+rest:
+    server:
+        url: http://nacos-service-provider
+
