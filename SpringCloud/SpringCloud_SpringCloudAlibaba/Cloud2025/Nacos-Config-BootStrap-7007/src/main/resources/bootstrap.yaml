@@ -1,0 +1,20 @@
+server:
+    port: 7007
+spring:
+    application:
+        name: nacos-config-client-bootstrap
+    cloud:
+        nacos:
+            config:
+                # nacos 配置中心地址
+                server-addr: 127.0.0.1:8848
+                # 配置文件格式
+                file-extension: yaml
+            discovery:
+                # nacos 注册中心地址
+                server-addr: 127.0.0.1:8848
+                # 命名空间
+                namespace: public
+                # 分组
+                group: DEFAULT_GROUP
+
