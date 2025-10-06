@@ -10,11 +10,11 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>Nacos-Consumer-Rest-Template-7002</artifactId>
+    <artifactId>Nacos-Consumer-Open-Feign-7004</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>Nacos-Consumer-Rest-Template-7002</name>
-    <description>Nacos-Consumer-Rest-Template-7002</description>
+    <name>Nacos-Consumer-Open-Feign-7004</name>
+    <description>Nacos-Consumer-Open-Feign-7004</description>
 
     <properties>
         <java.version>17</java.version>
@@ -23,27 +23,25 @@
         <spring-boot.version>3.0.2</spring-boot.version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <!--        loadBalancer-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
     </dependencies>

@@ -17,6 +17,7 @@
         <module>Nacos-Provider-7001</module>
         <module>Nacos-Consumer-Rest-Template-7002</module>
         <module>Nacos-Config-BootStrap-7007</module>
+        <module>Nacos-Consumer-Open-Feign-7004</module>
     </modules>
 
     <properties>
