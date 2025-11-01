@@ -1,0 +1,12 @@
+dubbo:
+    registry:
+        address:  nacos://localhost:8848
+        group: dubbo-group
+    protocol:
+        name: dubbo
+        port: 20880
+server:
+    port: 8000
+spring:
+  application:
+      name: sample-dubbo-consumer

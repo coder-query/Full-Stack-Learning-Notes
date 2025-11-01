@@ -1,0 +1,9 @@
+dubbo:
+  registry:
+      address:  nacos://localhost:8848
+      group: dubbo-group
+server:
+    port: 8001
+spring:
+    application:
+        name: sample-dubbo-provider

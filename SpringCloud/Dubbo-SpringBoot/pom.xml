@@ -33,18 +33,55 @@
             <version>2.7.8</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-dependencies-zookeeper -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.dubbo</groupId>-->
+<!--            <artifactId>dubbo-registry-zookeeper</artifactId>-->
+<!--            <version>2.7.8</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.dubbo</groupId>-->
+<!--            <artifactId>dubbo-nacos-spring-boot-starter</artifactId>-->
+<!--            <version>3.3.0</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-registry-zookeeper</artifactId>
-            <version>2.7.8</version>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>2.1.0</version>
         </dependency>
-        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.dubbo/dubbo-dependencies-zookeeper &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.dubbo</groupId>-->
-        <!--            <artifactId>dubbo-dependencies-zookeeper</artifactId>-->
-        <!--            <version>2.7.8</version>-->
-        <!--            <type>pom</type>-->
-        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
+        <!-- 这是sentinel的核心依赖 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-core</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+        <!-- 这是将自己项目和sentinel-dashboard打通的依赖 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-transport-simple-http</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+        <!-- 这是dubbo集成setinel的核心依赖 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-dubbo-adapter</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+
     </dependencies>
 
 </project>

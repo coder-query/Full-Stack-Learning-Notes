@@ -14,6 +14,6 @@ public class SayHelloImpl implements SayHelloService {
     @Override
     public String sayHello() {
         System.out.println("我是Provider~");
-        return "嗨喽,靓仔!";
+        return "嗨喽,靓仔!我是Provider";
     }
 }
