@@ -29,9 +29,16 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+<!--        服务注册发现 nacos-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!--        sentinel 限流-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
 
         <!--        loadBalancer-->

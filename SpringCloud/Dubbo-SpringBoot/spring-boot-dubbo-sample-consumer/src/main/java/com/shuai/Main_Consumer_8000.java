@@ -4,6 +4,8 @@ import com.shuai.api.service.SayHelloService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @SpringBootApplication
+@PropertySources({
+        @PropertySource("classpath:sentinel.properties")
+})
 public class Main_Consumer_8000 {
     public static void main(String[] args) {
         SpringApplication.run(Main_Consumer_8000.class, args);
