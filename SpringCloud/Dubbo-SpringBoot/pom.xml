@@ -67,19 +67,19 @@
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-core</artifactId>
-            <version>1.8.6</version>
+            <version>1.8.1</version>
         </dependency>
         <!-- 这是将自己项目和sentinel-dashboard打通的依赖 -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-transport-simple-http</artifactId>
-            <version>1.8.6</version>
+            <version>1.8.1</version>
         </dependency>
         <!-- 这是dubbo集成setinel的核心依赖 -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-dubbo-adapter</artifactId>
-            <version>1.8.6</version>
+            <artifactId>sentinel-apache-dubbo-adapter</artifactId>
+            <version>1.8.1</version>
         </dependency>
 
     </dependencies>

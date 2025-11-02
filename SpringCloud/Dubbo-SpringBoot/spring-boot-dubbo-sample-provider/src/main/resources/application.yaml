@@ -2,6 +2,14 @@ dubbo:
   registry:
       address:  nacos://localhost:8848
       group: dubbo-group
+      parameters:
+        namespace: f7fcc6e7-febc-4b33-af96-69acbbf2bdbb
+  protocol:
+      name: dubbo
+      port: 20881
+  provider:
+      timeout: 5000
+      retries: 3
 server:
     port: 8001
 spring:
