@@ -1,0 +1,25 @@
+
+spring:
+#    config:
+#        import:
+#            - optional:nacos:nacos-service-consumer-open-feign.feign-config.properties?refresh=true
+    application:
+        name: nacos-service-consumer-open-feign
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+                namespace: public
+                group: DEFAULT_GROUP
+#            config:
+#                server-addr: 127.0.0.1:8848
+#                namespace: public
+#                group: DEFAULT_GROUP
+#                file-extension: properties
+
+# 直接配置target.service.name，避免依赖 Nacos配置中心
+target:
+    service:
+        name: nacos-service-provider
+server:
+    port: 7004
