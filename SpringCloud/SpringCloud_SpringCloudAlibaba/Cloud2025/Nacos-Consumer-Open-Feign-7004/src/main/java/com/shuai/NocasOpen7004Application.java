@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.shuai.**")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.shuai.**")
 public class NocasOpen7004Application {
     public static void main(String[] args) {
         SpringApplication.run(NocasOpen7004Application.class, args);

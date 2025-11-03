@@ -11,10 +11,29 @@ public class TestController {
     
     @Resource
     private ConsumerFeignService consumerFeignService;
-    
-    @GetMapping("/test-feign")
-    public String testFeign() {
-        System.out.println("Feign 被调用了。。。");
-        return consumerFeignService.helloNacosProvider();
+//
+//    @GetMapping("/test-feign")
+//    public String testFeign() {
+//        System.out.println("Feign 被调用了。。。");
+//        return consumerFeignService.helloNacosProvider();
+//    }
+
+    @GetMapping("/order/query")
+    public String queryOrder() {
+        System.out.println("queryOrder Feign 被调用了。。。");
+
+        return consumerFeignService.queryOrder();
     }
+
+    @GetMapping("/order/update")
+    public String updateOrder() {
+        System.out.println("updateOrder Feign 被调用了。。。");
+        return consumerFeignService.updateOrder();
+    }
+
+//    @GetMapping("/order/add")
+//    public String addOrder() {
+//        System.out.println("addOrder Feign 被调用了。。。");
+//        return consumerFeignService.addOrder();
+//    }
 }

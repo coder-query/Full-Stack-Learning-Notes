@@ -1,11 +1,22 @@
 package com.shuai.feign;
 
+import com.shuai.fallback.ConsumerOrderFallBackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name = "${target.service.name}")
+@FeignClient(name = "${target.service.name}", fallbackFactory = ConsumerOrderFallBackFactory.class)
 public interface ConsumerFeignService {
-    @RequestMapping(value = "/helloNacosProvider", method = RequestMethod.GET)
-    String helloNacosProvider();
+
+//    @GetMapping("/helloNacosProvider")
+//    String helloNacosProvider();
+
+    @GetMapping("/order/query")
+    String queryOrder();
+
+    @GetMapping("/order/update")
+    String updateOrder();
+
+//    @PostMapping("/order/add")  // 通常添加操作使用 POST
+//    String addOrder();
 }

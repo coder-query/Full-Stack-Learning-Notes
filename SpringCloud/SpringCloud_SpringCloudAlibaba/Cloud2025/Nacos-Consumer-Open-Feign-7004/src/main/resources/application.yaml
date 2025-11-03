@@ -1,8 +1,4 @@
-
 spring:
-#    config:
-#        import:
-#            - optional:nacos:nacos-service-consumer-open-feign.feign-config.properties?refresh=true
     application:
         name: nacos-service-consumer-open-feign
     cloud:
@@ -11,15 +7,28 @@ spring:
                 server-addr: 127.0.0.1:8848
                 namespace: public
                 group: DEFAULT_GROUP
-#            config:
-#                server-addr: 127.0.0.1:8848
-#                namespace: public
-#                group: DEFAULT_GROUP
-#                file-extension: properties
+        sentinel:
+            transport:
+                dashboard: localhost:8080  # Sentinel控制台地址
+                port: 8719  # 应用与Sentinel控制台交互的端口，默认8719
+            web-context-unify: false  # 关闭Web上下文的统一处理
+            eager: true  # 立即初始化
 
-# 直接配置target.service.name，避免依赖 Nacos配置中心
+# OpenFeign配置
+feign:
+    sentinel:
+        enabled: true  # 开启Feign对Sentinel的支持
+
+
+# 目标服务配置
 target:
     service:
         name: nacos-service-provider
+
 server:
     port: 7004
+
+# 日志配置
+logging:
+    level:
+        com.shuai.feign: DEBUG
