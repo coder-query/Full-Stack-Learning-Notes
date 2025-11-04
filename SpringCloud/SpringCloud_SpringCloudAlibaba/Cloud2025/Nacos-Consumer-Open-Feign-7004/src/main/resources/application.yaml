@@ -7,7 +7,13 @@ spring:
                 server-addr: 127.0.0.1:8848
                 namespace: public
                 group: DEFAULT_GROUP
-#        sentinel:
+        openfeign:
+            httpclient:
+                enabled: false
+            okhttp:
+                enabled: true
+
+    #        sentinel:
 #            transport:
 #                dashboard: localhost:8035  # Sentinel控制台地址
 #                port: 8719  # 应用与Sentinel控制台交互的端口，默认8719
@@ -32,3 +38,6 @@ server:
 logging:
     level:
         com.shuai.feign: DEBUG
+        # OkHttp 特定日志
+        okhttp3: DEBUG
+        com.squareup.okhttp3: DEBUG
