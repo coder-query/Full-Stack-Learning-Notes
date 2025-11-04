@@ -1,9 +1,12 @@
 package com.shuai.controller;
 
 import com.shuai.feign.ConsumerFeignService;
+import com.shuai.feign.TestFeignDemo;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -11,6 +14,8 @@ public class TestController {
     
     @Resource
     private ConsumerFeignService consumerFeignService;
+
+    @Resource private TestFeignDemo testFeignDemo;
 //
 //    @GetMapping("/test-feign")
 //    public String testFeign() {
@@ -29,6 +34,11 @@ public class TestController {
     public String updateOrder() {
         System.out.println("updateOrder Feign 被调用了。。。");
         return consumerFeignService.updateOrder();
+    }
+
+    @RequestMapping("/getMessage")
+    public String getMessage(@RequestParam(value = "name") String name) {
+        return testFeignDemo.getMessage(name);
     }
 
 //    @GetMapping("/order/add")

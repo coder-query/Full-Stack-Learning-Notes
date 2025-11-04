@@ -3,9 +3,8 @@ package com.shuai.feign;
 import com.shuai.fallback.ConsumerOrderFallBackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name = "${target.service.name}", fallbackFactory = ConsumerOrderFallBackFactory.class)
+@FeignClient(name = "${target.service.name}", fallbackFactory = ConsumerOrderFallBackFactory.class,contextId = "consumerOrderService")
 public interface ConsumerFeignService {
 
 //    @GetMapping("/helloNacosProvider")
