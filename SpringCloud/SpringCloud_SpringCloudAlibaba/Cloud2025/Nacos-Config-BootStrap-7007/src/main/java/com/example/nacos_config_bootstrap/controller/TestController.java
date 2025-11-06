@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Value(value = "${zsh.datasource.url}")
+    @Value(value = "${spring.datasource.url}")
     private String url;
     @RequestMapping("/test")
     public String test() {

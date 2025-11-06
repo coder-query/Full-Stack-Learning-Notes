@@ -1,6 +1,6 @@
-server:
-    port: 7007
 spring:
+    profiles:
+        active: dev
     application:
         name: nacos-config-client-bootstrap
     cloud:
@@ -9,7 +9,9 @@ spring:
                 # nacos 配置中心地址
                 server-addr: 127.0.0.1:8848
                 # 配置文件格式
-                file-extension: properties
+                file-extension: yml
+                # 明确指定配置前缀
+                prefix: ${spring.application.name}
                 # 命名空间
                 namespace: f7fcc6e7-febc-4b33-af96-69acbbf2bdbb
                 # 分组
