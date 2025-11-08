@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 //@Scope("prototype")
 public class A {
 
-    @Autowired
+//    @Autowired
     private B b;
     // 基本数据类型
     // 引用数据类型
@@ -17,6 +18,7 @@ public class A {
     public A() {
     }
 
+    @Autowired
     public A(B b) {
         this.b = b;
     }

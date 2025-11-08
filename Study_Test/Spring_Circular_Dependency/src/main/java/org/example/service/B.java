@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 //@Scope("prototype")
 public class B {
 
-    @Autowired
+//    @Autowired
     private A a;
 
     public B() {
     }
 
+    @Autowired
     public B(A a) {
         this.a = a;
     }
