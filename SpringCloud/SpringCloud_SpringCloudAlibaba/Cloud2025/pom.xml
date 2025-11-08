@@ -19,6 +19,7 @@
         <module>Nacos-Consumer-Rest-Template-7002</module>
         <module>Nacos-Config-BootStrap-7007</module>
         <module>Nacos-Consumer-Open-Feign-7004</module>
+        <module>Nacos-GateWay-8001</module>
     </modules>
 
     <properties>

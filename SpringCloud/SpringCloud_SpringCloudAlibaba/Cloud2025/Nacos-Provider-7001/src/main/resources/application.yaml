@@ -8,11 +8,11 @@ spring:
                 server-addr: 127.0.0.1:8848
                 namespace: public
                 group: DEFAULT_GROUP
-        sentinel:
-            transport:
-                dashboard: localhost:8035  # Sentinel控制台地址
-                port: 8001  # 应用与Sentinel控制台通信端口
-            web-context-unify: false # 禁用Sentinel的WebContext
+#        sentinel:
+#            transport:
+#                dashboard: localhost:8035  # Sentinel控制台地址
+#                port: 8001  # 应用与Sentinel控制台通信端口
+#            web-context-unify: false # 禁用Sentinel的WebContext
 server:
     port: 7001
 

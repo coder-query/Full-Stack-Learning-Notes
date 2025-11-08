@@ -3,11 +3,14 @@ package com.shuai.controller;
 import com.shuai.feign.ConsumerFeignService;
 import com.shuai.feign.TestFeignDemo;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Enumeration;
 
 @RestController
 public class TestController {
@@ -46,4 +49,18 @@ public class TestController {
 //        System.out.println("addOrder Feign 被调用了。。。");
 //        return consumerFeignService.addOrder();
 //    }
+
+    @RequestMapping("/send")
+    public String send(HttpServletRequest httpServletRequest) {
+//        "DETAILS_USER_ID",   // 对应网关添加的用户ID头
+//                "DETAILS_USERNAME",  // 对应网关添加的用户名头
+//                "USER_KEY"
+        String detailsUserIdValue = httpServletRequest.getHeader("DETAILS_USER_ID");
+        System.out.println("detailsUserIdValue = " + detailsUserIdValue);
+        String detailsUsernameValue = httpServletRequest.getHeader("DETAILS_USERNAME");
+        System.out.println("detailsUsernameValue = " + detailsUsernameValue);
+        String userKeyValue = httpServletRequest.getHeader("USER_KEY");
+        System.out.println("userKeyValue = " + userKeyValue);
+        return testFeignDemo.send();
+    }
 }

@@ -8,4 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface TestFeignDemo {
     @RequestMapping("/getMessage")
     String getMessage(@RequestParam(value = "name") String name);
+    @RequestMapping("/send")
+    String send();
 }
