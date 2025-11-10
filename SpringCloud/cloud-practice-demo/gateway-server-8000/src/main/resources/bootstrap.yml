@@ -1,0 +1,32 @@
+spring:
+    application:
+        name: gateway-server
+    profiles:
+        active: dev
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+                namespace: public
+                group: DEFAULT_GROUP
+        gateway:
+            routes:
+                - id: order_route
+                  uri: lb://order-server
+                  predicates:
+                      - Path=/order/**
+#                  filters:
+#                      - StripPrefix=1
+                -  id: product_route
+                   uri: lb://product-server
+                   predicates:
+                        - Path=/product/**
+#                   filters:
+#                       - StripPrefix=1
+# 日志配置
+logging:
+    level:
+        com.shuai.feign: DEBUG
+        # OkHttp 特定日志
+        okhttp3: DEBUG
+        com.squareup.okhttp3: DEBUG
