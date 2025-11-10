@@ -1,6 +1,5 @@
-package com.shuai.controller.test;
+package shuai.controller.test;
 
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +23,6 @@ public class TestController {
 
     @RequestMapping("/predicateTest")
     public String predicateTest(){
-        return "predicateTest生产服务B - 7001 被调佣了。。。";
+        return "predicateTest生产服务C - 7003 被调佣了。。。";
     }
 }

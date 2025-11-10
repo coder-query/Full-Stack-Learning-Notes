@@ -11,7 +11,7 @@ import java.util.Enumeration;
 /**
  * OpenFeign全局拦截器：从当前请求头中提取需要传递的信息，添加到Feign调用的请求头中
  */
-@Component // 全局生效：Spring会自动将其注册为所有FeignClient的拦截器
+//@Component // 全局生效：Spring会自动将其注册为所有FeignClient的拦截器
 public class GlobalFeignHeaderInterceptor implements RequestInterceptor {
 
     // 需要传递的请求头列表（根据你的业务场景定义，如网关添加的用户ID、用户名等）

@@ -1,0 +1,30 @@
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+                namespace: public
+                group: DEFAULT_GROUP
+
+        gateway:
+            discovery:
+                locator:
+                    lowerCaseServiceId: true
+                    ####开启以服务id去注册中心上获取转发地址
+                    enabled: true
+            routes:
+                - id: user_route
+                  uri: lb://nacos-service-provider
+                  predicates:
+                    - Path=/predicateTest/**
+                    - He=X-Access-Token
+                  filters:
+                    - HeAuth
+
+    application:
+        name: cloud-gateway
+server:
+    port: 8001
+
+
+

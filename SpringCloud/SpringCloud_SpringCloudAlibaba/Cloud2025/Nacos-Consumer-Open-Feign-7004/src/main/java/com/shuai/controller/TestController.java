@@ -52,9 +52,6 @@ public class TestController {
 
     @RequestMapping("/send")
     public String send(HttpServletRequest httpServletRequest) {
-//        "DETAILS_USER_ID",   // 对应网关添加的用户ID头
-//                "DETAILS_USERNAME",  // 对应网关添加的用户名头
-//                "USER_KEY"
         String detailsUserIdValue = httpServletRequest.getHeader("DETAILS_USER_ID");
         System.out.println("detailsUserIdValue = " + detailsUserIdValue);
         String detailsUsernameValue = httpServletRequest.getHeader("DETAILS_USERNAME");
