@@ -19,14 +19,14 @@ public class ApplicationBoot {
     @Bean(name = "asyncExecutorPool1")
     public Executor asyncExecutorPool1() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(5);   // 根据任务量调整
-        executor.setMaxPoolSize(5);    // 根据峰值调整
-        executor.setQueueCapacity(200); // 根据内存和任务特性调整
-        executor.setKeepAliveSeconds(60); // 空闲线程存活时间
+        executor.setCorePoolSize(5);
+        executor.setMaxPoolSize(5);
+        executor.setQueueCapacity(200);
+        executor.setKeepAliveSeconds(60);
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.setThreadNamePrefix("asyncExecutorPool-zsh-thread-");
-        executor.setWaitForTasksToCompleteOnShutdown(true); // 优雅关闭
-        executor.setAwaitTerminationSeconds(60); // 等待任务完成的最大时间
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(60);
         executor.initialize();
         return TtlExecutors.getTtlExecutor(executor);
     }

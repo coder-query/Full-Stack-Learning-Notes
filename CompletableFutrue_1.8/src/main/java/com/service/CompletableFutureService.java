@@ -18,6 +18,9 @@
         private JobService2 jobService2;
 
         @Resource
+        private JobService3 jobService3;
+
+        @Resource
         private
         AsyncJobPoolService asyncJobPoolService;
 
@@ -47,11 +50,19 @@
 //            return runJobResult1 + "   " + runJobResult2;
             CompletableFuture<String> future = jobService2.runJob();
             try {
+                System.out.println("请注意，现在代码已经执行到这里了哦，看一下上面的任务有没有返回值哦---runJobResult1 ： " + future.get());
                 return future.get();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             } catch (ExecutionException e) {
                 throw new RuntimeException(e);
             }
+
+//            for (int i = 1; i <= 20; i++){
+//                jobService3.runJob();
+//            }
+//            System.out.println("上面任务还在执行，注意是否返回了结果哦");
+
+//            return "成功了嘟嘟";
         }
     }
