@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class JobService2 {
 
-    @Async(value = "asyncExecutorPool")
+    @Async(value = "asyncExecutorPool1")
     public String runJob() {
 
         System.out.println("[" + Thread.currentThread().getName() + "] JobService.runJob() 开始执行");
