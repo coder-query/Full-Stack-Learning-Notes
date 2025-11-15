@@ -1,10 +1,12 @@
 package com;
 
+import com.alibaba.ttl.threadpool.TtlExecutors;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @EnableAsync
@@ -15,7 +17,7 @@ public class ApplicationBoot {
     }
 
     @Bean(name = "asyncExecutorPool1")
-    public ThreadPoolTaskExecutor asyncExecutorPool1() {
+    public Executor asyncExecutorPool1() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);   // 根据任务量调整
         executor.setMaxPoolSize(5);    // 根据峰值调整
@@ -26,10 +28,10 @@ public class ApplicationBoot {
         executor.setWaitForTasksToCompleteOnShutdown(true); // 优雅关闭
         executor.setAwaitTerminationSeconds(60); // 等待任务完成的最大时间
         executor.initialize();
-        return executor;
+        return TtlExecutors.getTtlExecutor(executor);
     }
     @Bean(name = "asyncExecutorPool2")
-    public ThreadPoolTaskExecutor asyncExecutorPool2() {
+    public Executor asyncExecutorPool2() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);   // 根据任务量调整
         executor.setMaxPoolSize(5);    // 根据峰值调整

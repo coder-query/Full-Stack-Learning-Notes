@@ -4,6 +4,8 @@ package com.service;
 import com.job.ImportFileJob1;
 import com.job.ImportFileJob2;
 import com.job.fail.FailedJob;
+import com.util.ThreadLocalUtil;
+import com.util.TransmittableThreadUtil;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
@@ -23,10 +25,17 @@ public class AsyncJobPoolService {
 //    @Resource
 //    private ThreadPoolTaskExecutor asyncExecutorPool2;
 
-//    @Async(value = "asyncExecutorPool")
-    @Async(value = "asyncExecutorPool2")
+
+    @Async(value = "asyncExecutorPool1")
+//    @Async(value = "asyncExecutorPool2")
+//    @Async
     public String runJob(){
+        String s = ThreadLocalUtil.get();
+        System.out.println( Thread.currentThread().getName() +"  我在Async代码块里，现在从ThreadLocalUtil获取数据 ++++--->  " + s);
+        s = TransmittableThreadUtil.get();
+        System.out.println( Thread.currentThread().getName()+ "  我在Async代码块里，现在从TransmittableThreadUtil获取数据 ++++--->  " + s);
         System.out.println("[" + Thread.currentThread().getName() + "] AsyncJobPoolService.runJob() 开始执行");
+
         List<Runnable> jobList = createJobList();
 
         try {
