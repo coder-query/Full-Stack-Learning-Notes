@@ -6,7 +6,7 @@ public class ImportFileJob2 implements Runnable {
         System.out.println("[" + Thread.currentThread().getName() + "] 开始执行文件导入任务");
         try {
             Thread.sleep(1000L);
-//            int i = 1 / 0; // 这里会抛出异常
+            int i = 1 / 0; // 这里会抛出异常
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
