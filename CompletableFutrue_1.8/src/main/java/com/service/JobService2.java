@@ -45,7 +45,7 @@ public class JobService2 {
 
     // 修改方法参数为 Executor
     private CompletableFuture<?>[] submitAllTasks(List<Runnable> jobs,
-                                                  Executor executor,  // 改为 Executor
+                                                  Executor executor,
                                                   List<FailedJob> failedJobs) {
         CompletableFuture<?>[] futures = new CompletableFuture[jobs.size()];
 

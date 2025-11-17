@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
  * @author 帅宏-coding @Money java_offer_13k
  * @date 2025/4/14 星期一
  */
-@MapperScan("com.it.mapper")
+@MapperScan("com.**.mapper")
 @SpringBootApplication
 public class MainApplication {
   public static void main(String[] args) {

@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringbootStudyApplication {
 
     public static void main(String[] args) throws InterruptedException {
-        Thread.sleep(1000);
         SpringApplication.run(SpringbootStudyApplication.class, args);
     }
 

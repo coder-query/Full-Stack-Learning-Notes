@@ -1,0 +1,7 @@
+server:
+  tomcat:
+    threads:
+      max: 500
+spring:
+  profiles:
+    active: dev
