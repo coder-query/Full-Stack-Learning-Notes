@@ -9,4 +9,5 @@ import com.it.pojo.User;
  * @date 2025/4/14 星期一
  */
 public interface UpdateWrapperMapper extends BaseMapper<User> {
+
 }

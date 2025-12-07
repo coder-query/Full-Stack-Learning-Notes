@@ -1,2 +1,15 @@
+
+
+logging:
+    level:
+        # ========== HttpClient 4.x 详细日志 ==========
+        org.apache.http: DEBUG
+        org.apache.http.wire: DEBUG           # 显示网络传输数据
+        org.apache.http.headers: DEBUG        # 显示请求头和响应头
+        org.apache.http.impl: DEBUG
+        org.apache.http.client: DEBUG
+
+        # ========== 项目包日志 ==========
+        com.it: DEBUG
 server:
-  port: 8808
+    port: 9988
