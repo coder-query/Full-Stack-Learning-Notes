@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @TableName("t_student")
 @Data
-public class student {
+public class Student {
     @TableField(value = "s_id")
     private Integer id;
     @TableField(value = "s_name")
