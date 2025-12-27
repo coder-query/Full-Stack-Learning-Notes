@@ -1,1 +1,2 @@
-spring.application.name=Springboot3-Demo
+server:
+  port: 9798
