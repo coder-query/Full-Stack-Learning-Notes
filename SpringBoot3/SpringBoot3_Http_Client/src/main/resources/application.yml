@@ -23,4 +23,5 @@ remote:
   base-url:
     user-server: http://localhost:7777
     order-server: http://localhost:8888
-    open-server: https://api.apiopen.top/api
+#    open-server: https://api.apiopen.top/api
+    open-server: http://127.0.0.1:30000
