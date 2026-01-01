@@ -1,6 +1,6 @@
-package com.mdk.springboot3demo.controller;
+package com.shuai.springboot3demo.controller;
 
-import com.mdk.springboot3demo.service.UserService;
+import com.shuai.springboot3demo.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,10 +1,10 @@
-package com.mdk.springboot3demo;
+package com.shuai.springboot3_http_client;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Springboot3DemoApplicationTests {
+class SpringBoot3HttpClientApplicationTests {
 
     @Test
     void contextLoads() {

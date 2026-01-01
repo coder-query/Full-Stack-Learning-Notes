@@ -1,4 +1,4 @@
-package com.mdk.springboot3_http_client;
+package com.shuai.springboot3_http_client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

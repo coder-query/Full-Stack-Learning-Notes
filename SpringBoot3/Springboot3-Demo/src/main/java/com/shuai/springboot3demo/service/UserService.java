@@ -1,4 +1,4 @@
-package com.mdk.springboot3demo.service;
+package com.shuai.springboot3demo.service;
 
 import org.springframework.stereotype.Component;
 
