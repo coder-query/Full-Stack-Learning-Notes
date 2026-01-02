@@ -18,7 +18,7 @@ import java.util.Collections;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "sys_user")
-public class SysUser extends BaseEntity implements Serializable, UserDetails {
+public class SysUserEntity extends BaseEntity implements Serializable, UserDetails {
 
     @Serial
     private static final long serialVersionUID = 1L;

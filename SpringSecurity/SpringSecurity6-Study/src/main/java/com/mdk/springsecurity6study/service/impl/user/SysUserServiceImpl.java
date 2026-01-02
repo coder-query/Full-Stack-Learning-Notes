@@ -1,7 +1,7 @@
 package com.mdk.springsecurity6study.service.impl.user;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mdk.springsecurity6study.common.entity.SysUser;
+import com.mdk.springsecurity6study.common.entity.SysUserEntity;
 import com.mdk.springsecurity6study.mapper.SysUserMapper;
 import com.mdk.springsecurity6study.service.api.SysUserService;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
 */
 @Service
 @RequiredArgsConstructor
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity> implements SysUserService {
 
     private final AuthenticationManager authenticationManager;
 
@@ -31,8 +31,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 new UsernamePasswordAuthenticationToken(username, password);
         Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         Object details = authenticate.getPrincipal();
-        if (details instanceof SysUser sysUser) {
-            log.error("sysUser =>>> "+ sysUser);
+        if (details instanceof SysUserEntity sysUserEntity) {
+            log.error("sysUserEntity =>>> "+ sysUserEntity);
         }
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
