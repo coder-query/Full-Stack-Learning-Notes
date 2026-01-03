@@ -14,8 +14,9 @@
     <context:component-scan base-package="com.it"/>
 
     <!--        开启AOP注解驱动-->
-    <!-- CGLIB动态代理 proxy-target-class="true" -->
-    <aop:aspectj-autoproxy />
+    <!-- CGLIB动态代理 proxy-target-class="true" : cglib 动态代理 -->
+    <!-- CGLIB动态代理 proxy-target-class="false" : jdk 动态代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
 
 </beans>

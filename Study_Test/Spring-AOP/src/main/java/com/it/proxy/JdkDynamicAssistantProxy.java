@@ -1,5 +1,6 @@
 package com.it.proxy;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 

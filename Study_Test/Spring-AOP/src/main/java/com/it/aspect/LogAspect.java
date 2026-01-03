@@ -18,23 +18,23 @@ public class LogAspect {
 	}
 
 
-	@Before("pointcut()")
-	public void beforeMeeting(JoinPoint joinPoint) {
-		System.out.println("spring aop-----[日志]");
-		System.out.println("我是老板秘书,我们老板有事晚点到,各位大佬请喝茶....");
-	}
-
-	@After("pointcut()")
-	public void afterMeeting(JoinPoint joinPoint) {
-		System.out.println("spring aop-----[日志]");
-		System.out.println("我是老板秘书,现在没我事了,我先走了哈,你们开会...");
-	}
-
-//	@Around("pointcut()")
-//	public void around(ProceedingJoinPoint joinPoint) throws Throwable {
-//		System.out.println("我是老板秘书,我们老板有事晚点到,各位大佬请喝茶....");
-//		joinPoint.proceed();
+//	@Before("pointcut()")
+//	public void beforeMeeting(JoinPoint joinPoint) {
+//		System.out.println("spring aop-----[日志]");
 //		System.out.println("我是老板秘书,我们老板有事晚点到,各位大佬请喝茶....");
 //	}
+//
+//	@After("pointcut()")
+//	public void afterMeeting(JoinPoint joinPoint) {
+//		System.out.println("spring aop-----[日志]");
+//		System.out.println("我是老板秘书,现在没我事了,我先走了哈,你们开会...");
+//	}
+
+	@Around("pointcut()")
+	public void around(ProceedingJoinPoint joinPoint) throws Throwable {
+		System.out.println("我是老板秘书,我们老板有事晚点到,各位大佬请喝茶....");
+		joinPoint.proceed();
+		System.out.println("我是老板秘书,现在没我事了,我先走了哈,你们开会...");
+	}
 
 }

@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @date 2025/4/12 星期六 1:51
  */
 public class StaticAssistantProxy implements Boss {
-	private BossImpl target;
+	private Boss target;
 
 	public StaticAssistantProxy(BossImpl boosImpl) {
 		target = boosImpl;
