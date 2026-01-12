@@ -60,6 +60,7 @@ public class DownstreamCollectorDemo {
                         s -> s.getScores().size(),
                         Collectors.summarizingDouble(Student::calculateAverage) // 下游：汇总统计
                 ));
+        System.out.println("statsBySubjectNum = " + statsBySubjectNum);
         System.out.println("\n4. 按科目数量分组（Value=平均分统计信息）：");
         statsBySubjectNum.forEach((num, stats) -> {
             System.out.println("   科目数" + num + "：");
@@ -76,6 +77,7 @@ public class DownstreamCollectorDemo {
                         s -> s.calculateAverage() >= 85,
                         Collectors.mapping(Student::getName, Collectors.joining("、")) // 下游：拼接姓名
                 ));
+        System.out.println("nameStrByAvg "+nameStrByAvg);
         System.out.println("\n5. 按平均分≥85分区（Value=姓名拼接字符串）：");
         System.out.println("   平均分≥85的学生：" + nameStrByAvg.get(true));
         System.out.println("   平均分<85的学生：" + nameStrByAvg.get(false));
