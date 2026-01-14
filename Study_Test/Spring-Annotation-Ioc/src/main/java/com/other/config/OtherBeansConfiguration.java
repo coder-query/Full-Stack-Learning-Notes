@@ -4,6 +4,8 @@ import com.other.pojo.OtherUser;
 import com.other.service.Impl.Other_Annotation_ServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 帅宏-coding
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
  * @date 2025/3/21 星期五 9:59
  */
 @Configuration
+@Component
+@Service
 public class OtherBeansConfiguration {
 	@Bean
 	public OtherUser otherUser() {
