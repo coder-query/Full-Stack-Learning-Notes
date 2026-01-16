@@ -3,6 +3,7 @@ package com.anxiang.mybatisspring.service;
 import com.anxiang.mybatisspring.mapper.GoodsMapper;
 import com.anxiang.mybatisspring.model.Goods;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ public class BusinessService {
     private GoodsMapper goodsMapper;
 
     public List<Goods> getAllGoods() {
+//        System.out.println("goodsMapper.hashCode()===>"+goodsMapper.hashCode());
         return goodsMapper.selectAll();
     }
 }

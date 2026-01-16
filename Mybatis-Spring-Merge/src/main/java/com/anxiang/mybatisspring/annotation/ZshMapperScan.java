@@ -1,5 +1,7 @@
 package com.anxiang.mybatisspring.annotation;
 
+import com.anxiang.mybatisspring.config.ZshMapperBeanDefinitionRegistrar;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.ElementType;
@@ -17,6 +19,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Component
+@Import(ZshMapperBeanDefinitionRegistrar.class)
 public @interface ZshMapperScan {
-    String[] basePackage() default "";
+    String value() default "";
 }

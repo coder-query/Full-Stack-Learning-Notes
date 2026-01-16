@@ -1,10 +1,7 @@
 package com.anxiang;
 
 import com.anxiang.mybatisspring.config.SpringBeanConfig;
-import com.anxiang.mybatisspring.mapper.GoodsMapper;
 import com.anxiang.mybatisspring.service.BusinessService;
-import com.anxiang.mybatisspring.utils.MybatisUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
