@@ -10,14 +10,16 @@ public class YieldTest {
 		Runnable runnable = () -> {
 			for (int i = 0; i < 1000; i++) {
 				System.out.println("我是Runnable线程... " + i);
-				/// 每到50的倍数时,让出cpu执行权,进入调度队列,和其他线程一起公平竞争cpu执行权
+				/// 每到50的倍数时,让出cpu执行权,进入cpu调度队列,和其他线程一起公平竞争cpu执行权
 				if (i % 50 == 0) {
 					System.err.println("我是Runnable线程... 我现在让出cpu执行权...");
 					Thread.yield();
 				}
 			}
 		};
-		new Thread(runnable).start();
+		Thread thread = new Thread(runnable);
+
+		thread.setPriority(Thread.MAX_PRIORITY);
 
 		for (int i = 0; i < 1000; i++) {
 			System.out.println("我是main线程... " + i);

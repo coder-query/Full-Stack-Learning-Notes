@@ -12,7 +12,6 @@ public class ThreadTest {
 //        System.out.printf("线程id = %d\n", test01.getId());
 //        System.out.printf("线程name = %s\n", test01.getName());
         test01.start(); // 启动线程 调用 run()
-
         Thread.sleep(1000);  // main主线程调用的sleep
         System.out.println("我是main线程...");
     }
