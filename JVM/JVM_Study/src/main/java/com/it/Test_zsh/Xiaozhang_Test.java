@@ -1,4 +1,4 @@
-package Test_zsh;
+package com.it.Test_zsh;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class Xiaozhang_Test {
     public static void main(String[] args) throws IOException {
         Xiaozhang_Test xiaozhangTest = new Xiaozhang_Test();
         System.out.println(j);
-        System.out.println("k = "+xiaozhangTest.k);
+        System.out.println("k = " + xiaozhangTest.k);
         System.in.read();
     }
 }

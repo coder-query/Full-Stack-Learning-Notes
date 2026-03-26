@@ -1,4 +1,4 @@
-package Test_zsh;
+package com.it.Test_zsh;
 
 /**
  * @author 帅宏-coding
@@ -8,11 +8,13 @@ package Test_zsh;
 public class Static_Test {
     private static int a = 3;
     public static int b = 3;
+
     public static void main(String[] args) {
         Test_Inner_Class.print();
     }
-    static class Test_Inner_Class{
-        public static void print(){
+
+    static class Test_Inner_Class {
+        public static void print() {
             System.out.println(a);
         }
     }
