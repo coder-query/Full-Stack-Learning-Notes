@@ -25,10 +25,13 @@ public class 双亲委派机制 {
         for (URL url : urls) {
             System.out.println(url);
         }
-        System.out.println("ExtClassLoader加载的文件: ");
-        System.out.println(System.getProperty("java.ext.dirs"));
-        System.out.println("AppClassLoader加载的文件: ");
-        System.out.println(System.getProperty("java.class.path"));
+        System.out.println("---------ExtClassLoader加载的文件---------------");
+        String property1 = System.getProperty("java.ext.dirs");
+        System.out.println(property1.replaceAll(";", System.lineSeparator()));
+
+        System.out.println("-----------AppClassLoader加载的文件-------------");
+        String property2 = System.getProperty("java.class.path");
+        System.out.println(property2.replaceAll(";", System.lineSeparator()));
     }
 }
 

@@ -28,8 +28,9 @@ public class 线程的强占_join_01 {
             },
             "b线程");
 
-    for (int i = 0; i < 10; i++)
-      System.out.println(Thread.currentThread().getName() + " ---> " + i);
+    for (int i = 0; i < 10; i++) {
+        System.out.println(Thread.currentThread().getName() + " ---> " + i);
+    }
     tA.start();
     tB.start();
   }
