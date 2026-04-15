@@ -15,9 +15,9 @@ public class Main {
     copyOnWriteArrayList.add(null);
     ArrayList<Object> list = new ArrayList<>();
     list.add(new Object());
-    /** HashMap */
-    HashMap<Object, Object> hashMap = new HashMap<>(); // 没有在堆上建立新对象
-    hashMap.put("zsh", "zsh666");
+    /** HashMap */·
+    HashMap<Object, Object> hashMap = new HashMap<>(17); // 没有在堆上建立新对象
+    hashMap.put(null, "zsh666");
     System.out.println(hashMap.put("zsh", "ynn"));
     System.out.println();
 
@@ -31,5 +31,18 @@ public class Main {
     concurrentHashMap.get("");
     concurrentHashMap.size();
     System.out.println(concurrentHashMap.containsKey("zsh"));
+
+
+
+    String [] strArr = new String[10];
+
+    // 类 -》 对象
+    NodeTest<String, String> stringStringNodeTest = new NodeTest<>("zsh", "zsh666");
+    NodeTest<String, String> [] nodeTest = new NodeTest[10];
+    nodeTest[0] = stringStringNodeTest;
+
+
+
+
   }
 }

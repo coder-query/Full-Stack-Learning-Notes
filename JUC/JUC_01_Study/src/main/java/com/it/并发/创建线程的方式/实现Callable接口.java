@@ -15,13 +15,17 @@ public class 实现Callable接口 {
 
         MyCallable myCallable = new MyCallable(); //(表示多线程要执行的任务)
 
-        FutureTask futureTask = new FutureTask<Integer>(myCallable);  //(作为管理多线程运行的结果)
+        // 包装一层  （外面是 Runable  里面是 callable）
 
+//
+        FutureTask futureTask = new FutureTask<Integer>(myCallable);  //(作为管理多线程运行的结果)
+//
         new Thread(futureTask).start(); //(启动线程)
 
         //获取线程运行结果
         try {
             Thread.sleep(10000);
+            // 阻塞等待获取结果
             Integer sum = (Integer) futureTask.get();
             System.out.println("sum = " + sum);
         } catch (Exception e) {
@@ -30,10 +34,11 @@ public class 实现Callable接口 {
 
     }
 }
+
 class MyCallable implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
-       int sum = 0;
+        int sum = 0;
         for (int i = 0; i < 100; i++) {
             sum += i;
         }

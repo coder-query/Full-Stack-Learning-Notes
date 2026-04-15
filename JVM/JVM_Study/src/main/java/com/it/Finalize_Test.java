@@ -15,10 +15,13 @@ public class Finalize_Test {
         System.out.println("我自救一次");
         Finalize_Test.save_test = this;
     }
+    private static  String name = "123";
 
     public static void main(String[] args) {
         save_test = new Finalize_Test();
         save_test = null;
+//        Thread.sleep(1000);
+        System.out.println(name);
         try {
             System.gc();
             Thread.sleep(500);

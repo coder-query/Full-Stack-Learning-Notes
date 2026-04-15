@@ -29,7 +29,9 @@ public class Lock_Thread {
 
 class Ticket3 {
     private int num = 100;
-    Lock lock = new ReentrantLock(); /// 获取锁
+    Lock lock = new ReentrantLock();
+
+    /// 获取锁
 
 
     public void sale() {

@@ -11,5 +11,4 @@ public class SpringSecurity6StudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringSecurity6StudyApplication.class, args);
     }
-
 }
