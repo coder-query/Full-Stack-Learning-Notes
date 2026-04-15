@@ -15,7 +15,7 @@ public class Main {
     copyOnWriteArrayList.add(null);
     ArrayList<Object> list = new ArrayList<>();
     list.add(new Object());
-    /** HashMap */·
+    /** HashMap */
     HashMap<Object, Object> hashMap = new HashMap<>(17); // 没有在堆上建立新对象
     hashMap.put(null, "zsh666");
     System.out.println(hashMap.put("zsh", "ynn"));
