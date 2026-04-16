@@ -7,11 +7,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MapTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("key", "value");
@@ -42,5 +43,13 @@ public class MapTest {
         // 读多写少
         CopyOnWriteArrayList<String> stringCopyOnWriteArrayList = new CopyOnWriteArrayList<>();
         stringCopyOnWriteArrayList.add("1");  // ReentrantLock  ---》 cas
+
+        new Thread(() -> {
+            stringCopyOnWriteArrayList.add("2");
+        }).start();
+        FutureTask<String> futureTask = new FutureTask<>(() -> {
+            return "1";
+        });
+        Thread.sleep(300000000);
     }
 }

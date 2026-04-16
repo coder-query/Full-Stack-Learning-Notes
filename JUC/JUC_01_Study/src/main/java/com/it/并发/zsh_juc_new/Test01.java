@@ -8,21 +8,22 @@ package com.it.并发.zsh_juc_new;
 public class Test01 {
 
     public static boolean flag1 = true;
-    public static volatile boolean flag2 = true;
+    public static volatile byte[] bytes = new byte[1024 * 128];
 
 //    public volatile static boolean flag1 = true;
 
     public static void main(String[] args) throws InterruptedException {
 
-        Object o = new Object();
+
         new Thread(() -> {
             while (flag1) {
-                System.out.println("asdfgh");
-                flag2 = false;
+                bytes[0] = 1;
+                System.out.println(bytes[0]);
             }
             System.out.println("t1线程结束");
         }).start();
 
+        Object o = new Object();
 //        synchronized (o) {
 //            try {
 //                Thread.sleep(100L);
@@ -30,6 +31,7 @@ public class Test01 {
 //                throw new RuntimeException(e);
 //            }
 //        }
+
 
         Thread.sleep(1000);
         flag1 = false;
