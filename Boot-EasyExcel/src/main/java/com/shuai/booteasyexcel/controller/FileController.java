@@ -1,11 +1,9 @@
 package com.shuai.booteasyexcel.controller;
 
 import com.shuai.booteasyexcel.service.api.ExcelReadService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -26,5 +24,21 @@ public class FileController {
     public String upload(@RequestParam("file") MultipartFile file) {
         excelReadService.simpleReadExcel(file);
         return "ok";
+    }
+
+    /**
+     * 下载excel模版（只有表头，无数据）
+     */
+    @GetMapping("/downloadTemplate")
+    public void downloadTemplate(HttpServletResponse response) {
+        excelReadService.downloadTemplate(response);
+    }
+
+    /**
+     * 下载excel（带数据）
+     */
+    @GetMapping("/downloadExcel")
+    public void downloadExcel(HttpServletResponse response) {
+        excelReadService.downloadExcel(response);
     }
 }

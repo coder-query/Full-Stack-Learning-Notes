@@ -1,5 +1,6 @@
 package com.shuai.booteasyexcel.service.api;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -13,4 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ExcelReadService {
 
     void simpleReadExcel(MultipartFile file);
+
+    /**
+     * 下载excel模版（只有表头，无数据）
+     */
+    void downloadTemplate(HttpServletResponse response);
+
+    /**
+     * 下载excel（带数据）
+     */
+    void downloadExcel(HttpServletResponse response);
 }
