@@ -1,7 +1,10 @@
 package com.shuai.booteasyexcel.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class PurchaseModel {
@@ -18,4 +21,7 @@ public class PurchaseModel {
     private Double purchasePrice;         // 后台采购价
     @ExcelProperty(value = "采购数量")
     private Integer purchaseQuantity;     // 采购数量
+    @DateTimeFormat(value = "yyyy年MM月dd日HH时mm分ss秒")
+    @ExcelProperty(value = "采购日期")
+    private Date purchaseDate;
 }

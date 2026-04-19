@@ -1,0 +1,15 @@
+server:
+  port: 8086
+
+spring:
+  redis:
+    host: 124.222.233.74
+    port: 6379
+    password: '123456'
+    timeout: 30000
+    Jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait-millis: -1
