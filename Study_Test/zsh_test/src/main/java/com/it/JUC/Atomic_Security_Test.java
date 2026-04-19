@@ -20,5 +20,6 @@ public class Atomic_Security_Test {
 		}
 		Thread.sleep(1000);
 		System.out.println(atomicInteger.get());
+
 	}
 }

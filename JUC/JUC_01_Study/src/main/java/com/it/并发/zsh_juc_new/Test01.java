@@ -17,10 +17,8 @@ public class Test01 {
         Object o = new Object();
         new Thread(() -> {
             while (flag1) {
-                System.out.println("asdfgh");
                 flag2 = false;
             }
-            System.out.println("t1线程结束");
         }).start();
 
 //        synchronized (o) {
@@ -33,6 +31,6 @@ public class Test01 {
 
         Thread.sleep(1000);
         flag1 = false;
-        System.out.println("flag1 修改为 false");
+//        System.out.println("flag1 修改为 false");
     }
 }
