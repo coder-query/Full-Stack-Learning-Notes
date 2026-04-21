@@ -24,8 +24,8 @@ public class AtomicTest {
 
     public static void main(String[] args) throws NoSuchFieldException {
         AtomicInteger atomicInt = new AtomicInteger();
-        atomicInt.getAndAdd(1)
-        AtomicStampedReference atomicStampedRef = new AtomicStampedReference();
+        atomicInt.getAndAdd(1);
+        AtomicStampedReference atomicStampedRef = new AtomicStampedReference(atomicInt,1);
         atomicInt.getAndIncrement();
         Unsafe.getUnsafe()
                 .compareAndSwapObject(
