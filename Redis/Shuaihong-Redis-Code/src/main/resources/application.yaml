@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: zsh-backend-code
+  profiles:
+    active: local

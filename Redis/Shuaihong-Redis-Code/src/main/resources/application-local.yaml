@@ -1,0 +1,30 @@
+server:
+  port: 8065
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/zsh_backend_code?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123456
+redis:
+  host: 124.222.233.74
+  port: 6379
+  password: '123456'
+  database: 0
+  timeout: 2000
+  pool:
+    max-total: 8
+    max-idle: 8
+    min-idle: 2
+    max-wait-millis: 3000
+    test-on-borrow: false
+  redisson:
+    connection-minimum-idle-size: 10   # 最小空闲连接数
+    connection-pool-size: 64           # 连接池大小
+    idle-connection-timeout: 10000     # 空闲连接超时(毫秒)
+    connect-timeout: 10000             # 连接超时(毫秒)
+    timeout: 3000                      # 命令执行超时(毫秒)
+    retry-attempts: 3                  # 命令重试次数
+    retry-interval: 1500               # 命令重试间隔(毫秒)
+

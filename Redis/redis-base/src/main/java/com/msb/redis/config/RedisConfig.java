@@ -32,7 +32,7 @@ public class RedisConfig {
     private Boolean JmxEnabled;
 
     @Bean
-    public JedisPool jedisPoolFactory() {
+    public JedisPool jedisPool() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
