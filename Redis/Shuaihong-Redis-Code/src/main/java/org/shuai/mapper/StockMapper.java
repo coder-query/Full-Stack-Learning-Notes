@@ -1,4 +1,4 @@
-package generator.mapper;
+package org.shuai.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

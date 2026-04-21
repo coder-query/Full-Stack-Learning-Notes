@@ -1,8 +1,8 @@
-package generator.service.impl;
+package org.shuai.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import generator.service.StockService;
-import generator.mapper.StockMapper;
+import org.shuai.service.StockService;
+import org.shuai.mapper.StockMapper;
 import org.shuai.entity.Stock;
 import org.springframework.stereotype.Service;
 

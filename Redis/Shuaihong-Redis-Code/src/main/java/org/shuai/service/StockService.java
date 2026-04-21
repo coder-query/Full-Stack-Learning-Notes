@@ -1,4 +1,4 @@
-package generator.service;
+package org.shuai.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
