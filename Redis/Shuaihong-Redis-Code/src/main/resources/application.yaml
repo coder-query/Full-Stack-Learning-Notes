@@ -1,6 +1,6 @@
 spring:
   application:
-    name: zsh-backend-code
+    name: shuaihong-redis-code
   profiles:
     active: local
   mvc:
