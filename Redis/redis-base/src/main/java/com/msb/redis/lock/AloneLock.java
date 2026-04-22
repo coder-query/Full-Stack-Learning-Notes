@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
+import java.util.stream.Stream;
 
 public class AloneLock implements Lock {
     AtomicReference<Thread> owner = new AtomicReference<>();
@@ -25,10 +26,7 @@ public class AloneLock implements Lock {
     @Override
     public void unlock() {
         if(owner.compareAndSet(Thread.currentThread(),null)){
-            for (Object  object:waiters.toArray()){
-                Thread  next= (Thread) object;
-                LockSupport.unpark(next);
-            }
+            Stream.of(waiters.toArray()).forEach(t->LockSupport.unpark((Thread) t));
         }
     }
 

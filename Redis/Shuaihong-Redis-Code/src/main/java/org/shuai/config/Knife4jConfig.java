@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Knife4jConfig {
 
     @Bean
-    public Docket adminApi() {
+    public Docket redisSetNxApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("redis的setnx实现分布式锁")
                 .apiInfo(apiInfo())
@@ -29,7 +29,7 @@ public class Knife4jConfig {
     }
 
     @Bean
-    public Docket appApi() {
+    public Docket RedissonApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("Redisson的分布式锁")
                 .apiInfo(apiInfo())
@@ -39,12 +39,23 @@ public class Knife4jConfig {
                 .build();
     }
 
+    @Bean
+    public Docket redisMQApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("redis实现mq消息队列")
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.redismq"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("项目API文档")
+                .title("springboot redis API文档")
                 .description("Knife4j 多分组接口文档")
                 .version("1.0.0")
-                .contact(new Contact("作者", "https://xxx.com", "xxx@qq.com"))
+                .contact(new Contact("帅宏-coding", "https://gitee.com/zhangshuaihong", "2798679648@qq.com"))
                 .build();
     }
 }
