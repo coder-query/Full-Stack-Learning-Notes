@@ -34,6 +34,9 @@ public class RedisConnectionListener implements ApplicationListener<ApplicationR
     }
 
     private void testRedisConnection() {
+        // 查询 mysql
+        // 调用jedis缓存预热
+        // redisson 布隆过滤器预热
         try (Jedis jedis = jedisPool.getResource()) {
             String pingResult = jedis.ping();
             if ("PONG".equals(pingResult)) {
