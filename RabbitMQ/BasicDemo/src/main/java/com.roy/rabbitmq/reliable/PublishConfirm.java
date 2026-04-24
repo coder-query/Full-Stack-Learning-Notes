@@ -122,7 +122,7 @@ public class PublishConfirm {
                 ch.basicPublish("", queue, null, body.getBytes());
             }
 
-            if (!waitUntil(Duration.ofSeconds(60), () -> outstandingConfirms.isEmpty())) {
+            if (!waitUntil(Duration.ofSeconds(60), outstandingConfirms::isEmpty)) {
                 throw new IllegalStateException("All messages could not be confirmed in 60 seconds");
             }
 
