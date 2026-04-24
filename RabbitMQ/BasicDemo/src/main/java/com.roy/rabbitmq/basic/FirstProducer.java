@@ -46,33 +46,5 @@ public class FirstProducer {
                 );
                 System.out.println("发送了消息: " + message);
             }
-
-
-
-//        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-
-//        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
-//        Map<String,Object> params = new HashMap<>();
-//        params.put("alternate-exchange","xxxx");
-//        channel.exchangeDeclare(EXCHANGE_NAME,BuiltinExchangeType.DIRECT,true,false,null);
-
-
-//        channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,"key1");
-
-
-//        Map<String,Object> params = new HashMap<>();
-//        params.put("x-queue-type","quorum");
-//        params.put("x-expires",10000);
-//        channel.queueDeclare("quorumQueue", true, false, false, params);
-//
-//        channel.queueBind("quorumQueue",EXCHANGE_NAME,"key1");
-
-
-//        String message = "message1";
-//        channel.basicPublish("", QUEUE_NAME,
-//                MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
-//        String message2 = "message2";
-//        channel.basicPublish(EXCHANGE_NAME, "key1",
-//                MessageProperties.PERSISTENT_TEXT_PLAIN, message2.getBytes());
     }
 }

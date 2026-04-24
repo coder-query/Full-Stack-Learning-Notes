@@ -1,10 +1,11 @@
-package com.roy.rabbitmq.task;
+package com.roy.rabbitmq.A_Work_Queue;
 
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.*;
 import com.roy.rabbitmq.RabbitMQUtil;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 可以启动多个worker，同时等待NewTask发送一个消息，task将由其中一个worker完成。
@@ -23,9 +24,7 @@ public class Worker2 {
 		channel.basicQos(1);
 		Consumer myconsumer = new DefaultConsumer(channel) {
 			@Override
-			public void handleDelivery(String consumerTag, Envelope envelope,
-					BasicProperties properties, byte[] body)
-					throws IOException {
+			public void handleDelivery(String consumerTag, Envelope envelope, BasicProperties properties, byte[] body) throws IOException {
 				 System.out.println("========================");
 				 String routingKey = envelope.getRoutingKey();
 				 System.out.println("routingKey >"+routingKey);
@@ -33,13 +32,8 @@ public class Worker2 {
 				 System.out.println("contentType >"+contentType);
 				 long deliveryTag = envelope.getDeliveryTag();
 				 System.out.println("deliveryTag >"+deliveryTag);
-				 System.out.println("content:"+new String(body,"UTF-8"));
-				 // (process the message components here ...)
-//				try {
-//					Thread.sleep(1000L);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
+				 System.out.println("content:"+ new String(body, StandardCharsets.UTF_8));
+
 				channel.basicAck(deliveryTag, false);
 				}
 			};

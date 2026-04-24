@@ -16,9 +16,14 @@ public class RabbitMQUtil {
 	public static final String PASSWORD="rabbitmq";
 	public static final String VIRTUAL_HOST="/";
 	public static final String QUEUE_WORK="work";
-
 	public static final String QUEUE_NAME_001="myQueue_001";
 	public static final String EXCHANGE_NAME="callbackExchange";
+	public static final String EXCHANGE_FANOUT_001="exchange.fanout.001";
+	public static final String QUEUE_FANOUT_001="queue.fanout.001";
+	public static final String QUEUE_FANOUT_002="queue.fanout.002";
+	public static final String EXCHANGE_HEADERS_001="exchange.headers.001";
+	public static final String EXCHANGE_DIRECT_001="exchange.direct.001";
+	public static final String EXCHANGE_TOPIC_001="exchange.topic.001";
 	
 	private RabbitMQUtil() {
 	}
