@@ -1,4 +1,4 @@
-package com.roy.rabbitmq.direct;
+package com.roy.rabbitmq.zzzdirect;
 
 import java.io.IOException;
 

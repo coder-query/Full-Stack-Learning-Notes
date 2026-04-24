@@ -1,10 +1,8 @@
-package com.roy.rabbitmq.dlq;
+package com.roy.rabbitmq.zzzdlq;
 
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @auth roykingw

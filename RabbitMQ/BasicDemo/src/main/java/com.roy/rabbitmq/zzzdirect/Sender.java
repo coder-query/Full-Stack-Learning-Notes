@@ -1,4 +1,4 @@
-package com.roy.rabbitmq.direct;
+package com.roy.rabbitmq.zzzdirect;
 
 import com.rabbitmq.client.*;
 import com.roy.rabbitmq.RabbitMQUtil;

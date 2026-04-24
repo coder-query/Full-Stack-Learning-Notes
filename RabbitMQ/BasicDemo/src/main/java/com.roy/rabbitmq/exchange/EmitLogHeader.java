@@ -1,5 +1,6 @@
 package com.roy.rabbitmq.exchange;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class EmitLogHeader {
 		builder.priority(MessageProperties.PERSISTENT_TEXT_PLAIN.getPriority());
 		builder.headers(headers);
 
-		channel.basicPublish(EXCHANGE_NAME, routingKey, builder.build(), message.getBytes("UTF-8"));
+		channel.basicPublish(EXCHANGE_NAME, routingKey, builder.build(), message.getBytes(StandardCharsets.UTF_8));
 
 //		channel.txSelect();
 //		channel.txCommit();

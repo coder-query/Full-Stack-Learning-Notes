@@ -23,7 +23,15 @@ public class RabbitMQUtil {
 	public static final String QUEUE_FANOUT_002="queue.fanout.002";
 	public static final String EXCHANGE_HEADERS_001="exchange.headers.001";
 	public static final String EXCHANGE_DIRECT_001="exchange.direct.001";
+	public static final String QUEUE_DIRECT_001="queue.direct.001";
+	public static final String QUEUE_DIRECT_002="queue.direct.002";
+	public static final String ROUTING_001="routing.001";
+	public static final String ROUTING_002="routing.002";
 	public static final String EXCHANGE_TOPIC_001="exchange.topic.001";
+	public static final String QUEUE_TOPIC_001="queue.topic.001";
+	public static final String QUEUE_TOPIC_002="queue.topic.002";
+	public static final String TOPIC_001 ="topic.#";
+	public static final String TOPIC_002 ="*.topic";
 	
 	private RabbitMQUtil() {
 	}

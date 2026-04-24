@@ -1,4 +1,4 @@
-package com.roy.rabbitmq.dlq;
+package com.roy.rabbitmq.zzzdlq;
 
 import com.rabbitmq.client.*;
 
