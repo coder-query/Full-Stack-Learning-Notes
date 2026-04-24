@@ -41,7 +41,7 @@ public class ProducerController {
 		//将对象转换成json再发送。
 //		rabbitTemplate.convertandsend("",Object);
 		//发消息
-		rabbitTemplate.send("directqueue",new Message(message.getBytes("UTF-8"),messageProperties));
+		rabbitTemplate.send("directqueue",new Message(message.getBytes(StandardCharsets.UTF_8),messageProperties));
 		return "message sended : "+message;
 	}
 	@ApiOperation(value="fanout发送接口",notes="发送到fanoutExchange。消息将往该exchange下的所有queue转发")
