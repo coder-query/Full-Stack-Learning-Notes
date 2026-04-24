@@ -3,11 +3,13 @@ package org.example.bootmybatisplus.pojo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
 import java.time.LocalDateTime;
 
 @TableName("t_student")
 @Data
+@FieldNameConstants
 public class Student {
     @TableField(value = "s_id")
     private Integer id;

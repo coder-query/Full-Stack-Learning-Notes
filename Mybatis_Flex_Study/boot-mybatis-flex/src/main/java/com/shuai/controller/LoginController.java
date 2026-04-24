@@ -3,16 +3,17 @@ package com.shuai.controller;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSON;
-import com.shuai.model.Account;
+import com.shuai.model.User;
 import com.shuai.service.ILoginService;
-import java.util.HashMap;
-import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 /// **
 // * @author : 帅宏-coding
@@ -36,7 +37,7 @@ public class LoginController {
       return JSON.toJSONString(map);
     }
 
-    Account accountInfo = loginService.login(account, password);
+    User accountInfo = loginService.login(account, password);
 
     if (Objects.isNull(accountInfo)) {
       map.put("status", 1);

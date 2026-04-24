@@ -1,36 +1,41 @@
 package com.shuai.service.impl;
 
+import static com.shuai.model.table.UserTableDef.USER;
+
 import com.mybatisflex.core.query.QueryWrapper;
-import com.shuai.mapper.AccountMapper;
-import com.shuai.model.Account;
-import com.shuai.model.table.AccountTableDef;
+import com.shuai.mapper.UserMapper;
+import com.shuai.model.User;
+import com.shuai.model.table.TestTableDef;
+import com.shuai.model.table.UserTableDef;
 import com.shuai.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/// **
-// * @author : 帅宏-coding
-// * @version : 1.0
-// * @date : 2025/7/31 0031
-// */
 @Service
 public class LoginService implements ILoginService {
 
-  @Autowired private AccountMapper accountMapper;
+  @Autowired private UserMapper userMapper;
 
   @Override
-  public Account login(String account, String password) {
+  public User login(String account, String password) {
 
-    AccountTableDef ACCOUNT = AccountTableDef.ACCOUNT;
+    TestTableDef t = TestTableDef.TEST.as("t");
+
+    UserTableDef u = UserTableDef.USER.as("u");
     // 从数据库里查询用户信息
-    QueryWrapper queryWrapper =
-        QueryWrapper.create()
-            .select(ACCOUNT.ALL_COLUMNS)
-            .from(ACCOUNT)
-            .where(ACCOUNT.ACCOUNT_.eq(account).and(ACCOUNT.PASSWORD.eq(password)));
+    QueryWrapper queryWrapper = QueryWrapper.create()
+            .select(
+                    u.ID,
+                    u.USER_ACCOUNT,
+                    u.USER_PASSWORD
+            )
+            .from(u)
+            .leftJoin(t)
+            .on(u.ID.eq(t.AGE))
+            .where(u.USER_ACCOUNT.eq(account)).and(u.USER_PASSWORD.eq(password))
+            .groupBy(u.ID);
+    User user = userMapper.selectOneByQuery(queryWrapper);
 
-    Account res = accountMapper.selectOneByQuery(queryWrapper);
-
-    return res;
+    return user;
   }
 }

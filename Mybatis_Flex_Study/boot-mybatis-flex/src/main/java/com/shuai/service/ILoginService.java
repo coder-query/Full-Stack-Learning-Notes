@@ -1,6 +1,7 @@
 package com.shuai.service;
 
-import com.shuai.model.Account;
+
+import com.shuai.model.User;
 
 /// **
 // * @author : 帅宏-coding
@@ -8,5 +9,5 @@ import com.shuai.model.Account;
 // * @date : 2025/7/31 0031
 // */
 public interface ILoginService {
-  Account login(String account, String password);
+  User login(String account, String password);
 }
