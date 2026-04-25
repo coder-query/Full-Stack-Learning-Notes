@@ -46,6 +46,8 @@ public class RedissonClientAutoConfiguration {
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redissonClient() {
         Config config = new Config();
+//        // 设置锁的watchdog超时时间
+//        config.setLockWatchdogTimeout(10000);
         config.useSingleServer()
                 .setAddress("redis://" + host + ":" + port)
                 .setPassword(password.isEmpty() ? null : password)
