@@ -37,7 +37,7 @@ public class SetNxController {
     @Resource
     private StockMapper stockMapper;
 
-    public static final String SET_NX_LOCK_PREFIX = "set_nx_lock:";
+    public static final String SET_NX_LOCK_PREFIX = "redis_set_nx_lock:";
 
     public static final String SET_NX_LOCK_LUA_SCRIPT =
                                 "if redis.call('get', KEYS[1]) == ARGV[1] then " +
@@ -120,7 +120,7 @@ public class SetNxController {
         Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
         if (Objects.isNull(stock) || stock.getProductCount() <= 0){
             log.error("库存不足 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            return Collections.singletonMap("msg", "库存不足");
+            return Map.of("msg", "库存不足");
         }
 
         // 原库存
@@ -139,11 +139,11 @@ public class SetNxController {
 
         if (updateFlag <= 0){
             log.error("库存扣减失败 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            return Collections.singletonMap("msg", "库存扣减失败，请重试");
+            return Map.of("msg", "库存扣减失败，请重试");
         }
 
         log.info("库存扣减成功 for product ID: {} ，线程名称：{}，线程ID：{}, 原库存：{}，扣减后库存剩余：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId(), oldStock, newStock);
-        return Collections.singletonMap("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
+        return Map.of("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
     }
 
 

@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.shuai.entity.Stock;
 import org.shuai.mapper.StockMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +37,10 @@ public class RedissonSetNxController {
     @Resource
     private StockMapper stockMapper;
 
-    public static final String SET_NX_LOCK_PREFIX = "set_nx_lock:";
+    @Resource
+    private RedissonClient redissonClient;
+
+    public static final String SET_NX_LOCK_PREFIX = "redisson_set_nx_lock:";
 
     public static final String SET_NX_LOCK_LUA_SCRIPT =
                                 "if redis.call('get', KEYS[1]) == ARGV[1] then " +
@@ -44,73 +49,26 @@ public class RedissonSetNxController {
                                 "end";
 
     @GetMapping(value = "/deduct-stock")
-    @ApiOperation("扣减库存")
+    @ApiOperation(value = "扣减库存")
     public String deductStock(Integer productId) {
-        Jedis jedis = null;
+
+        // 获取锁的key ( 保证每次操作商品为productId时的锁是唯一的 )
+        String lockKey = SET_NX_LOCK_PREFIX + productId;
+        // 获取锁的value ( 打标记，当前 xxx jar包应用的线程获取了分布式锁 )
+        String clientId = UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
+        RLock setNxLock = redissonClient.getLock(lockKey);
+
         try {
-            /**
-             *  1. 获取Jedis连接，jedisPool中已经线程安全
-             */
-            jedis = jedisPool.getResource();
-
-            /**
-             * 2. 获取分布式锁
-             */
-            // 2.1 获取锁的key ( 保证每次操作商品为productId时的锁是唯一的 )
-            String lockKey = SET_NX_LOCK_PREFIX + productId;
-            // 2.2 获取锁的value ( 打标记，当前xxxjar包应用的线程获取了分布式锁 )
-            String clientId = UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
-
-            // 2.3 设置锁的过期时间 ( 防止死锁 )
-            SetParams setParams = new SetParams()
-                    .ex(10L)
-                    .nx();
-            String result = jedis.set(lockKey, clientId, setParams);
-
-//            // 错误的setnx示例 （非原子操作）
-//            String set = jedis.set("set_nx_lock:" + productId, clientId);
-//            jedis.expire("set_nx_lock:" + productId, 60L);
-//
-
-            // 2.4 验证获取锁是否成功
-            if (!StrUtil.equals(result, "OK")) {
-                log.error("获取分布式锁失败，当前分布式锁被占用中。。。lockKey: {}", lockKey);
-                return "error_code: 当前分布式锁被占用，请稍后重试";
-            }
-
-            /**
-             * 3. 获取分布式锁成功后，执行业务逻辑
-              */
-            try {
-                // 3.1 扣减库存
-                Map<String, Object> resultMap = deductStockSync(productId);
-                return (String) (resultMap.get("msg"));
-            } finally {
-
-//                // 4. 释放分布式锁 （这个直接删除锁，会因为线程执行业务时间不同，导致锁误删）
-//                jedis.del(lockKey);
-
-//                // 4. 释放分布式锁 （错误的释放锁方式，非原子操作，会导致锁误删）
-//                if (StrUtil.equals(clientId, jedis.get(lockKey))) {
-//                    jedis.del(lockKey);
-//                }
-                Integer evalResult = (Integer) jedis.eval(SET_NX_LOCK_LUA_SCRIPT, Collections.singletonList(lockKey), Collections.singletonList(clientId));
-                if (evalResult == 0) {
-                    log.error("释放分布式锁失败，请检查lua脚本,或检查redis服务器");
-                }
-                log.info("释放分布式锁成功");
-            }
+            setNxLock.lock();
+            Map<String, Object> resultMap = deductStockSync(productId);
+            return (String) (resultMap.get("msg"));
         } catch (Exception e) {
-            log.error("扣减库存异常", e);
-            return "系统错误";
-        } finally {
-            // 5. 归还连接
-            if (jedis != null) {
-                jedis.close();
-            }
+            log.error("获取分布式锁失败", e);
+            return "error_code: 获取分布式锁失败，请稍后重试";
+        }finally {
+            setNxLock.unlock();
         }
     }
-
 
     public Map<String,Object> deductStockSync(Integer productId){
 
