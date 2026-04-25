@@ -26,8 +26,8 @@ import java.util.Objects;
 import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
-@RequestMapping("/setnx")
-@Api(tags = "setnx命令")
+@RequestMapping("/redis-setnx")
+@Api(tags = "redis setnx命令")
 @Slf4j
 public class SetNxController {
 

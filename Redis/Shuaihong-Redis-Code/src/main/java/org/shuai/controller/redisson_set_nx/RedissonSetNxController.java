@@ -26,13 +26,10 @@ import java.util.Map;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/setnx")
+@RequestMapping("/redisson-setnx")
 @Api(tags = "redisson setnx命令")
 @Slf4j
 public class RedissonSetNxController {
-
-    @Resource
-    private JedisPool jedisPool;
 
     @Resource
     private StockMapper stockMapper;
