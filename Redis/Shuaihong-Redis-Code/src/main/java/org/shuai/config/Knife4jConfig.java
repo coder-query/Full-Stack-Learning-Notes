@@ -18,6 +18,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Knife4jConfig {
 
     @Bean
+    public Docket errorExampleApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("本地单机锁（在分布式下的错误示例）")
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.error_example"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    @Bean
     public Docket redisSetNxApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("redis的setnx实现分布式锁")

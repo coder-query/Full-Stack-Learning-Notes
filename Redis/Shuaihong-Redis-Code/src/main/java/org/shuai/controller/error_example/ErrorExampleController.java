@@ -1,0 +1,69 @@
+package org.shuai.controller.error_example;
+
+
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.shuai.entity.Stock;
+import org.shuai.mapper.StockMapper;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.Objects;
+import java.util.concurrent.locks.ReentrantLock;
+
+
+@Slf4j
+@RestController
+@RequestMapping("/error-example")
+@Api(tags = "本地单机锁（在分布式下的错误示例）")
+public class ErrorExampleController {
+
+    @Resource
+    private StockMapper stockMapper;
+
+    /**
+     * 本地锁
+     */
+    private final static ReentrantLock localCasLock = new ReentrantLock();
+
+    @RequestMapping("/deduct-stock")
+    @ApiOperation(value = "扣减库存")
+    public String deductStock(Integer productId) {
+        try {
+
+            // 获取锁
+            localCasLock.lock();
+            log.info("Lock acquired for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+
+            // 查询库存
+            Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
+            if (Objects.isNull(stock) || stock.getProductCount() <= 0){
+                log.error("Stock not found for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+                return "库存不存在或已售罄";
+            }
+
+            // 扣减库存
+            int updateFlag = stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
+                    .set(Stock::getProductCount, stock.getProductCount() - 1)
+                    .eq(Stock::getId, productId));
+
+            if (updateFlag <= 0){
+                log.error("Stock deduct failed for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+                return "库存扣减失败";
+            }
+
+            log.info("Stock deducted successfully for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+            log.info("原库存：{}，扣减后库存剩余：{}", stock.getProductCount(), (stock.getProductCount() - 1));
+            return "库存扣减成功，原库存：" + stock.getProductCount() + "，扣减后库存剩余：" + (stock.getProductCount() - 1);
+        } catch (Exception e) {
+            log.error("Error occurred while deducting stock: {}", e.getMessage());
+        } finally {
+            // 释放锁
+            localCasLock.unlock();
+        }
+        return "库存扣减失败";
+    }
+}
