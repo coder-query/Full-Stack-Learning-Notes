@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.shuai.entity.Stock;
 import org.shuai.mapper.StockMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -32,9 +29,9 @@ public class ErrorExampleController {
      */
     private final static ReentrantLock localCasLock = new ReentrantLock();
 
-    @PostMapping("/deduct-stock")
+    @GetMapping("/deduct-stock")
     @ApiOperation(value = "扣减库存")
-    public String deductStock(Integer productId) {
+    public String deductStock(@RequestParam(value = "productId") Integer productId) {
         try {
 
             // 获取锁

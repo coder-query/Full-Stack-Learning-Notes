@@ -1,5 +1,5 @@
 server:
-  port: 8065
+  port: 8050
 
 knife4j:
   enable: true

@@ -40,7 +40,7 @@ public class SetNxController {
     @Resource
     private StockMapper stockMapper;
 
-    @PostMapping(value = "/deduct-stock")
+    @GetMapping(value = "/deduct-stock")
     @ApiOperation("扣减库存")
     public String deductStock(Integer productId) {
         try {
