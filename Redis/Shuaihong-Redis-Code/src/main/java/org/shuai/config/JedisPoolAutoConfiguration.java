@@ -45,10 +45,15 @@ public class JedisPoolAutoConfiguration {
     @Bean
     public JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig config = new JedisPoolConfig();
+        // 设置最大连接数
         config.setMaxTotal(maxTotal);
+        // 设置最大空闲数
         config.setMaxIdle(maxIdle);
+        // 设置最小空闲数
         config.setMinIdle(minIdle);
+        // 设置最大等待时间
         config.setMaxWaitMillis(maxWaitMillis);
+        // 设置是否在获取连接时进行测试
         config.setTestOnBorrow(testOnBorrow);
         return config;
     }

@@ -50,12 +50,19 @@ public class RedissonClientAutoConfiguration {
                 .setAddress("redis://" + host + ":" + port)
                 .setPassword(password.isEmpty() ? null : password)
                 .setDatabase(database)
+                // 设置最小空闲连接数
                 .setConnectionMinimumIdleSize(connectionMinimumIdleSize)
+                // 设置连接池大小
                 .setConnectionPoolSize(connectionPoolSize)
+                // 设置空闲连接超时时间
                 .setIdleConnectionTimeout(idleConnectionTimeout)
+                // 设置连接超时时间
                 .setConnectTimeout(connectTimeout)
+                // 设置超时时间
                 .setTimeout(timeout)
+                // 设置重试次数
                 .setRetryAttempts(retryAttempts)
+                // 设置重试间隔
                 .setRetryInterval(retryInterval);
         return Redisson.create(config);
     }
