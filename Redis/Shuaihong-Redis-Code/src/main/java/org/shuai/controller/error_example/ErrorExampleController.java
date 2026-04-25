@@ -1,6 +1,9 @@
 package org.shuai.controller.error_example;
 
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,8 +13,7 @@ import org.shuai.mapper.StockMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 
@@ -27,7 +29,7 @@ public class ErrorExampleController {
     /**
      * 本地锁
      */
-    private final static ReentrantLock localCasLock = new ReentrantLock();
+    private final static ReentrantLock localCasLock = new ReentrantLock(false);
 
     @GetMapping("/deduct-stock")
     @ApiOperation(value = "扣减库存")
@@ -36,40 +38,49 @@ public class ErrorExampleController {
 
             // 获取锁
             localCasLock.lock();
-            log.info("Lock acquired for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-
-            // 查询库存
-            Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
-            if (Objects.isNull(stock) || stock.getProductCount() <= 0){
-                log.error("Stock not found for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-                return "库存不存在或已售罄";
-            }
-
-            // 原库存
-            int oldStock = stock.getProductCount();
-            // 扣减后库存
-            int newStock = oldStock - 1;
+            log.info("本地锁获取成功 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
 
             // 扣减库存
-            int updateFlag = stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
-                    .set(Stock::getProductCount, newStock)
-                    .eq(Stock::getId, productId));
+            Map<String, Object> resultMap = deductStockSync(productId);
 
-            if (updateFlag <= 0){
-                log.error("Stock deduct failed for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-                return "库存扣减失败";
-            }
-
-            log.info("Stock deducted successfully for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            log.info("原库存：{}，扣减后库存剩余：{}", oldStock, newStock);
-            return "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock;
+            // 返回结果
+            return (String) (resultMap.get("msg"));
         } catch (Exception e) {
             log.error("Error occurred while deducting stock: {}", e.getMessage());
         } finally {
             // 释放锁
             localCasLock.unlock();
+            log.info("本地锁释放成功 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
         }
         return "库存扣减失败";
+    }
+
+    public Map<String,Object> deductStockSync(Integer productId){
+
+        // 查询库存
+        Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
+        if (Objects.isNull(stock) || stock.getProductCount() <= 0){
+            log.error("库存不足 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+            return Collections.singletonMap("msg", "库存不足");
+        }
+
+        // 原库存
+        int oldStock = stock.getProductCount();
+        // 扣减后库存
+        int newStock = oldStock - 1;
+
+        // 扣减库存
+        int updateFlag = stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
+                .set(Stock::getProductCount, newStock)
+                .eq(Stock::getId, productId));
+
+        if (updateFlag <= 0){
+            log.error("库存扣减失败 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+            return Collections.singletonMap("msg", "库存扣减失败");
+        }
+
+        log.info("库存扣减成功 for product ID: {} ，线程名称：{}，线程ID：{}, 原库存：{}，扣减后库存剩余：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId(), oldStock, newStock);
+        return Collections.singletonMap("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
     }
 
     /**

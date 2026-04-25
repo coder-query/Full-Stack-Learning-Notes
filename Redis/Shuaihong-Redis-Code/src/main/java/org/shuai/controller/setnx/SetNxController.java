@@ -21,6 +21,8 @@ import redis.clients.jedis.params.SetParams;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
@@ -40,54 +42,107 @@ public class SetNxController {
     @Resource
     private StockMapper stockMapper;
 
+    public static final String SET_NX_LOCK_PREFIX = "set_nx_lock:";
+
+    public static final String SET_NX_LOCK_LUA_SCRIPT =
+                                "if redis.call('get', KEYS[1]) == ARGV[1] then " +
+                                "return redis.call('del', KEYS[1])" +
+                                " else return 0 " +
+                                "end";
+
     @GetMapping(value = "/deduct-stock")
     @ApiOperation("扣减库存")
     public String deductStock(Integer productId) {
+        Jedis jedis = null;
         try {
-            SetNxController.localCasLock.lock();
-            Jedis jedis = null;
-            // 从数据库里查询商品
-            String lockKey = null;
-            String clientId = null;
-            try {
-                lockKey = "lock_" + productId;
-                clientId = UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
-                jedis = jedisPool.getResource();
-                long expireTime = 60;
-                SetParams setParams = new SetParams();
-                setParams.ex(expireTime);
-                setParams.nx();
-                // 设置分布式锁
-                String result = jedis.set(lockKey, clientId, setParams);
-                System.out.println("result:" + result);
-                if (!StrUtil.equals(result, "OK")) {
-                    return "error_code 当前 set ex nx  返回null，表示分布式锁被占用。。。";
-                }
+            /**
+             *  1. 获取Jedis连接，jedisPool中已经线程安全
+             */
+            jedis = jedisPool.getResource();
 
-                // 获取锁成功
-                Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
-                Integer productCount = stock.getProductCount();
-                if (productCount > 0) {
-                    int realStock = productCount - 1;
-                    stock.setProductCount(realStock);
-                    stockMapper.update(null, Wrappers.<Stock>lambdaUpdate().set(Stock::getProductCount, realStock).eq(Stock::getId, productId));
-                    System.out.println("扣减成功，剩余库存:" + realStock);
-                } else {
-                    System.out.println("扣减失败，库存不足");
-                }
-            } finally {
-                if (jedis != null) {
-                    if (jedis.get(lockKey).equals(clientId)) {
-                        jedis.del(lockKey);
-                    }
-                    jedis.close();
-                }
+            /**
+             * 2. 获取分布式锁
+             */
+            // 2.1 获取锁的key ( 保证每次操作商品为productId时的锁是唯一的 )
+            String lockKey = SET_NX_LOCK_PREFIX + productId;
+            // 2.2 获取锁的value ( 打标记，当前xxxjar包应用的线程获取了分布式锁 )
+            String clientId = UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
+
+            // 2.3 设置锁的过期时间 ( 防止死锁 )
+            SetParams setParams = new SetParams()
+                    .ex(10L)
+                    .nx();
+            String result = jedis.set(lockKey, clientId, setParams);
+
+//            // 错误的setnx示例 （非原子操作）
+//            String set = jedis.set("set_nx_lock:" + productId, clientId);
+//            jedis.expire("set_nx_lock:" + productId, 60L);
+//
+
+            // 2.4 验证获取锁是否成功
+            if (!StrUtil.equals(result, "OK")) {
+                log.error("获取分布式锁失败，当前分布式锁被占用中。。。lockKey: {}", lockKey);
+                return "error_code: 当前分布式锁被占用，请稍后重试";
             }
-            return "扣减库存成功！！！";
+
+            /**
+             * 3. 获取分布式锁成功后，执行业务逻辑
+              */
+            try {
+                // 3.1 扣减库存
+                Map<String, Object> resultMap = deductStockSync(productId);
+                return (String) (resultMap.get("msg"));
+            } finally {
+//                // 4. 释放分布式锁 （错误的释放锁方式，非原子操作，会导致锁误删）
+//                if (StrUtil.equals(clientId, jedis.get(lockKey))) {
+//                    jedis.del(lockKey);
+//                }
+                Integer evalResult = (Integer) jedis.eval(SET_NX_LOCK_LUA_SCRIPT, Collections.singletonList(lockKey), Collections.singletonList(clientId));
+                if (evalResult == 0) {
+                    log.error("释放分布式锁失败，请检查lua脚本,或检查redis服务器");
+                }
+                log.info("释放分布式锁成功");
+            }
+        } catch (Exception e) {
+            log.error("扣减库存异常", e);
+            return "系统错误";
         } finally {
-            localCasLock.unlock();
+            // 5. 归还连接
+            if (jedis != null) {
+                jedis.close();
+            }
         }
     }
+
+
+    public Map<String,Object> deductStockSync(Integer productId){
+
+        // 查询库存
+        Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
+        if (Objects.isNull(stock) || stock.getProductCount() <= 0){
+            log.error("库存不足 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+            return Collections.singletonMap("msg", "库存不足");
+        }
+
+        // 原库存
+        int oldStock = stock.getProductCount();
+        // 扣减后库存
+        int newStock = oldStock - 1;
+
+        // 扣减库存
+        int updateFlag = stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
+                .set(Stock::getProductCount, newStock)
+                .eq(Stock::getId, productId));
+
+        if (updateFlag <= 0){
+            log.error("库存扣减失败 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
+            return Collections.singletonMap("msg", "库存扣减失败");
+        }
+
+        log.info("库存扣减成功 for product ID: {} ，线程名称：{}，线程ID：{}, 原库存：{}，扣减后库存剩余：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId(), oldStock, newStock);
+        return Collections.singletonMap("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
+    }
+
 
     /**
      * 获取数据库中所有的商品信息
