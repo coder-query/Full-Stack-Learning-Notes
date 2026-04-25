@@ -61,7 +61,7 @@ public class ErrorExampleController {
         Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
         if (Objects.isNull(stock) || stock.getProductCount() <= 0){
             log.error("库存不足 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            return Map.of("msg", "库存不足");
+            return Collections.singletonMap("msg", "库存不足");
         }
 
         // 原库存
@@ -76,11 +76,11 @@ public class ErrorExampleController {
 
         if (updateFlag <= 0){
             log.error("库存扣减失败 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            return Map.of("msg", "库存扣减失败");
+            return Collections.singletonMap("msg", "库存扣减失败");
         }
 
         log.info("库存扣减成功 for product ID: {} ，线程名称：{}，线程ID：{}, 原库存：{}，扣减后库存剩余：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId(), oldStock, newStock);
-        return Map.of("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
+        return Collections.singletonMap("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
     }
 
     /**
