@@ -51,8 +51,6 @@ public class RedissonSetNxController {
 
         // 获取锁的key ( 保证每次操作商品为productId时的锁是唯一的 )
         String lockKey = SET_NX_LOCK_PREFIX + productId;
-        // 获取锁的value ( 打标记，当前 xxx jar包应用的线程获取了分布式锁 )
-        String clientId = UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
         RLock setNxLock = redissonClient.getLock(lockKey);
 
         try {
