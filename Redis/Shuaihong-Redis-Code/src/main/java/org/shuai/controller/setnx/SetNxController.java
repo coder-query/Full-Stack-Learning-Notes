@@ -31,11 +31,6 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class SetNxController {
 
-    /**
-     * 本地锁
-     */
-    private final static ReentrantLock localCasLock = new ReentrantLock();
-
     @Resource
     private JedisPool jedisPool;
 
@@ -130,9 +125,13 @@ public class SetNxController {
         int newStock = oldStock - 1;
 
         // 扣减库存
-        int updateFlag = stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
-                .set(Stock::getProductCount, newStock)
-                .eq(Stock::getId, productId));
+        // 带乐观锁的更新
+        int updateFlag = stockMapper.update(null,
+                Wrappers.<Stock>lambdaUpdate()
+                        .set(Stock::getProductCount, newStock)
+                        .eq(Stock::getId, productId)
+                        .eq(Stock::getProductCount, oldStock)// 关键：乐观锁条件
+        );
 
         if (updateFlag <= 0){
             log.error("库存扣减失败 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
