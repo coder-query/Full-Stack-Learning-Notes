@@ -88,6 +88,10 @@ public class SetNxController {
                 Map<String, Object> resultMap = deductStockSync(productId);
                 return (String) (resultMap.get("msg"));
             } finally {
+
+//                // 4. 释放分布式锁 （这个直接删除锁，会因为线程执行业务时间不同，导致锁误删）
+//                jedis.del(lockKey);
+
 //                // 4. 释放分布式锁 （错误的释放锁方式，非原子操作，会导致锁误删）
 //                if (StrUtil.equals(clientId, jedis.get(lockKey))) {
 //                    jedis.del(lockKey);
@@ -135,7 +139,7 @@ public class SetNxController {
 
         if (updateFlag <= 0){
             log.error("库存扣减失败 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            return Collections.singletonMap("msg", "库存扣减失败");
+            return Collections.singletonMap("msg", "库存扣减失败，请重试");
         }
 
         log.info("库存扣减成功 for product ID: {} ，线程名称：{}，线程ID：{}, 原库存：{}，扣减后库存剩余：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId(), oldStock, newStock);
