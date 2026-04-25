@@ -7,10 +7,13 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.shuai.entity.Stock;
 import org.shuai.mapper.StockMapper;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -29,7 +32,7 @@ public class ErrorExampleController {
      */
     private final static ReentrantLock localCasLock = new ReentrantLock();
 
-    @RequestMapping("/deduct-stock")
+    @PostMapping("/deduct-stock")
     @ApiOperation(value = "扣减库存")
     public String deductStock(Integer productId) {
         try {
@@ -45,9 +48,14 @@ public class ErrorExampleController {
                 return "库存不存在或已售罄";
             }
 
+            // 原库存
+            int oldStock = stock.getProductCount();
+            // 扣减后库存
+            int newStock = oldStock - 1;
+
             // 扣减库存
             int updateFlag = stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
-                    .set(Stock::getProductCount, stock.getProductCount() - 1)
+                    .set(Stock::getProductCount, newStock)
                     .eq(Stock::getId, productId));
 
             if (updateFlag <= 0){
@@ -56,8 +64,8 @@ public class ErrorExampleController {
             }
 
             log.info("Stock deducted successfully for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
-            log.info("原库存：{}，扣减后库存剩余：{}", stock.getProductCount(), (stock.getProductCount() - 1));
-            return "库存扣减成功，原库存：" + stock.getProductCount() + "，扣减后库存剩余：" + (stock.getProductCount() - 1);
+            log.info("原库存：{}，扣减后库存剩余：{}", oldStock, newStock);
+            return "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock;
         } catch (Exception e) {
             log.error("Error occurred while deducting stock: {}", e.getMessage());
         } finally {
@@ -65,5 +73,26 @@ public class ErrorExampleController {
             localCasLock.unlock();
         }
         return "库存扣减失败";
+    }
+
+    /**
+     * 获取数据库中所有的商品信息
+     */
+    @GetMapping("/get-all-stock")
+    @ApiOperation(value = "获取数据库中所有的商品信息")
+    public List<Stock> getAllStock() {
+        return stockMapper.selectList(Wrappers.emptyWrapper());
+    }
+
+    /**
+     * 恢复所有商品数量为100
+     */
+    @GetMapping("/restore-stock")
+    @ApiOperation(value = "恢复所有商品数量为100")
+    public String restoreStock() {
+        stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
+                        .set(Stock::getProductCount, 100)
+                        .ne(Stock::getProductCount, -66666));
+        return "库存恢复成功";
     }
 }

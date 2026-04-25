@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.shuai.entity.Stock;
 import org.shuai.mapper.StockMapper;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
@@ -39,7 +40,7 @@ public class SetNxController {
     @Resource
     private StockMapper stockMapper;
 
-    @GetMapping("/deduct-stock")
+    @PostMapping(value = "/deduct-stock")
     @ApiOperation("扣减库存")
     public String deductStock(Integer productId) {
         try {
@@ -88,26 +89,24 @@ public class SetNxController {
         }
     }
 
+    /**
+     * 获取数据库中所有的商品信息
+     */
     @GetMapping("/get-all-stock")
-    @ApiOperation("获取所有库存")
+    @ApiOperation(value = "获取数据库中所有的商品信息")
     public List<Stock> getAllStock() {
-        try {
-            return stockMapper.selectList(Wrappers.<Stock>lambdaQuery());
-        } catch (Exception e) {
-            log.error("获取所有库存失败", e);
-            return Collections.emptyList();
-        }
+        return stockMapper.selectList(Wrappers.emptyWrapper());
     }
 
+    /**
+     * 恢复所有商品数量为100
+     */
     @GetMapping("/restore-stock")
-    @ApiOperation("恢复库存为100")
+    @ApiOperation(value = "恢复所有商品数量为100")
     public String restoreStock() {
-        try {
-            stockMapper.update(null, Wrappers.<Stock>lambdaUpdate().set(Stock::getProductCount, 100).eq(Stock::getId, 1));
-        } catch (Exception e) {
-            log.error("恢复库存失败", e);
-            return "error_code";
-        }
-        return "恢复库存成功！！！";
+        stockMapper.update(null, Wrappers.<Stock>lambdaUpdate()
+                .set(Stock::getProductCount, 100)
+                .ne(Stock::getProductCount, -66666));
+        return "库存恢复成功";
     }
 }
