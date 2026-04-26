@@ -28,6 +28,7 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
 @RequestMapping("/redisson-setnx")
@@ -46,7 +47,7 @@ public class RedissonSetNxController {
     public static final String SET_NX_LOCK_LUA_SCRIPT =
                                 "if redis.call('get', KEYS[1]) == ARGV[1] then " +
                                 "return redis.call('del', KEYS[1])" +
-                                " else return 0 " +
+                                "else return 0 " +
                                 "end";
 
     @GetMapping(value = "/deduct-stock")
@@ -55,16 +56,21 @@ public class RedissonSetNxController {
 
         // 获取锁的key ( 保证每次操作商品为productId时的锁是唯一的 )
         String lockKey = SET_NX_LOCK_PREFIX + productId;
+        // lockValue 这里不需要手动设置？？？？？
         RLock setNxLock = redissonClient.getLock(lockKey);
 
         try {
+            // 不传入时间，默认-1，则开启看门狗机制（锁续期机制）
             setNxLock.lock();
+            ReentrantLock localCasLock = new ReentrantLock(false);
+            localCasLock.lock();
             Map<String, Object> resultMap = deductStockSync(productId);
             return (String) (resultMap.get("msg"));
         } catch (Exception e) {
             log.error("获取分布式锁失败", e);
             return "error_code: 获取分布式锁失败，请稍后重试";
         }finally {
+            // 释放锁
             setNxLock.unlock();
         }
     }

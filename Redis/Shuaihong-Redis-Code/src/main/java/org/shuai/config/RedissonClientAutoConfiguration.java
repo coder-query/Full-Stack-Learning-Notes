@@ -47,7 +47,7 @@ public class RedissonClientAutoConfiguration {
     public RedissonClient redissonClient() {
         Config config = new Config();
 //        // 设置锁的watchdog超时时间
-//        config.setLockWatchdogTimeout(10000);
+        config.setLockWatchdogTimeout(9);  // 自定义手动配置
         config.useSingleServer()
                 .setAddress("redis://" + host + ":" + port)
                 .setPassword(password.isEmpty() ? null : password)

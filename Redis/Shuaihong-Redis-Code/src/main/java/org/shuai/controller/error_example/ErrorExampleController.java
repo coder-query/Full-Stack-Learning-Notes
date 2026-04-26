@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 
@@ -58,7 +59,9 @@ public class ErrorExampleController {
     public Map<String,Object> deductStockSync(Integer productId){
 
         // 查询库存
-        Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery().eq(Stock::getId, productId));
+        Stock stock = stockMapper.selectOne(Wrappers.<Stock>lambdaQuery()
+                .eq(Stock::getId, productId)
+        );
         if (Objects.isNull(stock) || stock.getProductCount() <= 0){
             log.error("库存不足 for product ID: {} ，线程名称：{}，线程ID：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId());
             return Collections.singletonMap("msg", "库存不足");
@@ -82,6 +85,25 @@ public class ErrorExampleController {
         log.info("库存扣减成功 for product ID: {} ，线程名称：{}，线程ID：{}, 原库存：{}，扣减后库存剩余：{}", productId, Thread.currentThread().getName(), Thread.currentThread().getId(), oldStock, newStock);
         return Collections.singletonMap("msg", "库存扣减成功，原库存：" + oldStock + "，扣减后库存剩余：" + newStock);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 获取数据库中所有的商品信息
