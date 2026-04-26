@@ -1,4 +1,4 @@
-package org.shuai.controller.setnx;
+package org.shuai.controller.redis_setnx;
 
 
 import cn.hutool.core.lang.UUID;

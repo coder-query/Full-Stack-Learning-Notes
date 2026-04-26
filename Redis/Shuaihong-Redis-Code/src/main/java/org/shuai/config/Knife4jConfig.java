@@ -34,7 +34,7 @@ public class Knife4jConfig {
                 .groupName("redis的setnx实现分布式锁")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.setnx"))
+                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.redis_setnx"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -45,7 +45,7 @@ public class Knife4jConfig {
                 .groupName("Redisson的分布式锁")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.redisson"))
+                .apis(RequestHandlerSelectors.basePackage("org/shuai/controller/redisson_set_nx"))
                 .paths(PathSelectors.any())
                 .build();
     }
