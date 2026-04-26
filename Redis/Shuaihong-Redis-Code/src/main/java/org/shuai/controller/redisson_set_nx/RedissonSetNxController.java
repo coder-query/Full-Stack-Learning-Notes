@@ -66,8 +66,8 @@ public class RedissonSetNxController {
         try {
             // 不传入时间，默认-1，则开启看门狗机制（锁续期机制）
             setNxLock.lock();
-            ReentrantLock localCasLock = new ReentrantLock(false);
-            localCasLock.lock();
+//            ReentrantLock localCasLock = new ReentrantLock(false);
+//            localCasLock.lock();
             Map<String, Object> resultMap = deductStockSync(productId);
             return (String) (resultMap.get("msg"));
         } catch (Exception e) {
