@@ -41,7 +41,6 @@ public class RedisDemoController {
 
         /**
          * 在不引入redisson的情况下，如何实现分布式锁
-         * UUID.fastUUID().toString(true) +
          */
         // setnx  + 过期时间
         Jedis jedis = null;
