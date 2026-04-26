@@ -4,6 +4,7 @@ package org.shuai.controller.setnx_eee;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class RedisDemoController {
 
     @Autowired
     private JedisPool jedisPool;
+
+    @Value("${server.port}")
+    private String port;
 
     public static final String LOCK_PREFIX = "product_stock_lock:";
 
@@ -42,7 +46,7 @@ public class RedisDemoController {
         // setnx  + 过期时间
         Jedis jedis = null;
         String lockKey = LOCK_PREFIX + productId;
-        String lockValue = UUID.fastUUID().toString(true) +Thread.currentThread().getId();
+        String lockValue = port + UUID.fastUUID().toString(true) +Thread.currentThread().getId();
         try {
             // 拿到操作Redis的jedis
             jedis = jedisPool.getResource();

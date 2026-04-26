@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.shuai.entity.Stock;
 import org.shuai.mapper.StockMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,9 @@ public class SetNxController {
 
     @Resource
     private JedisPool jedisPool;
+
+    @Value("${server.port}")
+    private String port;
 
     @Resource
     private StockMapper stockMapper;
@@ -58,7 +62,7 @@ public class SetNxController {
             // 2.1 获取锁的key ( 保证每次操作商品为productId时的锁是唯一的 )
             String lockKey = SET_NX_LOCK_PREFIX + productId;
             // 2.2 获取锁的value ( 打标记，当前xxxjar包应用的线程获取了分布式锁 )
-            String clientId = UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
+            String clientId = port + UUID.fastUUID().toString(true) + Thread.currentThread().getName() + System.currentTimeMillis();
 
             // 2.3 设置锁的过期时间 ( 防止死锁 )
             SetParams setParams = new SetParams()

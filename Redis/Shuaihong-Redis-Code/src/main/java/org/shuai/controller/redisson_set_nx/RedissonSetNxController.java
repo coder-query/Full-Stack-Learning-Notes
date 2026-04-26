@@ -13,6 +13,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.shuai.entity.Stock;
 import org.shuai.mapper.StockMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,9 @@ public class RedissonSetNxController {
 
     @Resource
     private StockMapper stockMapper;
+
+    @Value("${server.port}")
+    private String port;
 
     @Resource
     private RedissonClient redissonClient;
