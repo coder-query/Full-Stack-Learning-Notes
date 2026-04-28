@@ -57,7 +57,7 @@ public class RedisClusterConfig {
         String[] hostsArray = hosts.split(",");
         for (String ipPort : hostsArray) {
             String[] ipPortPair = ipPort.split(":");
-            nodes.add(new HostAndPort(ipPortPair[0].trim(), Integer.valueOf(ipPortPair[1].trim())));
+            nodes.add(new HostAndPort(ipPortPair[0].trim(), Integer.parseInt(ipPortPair[1].trim())));
         }
         return new JedisCluster(nodes,timeout,1000,1,jedisPoolConfig);
     }
