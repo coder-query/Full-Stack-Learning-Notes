@@ -15,6 +15,8 @@ class RedisClusterApplicationTests {
     void contextLoads() {
         String set = redisString.set("test", "123");
         System.out.println(set);
+        String get = redisString.get("test");
+        System.out.println(get);
     }
 
 }
