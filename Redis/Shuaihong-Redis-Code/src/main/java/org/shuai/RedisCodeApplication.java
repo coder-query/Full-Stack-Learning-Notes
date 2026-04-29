@@ -9,6 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 @MapperScan("org.shuai.mapper")
@@ -40,5 +41,8 @@ public class RedisCodeApplication {
                 InetAddress.getLocalHost().getHostAddress(),
                 env.getProperty("server.port"));
         log.info(("spring boot 2.6.6 + jedis 操作 redis  (已启动) 耗时: " + (System.currentTimeMillis() - startTime)) + "ms");
+        Stream.of(applicationContext.getBeanDefinitionNames())
+                .filter(beanName -> !beanName.contains("spring"))
+                .forEach(System.out::println);
     }
 }

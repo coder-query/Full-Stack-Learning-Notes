@@ -12,7 +12,8 @@ import java.util.stream.Stream;
 @EnableAspectJAutoProxy
 public class Spring_Three_Main {
     public static void main(String[] args) {
-        ApplicationContext ioc = new AnnotationConfigApplicationContext(BootApplicationContextConfig.class);
+        ApplicationContext ioc
+                = new AnnotationConfigApplicationContext(BootApplicationContextConfig.class);
         String[] beanDefinitionNames = ioc.getBeanDefinitionNames();
         Stream.of(beanDefinitionNames)
                 .filter(s-> !s.contains("springframework"))

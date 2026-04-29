@@ -6,6 +6,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.stream.Stream;
 
+
+// 复合命令  复合注解
 public class Spring_Two_Main {
     public static void main(String[] args) {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("application-context.xml");
