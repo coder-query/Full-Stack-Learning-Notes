@@ -12,13 +12,6 @@
     <name>Encrypt Spring Boot Starter</name>
     <description>Spring Boot Starter for Encryption Tools with Property Hints</description>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.6</version>
-        <relativePath/>
-    </parent>
-
     <properties>
         <java.version>8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
@@ -30,6 +23,8 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <version>2.6.6</version>
+            <optional>true</optional>
         </dependency>
         <!-- Source: https://mvnrepository.com/artifact/commons-codec/commons-codec -->
         <dependency>
@@ -37,15 +32,19 @@
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
             <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.8.42</version>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>2.6.6</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
