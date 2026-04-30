@@ -9,8 +9,8 @@
     {
       "name": "encrypt.algorithm",
       "type": "java.lang.String",
-      "defaultValue": "SHA-256",
-      "description": "加密算法，支持MD5、SHA-256、SHA-512"
+      "defaultValue": "SHA-1",
+      "description": "加密算法，支持MD5、SHA-1、SHA-256、SHA-512"
     },
     {
       "name": "encrypt.salt-length",
