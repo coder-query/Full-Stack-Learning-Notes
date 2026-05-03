@@ -2,10 +2,12 @@ package org.shuai.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-public class EhCacheApplication {
+@EnableCaching
+public class EhCache2Application {
     public static void main(String[] args) {
-        SpringApplication.run(EhCacheApplication.class, args);
+        SpringApplication.run(EhCache2Application.class, args);
     }
 }
