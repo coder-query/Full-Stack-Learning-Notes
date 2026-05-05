@@ -31,6 +31,13 @@
 
 
     <dependencies>
+        <!--        swagger-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -64,27 +71,34 @@
             <version>1.11.6</version>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
+            <artifactId>shiro-spring</artifactId>
             <version>1.13.0</version>
-            <scope>compile</scope>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.13.0</version>
-            <scope>compile</scope>
-        </dependency>
-
-<!--        &lt;!&ndash; Source: https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring-boot-starter &ndash;&gt;-->
+<!--        &lt;!&ndash; Source: https://mvnrepository.com/artifact/org.apache.shiro/shiro-core &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.apache.shiro</groupId>-->
-<!--            <artifactId>shiro-spring-boot-starter</artifactId>-->
+<!--            <artifactId>shiro-core</artifactId>-->
 <!--            <version>1.13.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Source: https://mvnrepository.com/artifact/org.apache.shiro/shiro-web &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shiro</groupId>-->
+<!--            <artifactId>shiro-web</artifactId>-->
+<!--            <version>1.13.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; Source: https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring-boot-web-starter &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shiro</groupId>-->
+<!--            <artifactId>shiro-spring-boot-web-starter</artifactId>-->
+<!--            <version>1.13.0</version>-->
+<!--            <scope>compile</scope>-->
 <!--        </dependency>-->
 
         <dependency>
