@@ -9,16 +9,13 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.shuai.boot.shirocodestudy.shiro.entity.SysUser;
+import org.shuai.boot.shirocodestudy.shiro.utils.ShiroPwdUtils;
 
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
 public class CustomRealm extends AuthorizingRealm {
-
-    private static final String SALT = "123456@~realm~salt";
-
-    private static final int HASH_ITERATIONS = 1024;
 
     public static final String TEST_PASSWORD = "123456";
 
@@ -29,7 +26,7 @@ public class CustomRealm extends AuthorizingRealm {
     public static final String TEST_PERMISSION = "sys:user:add";
 
     public static void main(String[] args) {
-        Sha256Hash Sha256Hash = new Sha256Hash(TEST_PASSWORD, SALT, HASH_ITERATIONS);
+        Sha256Hash Sha256Hash = new Sha256Hash(TEST_PASSWORD, ShiroPwdUtils.SALT, ShiroPwdUtils.HASH_ITERATIONS);
         String hex = Sha256Hash.toHex();
         System.out.println(hex);
     }
@@ -73,9 +70,7 @@ public class CustomRealm extends AuthorizingRealm {
         }
 
         // 校验密码
-        Sha256Hash Sha256Hash = new Sha256Hash(password, SALT, HASH_ITERATIONS);
-        String hex = Sha256Hash.toHex();
-        if (!StrUtil.equals(hex, sysUser.getPassword())){
+        if (!ShiroPwdUtils.verifyWithSha256(password, sysUser.getPassword())){
             throw new IncorrectCredentialsException("用户名或密码错误,请重新输入");
         }
         return new SimpleAuthenticationInfo(sysUser, password,CustomRealm.class.getName());
