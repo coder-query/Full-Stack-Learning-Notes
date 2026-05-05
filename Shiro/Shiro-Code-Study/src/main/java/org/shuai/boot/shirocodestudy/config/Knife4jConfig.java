@@ -18,55 +18,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Knife4jConfig {
 
     @Bean
-    public Docket testCcApi() {
+    public Docket demoApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("测试cc")
-                .apiInfo(apiInfo())
+                .groupName("demo Controller")
+                .apiInfo(this.apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.testcc"))
-                .paths(PathSelectors.any())
-                .build();
-    }
-    @Bean
-    public Docket errorExampleApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("本地单机锁（在分布式下的错误示例）")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.error_example"))
-                .paths(PathSelectors.any())
-                .build();
-    }
-
-    @Bean
-    public Docket redisSetNxApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("redis的setnx实现分布式锁")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.redis_setnx"))
-                .paths(PathSelectors.any())
-                .build();
-    }
-
-    @Bean
-    public Docket RedissonApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("Redisson的分布式锁")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org/shuai/controller/redisson_set_nx"))
-                .paths(PathSelectors.any())
-                .build();
-    }
-
-    @Bean
-    public Docket redisMQApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("redis实现mq消息队列")
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.controller.redismq"))
+                .apis(RequestHandlerSelectors.basePackage("org.shuai.boot.shirocodestudy.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

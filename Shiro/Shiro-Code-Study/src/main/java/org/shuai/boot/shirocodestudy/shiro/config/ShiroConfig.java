@@ -5,22 +5,34 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.shuai.boot.shirocodestudy.shiro.filter.JwtAuthFilter;
 import org.shuai.boot.shirocodestudy.shiro.realm.CustomRealm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
 
+    public static final String JWT_AUTH_FILTER = "jwtAuthFilter";
+
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager,ShiroFilterChainDefinition shiroFilterChainDefinition){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager, ShiroFilterChainDefinition shiroFilterChainDefinition,JwtAuthFilter jwtAuthFilter){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        Map<String, Filter> filtersMap = new LinkedHashMap<>();
+        filtersMap.put(JWT_AUTH_FILTER, jwtAuthFilter);
+        shiroFilterFactoryBean.setFilters(filtersMap);
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(shiroFilterChainDefinition.getFilterChainMap());
         return shiroFilterFactoryBean;
+    }
+
+    @Bean
+    public JwtAuthFilter jwtAuthFilter(){
+        return new JwtAuthFilter();
     }
 
     @Bean
@@ -39,8 +51,12 @@ public class ShiroConfig {
     public ShiroFilterChainDefinition shiroFilterChainDefinition(){
         DefaultShiroFilterChainDefinition defaultShiroFilterChainDefinition = new DefaultShiroFilterChainDefinition();
         Map<String, String> filterChainMap = new LinkedHashMap<>();
-        filterChainMap.put("/login", "anon");
-        filterChainMap.put("/**", "authc");
+        filterChainMap.put("/doc.html", "anon");
+        filterChainMap.put("/webjars/**", "anon");
+        filterChainMap.put("/swagger-resources/**", "anon");
+        filterChainMap.put("/v2/api-docs/**", "anon");
+        filterChainMap.put("/auth/**", "anon");
+        filterChainMap.put("/**", JWT_AUTH_FILTER);
         defaultShiroFilterChainDefinition.addPathDefinitions(filterChainMap);
         return defaultShiroFilterChainDefinition;
     }

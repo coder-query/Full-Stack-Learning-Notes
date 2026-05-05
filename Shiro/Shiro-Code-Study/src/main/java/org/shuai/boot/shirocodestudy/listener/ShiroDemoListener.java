@@ -1,4 +1,4 @@
-package org.shuai.boot.shirocodestudy.demo;
+package org.shuai.boot.shirocodestudy.listener;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
