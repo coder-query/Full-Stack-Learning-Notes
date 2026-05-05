@@ -27,7 +27,7 @@ public class ShiroDemoListener implements ApplicationListener<ApplicationReadyEv
         Subject subject = SecurityUtils.getSubject();
         subject.login(new UsernamePasswordToken( CustomRealm.TEST_USERNAME, CustomRealm.TEST_PASSWORD));
 
-        System.out.println("是否拥有管理员角色 ："+subject.hasRole(CustomRealm.TEST_USERNAME));
+        System.out.println("是否拥有管理员角色 ："+subject.hasRole(CustomRealm.TEST_ROlE));
 
         System.out.println("是否拥有权限："+subject.isPermitted(CustomRealm.TEST_PERMISSION));
     }
