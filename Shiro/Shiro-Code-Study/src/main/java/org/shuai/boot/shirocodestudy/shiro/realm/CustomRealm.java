@@ -26,8 +26,7 @@ public class CustomRealm extends AuthorizingRealm {
     public static final String TEST_PERMISSION = "sys:user:add";
 
     public static void main(String[] args) {
-        Sha256Hash Sha256Hash = new Sha256Hash(TEST_PASSWORD, ShiroPwdUtils.SALT, ShiroPwdUtils.HASH_ITERATIONS);
-        String hex = Sha256Hash.toHex();
+        String hex = ShiroPwdUtils.encryptWithSha256(TEST_PASSWORD);
         System.out.println(hex);
     }
 
@@ -36,7 +35,7 @@ public class CustomRealm extends AuthorizingRealm {
             return SysUser.builder()
                     .id(1L)
                     .username(TEST_USERNAME)
-                    .password("5bbb772900403596ab58bab5312103cb537fccd0b59bec4d73cd3e8372d1ca8e")
+                    .password("fb6d6a86368e7dc6973a976a055a91194180b2b7e000207cd88d87158dc831c4")
                     .status("1")
                     .build();
         }

@@ -3,10 +3,11 @@ package org.shuai.boot.shirocodestudy.listener;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
 import org.shuai.boot.shirocodestudy.shiro.realm.CustomRealm;
+import org.shuai.boot.shirocodestudy.shiro.utils.ShiroUtils;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -23,12 +24,17 @@ public class ShiroDemoListener implements ApplicationListener<ApplicationReadyEv
     @Override
     public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
         log.warn("ShiroDemoListener onApplicationEvent, 开始测试校验密码。。。");
-        SecurityUtils.setSecurityManager(securityManager);
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(new UsernamePasswordToken( CustomRealm.TEST_USERNAME, CustomRealm.TEST_PASSWORD));
-
-        System.out.println("是否拥有管理员角色 ："+subject.hasRole(CustomRealm.TEST_ROlE));
-
-        System.out.println("是否拥有权限："+subject.isPermitted(CustomRealm.TEST_PERMISSION));
+        // 在非 HTTP 请求线程中，需要手动绑定 SecurityManager 到 ThreadContext
+        ThreadContext.bind(securityManager);
+        try {
+            ShiroUtils.login(CustomRealm.TEST_USERNAME, CustomRealm.TEST_PASSWORD);
+            Subject subject = SecurityUtils.getSubject();
+            log.info("登录成功, principal = {}", subject.getPrincipal());
+            subject.logout();
+        } catch (Exception e) {
+            log.error("登录测试失败", e);
+        } finally {
+            ThreadContext.remove();
+        }
     }
 }
