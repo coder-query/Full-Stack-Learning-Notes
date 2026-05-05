@@ -9,11 +9,15 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.shuai.boot.shirocodestudy.shiro.utils.JwtUtils;
 import org.shuai.boot.shirocodestudy.shiro.utils.ShiroUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.HashMap;
 
 @Slf4j
 @RestController
@@ -39,6 +43,7 @@ public class AuthController {
             log.error("密码不正确, e = ", e);
             return "username or password is error";
         }
-        return "login success";
+        // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
+       return JwtUtils.createToken(Collections.emptyMap());
     }
 }
