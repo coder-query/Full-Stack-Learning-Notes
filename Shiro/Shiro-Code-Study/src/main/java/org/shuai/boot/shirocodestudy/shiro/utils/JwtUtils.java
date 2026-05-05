@@ -59,7 +59,7 @@ public class JwtUtils {
 
         } catch (Exception e) {
             // 这里可以根据具体异常类型（如 TokenExpiredException）做不同处理
-            e.printStackTrace();
+            log.error("verifyToken error, e = ", e);
             return null; // 验证失败
         }
     }

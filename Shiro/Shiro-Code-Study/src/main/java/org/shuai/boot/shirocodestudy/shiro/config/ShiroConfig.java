@@ -10,6 +10,9 @@ import org.shuai.boot.shirocodestudy.shiro.realm.CustomRealm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,19 +23,14 @@ public class ShiroConfig {
     public static final String JWT_AUTH_FILTER = "jwtAuthFilter";
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager, ShiroFilterChainDefinition shiroFilterChainDefinition,JwtAuthFilter jwtAuthFilter){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager, ShiroFilterChainDefinition shiroFilterChainDefinition){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         Map<String, Filter> filtersMap = new LinkedHashMap<>();
-        filtersMap.put(JWT_AUTH_FILTER, jwtAuthFilter);
+        filtersMap.put(JWT_AUTH_FILTER,  new JwtAuthFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(shiroFilterChainDefinition.getFilterChainMap());
         return shiroFilterFactoryBean;
-    }
-
-    @Bean
-    public JwtAuthFilter jwtAuthFilter(){
-        return new JwtAuthFilter();
     }
 
     @Bean

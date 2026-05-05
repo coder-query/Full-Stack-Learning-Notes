@@ -1,15 +1,18 @@
 package org.shuai.boot.shirocodestudy.shiro.filter;
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONObject;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.shuai.boot.shirocodestudy.shiro.utils.JwtUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Slf4j
 public class JwtAuthFilter extends AccessControlFilter {
