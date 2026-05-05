@@ -18,9 +18,6 @@ import javax.annotation.Resource;
 public class ShiroDemoListener implements ApplicationListener<ApplicationReadyEvent> {
 
     @Resource
-    private CustomRealm customRealm;
-
-    @Resource
     private SecurityManager securityManager;
 
     @Override
@@ -29,5 +26,9 @@ public class ShiroDemoListener implements ApplicationListener<ApplicationReadyEv
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         subject.login(new UsernamePasswordToken( CustomRealm.TEST_USERNAME, CustomRealm.TEST_PASSWORD));
+
+        System.out.println("是否拥有管理员角色 ："+subject.hasRole(CustomRealm.TEST_USERNAME));
+
+        System.out.println("是否拥有权限："+subject.isPermitted(CustomRealm.TEST_PERMISSION));
     }
 }

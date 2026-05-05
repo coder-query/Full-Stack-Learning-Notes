@@ -1,17 +1,18 @@
 package org.shuai.boot.shirocodestudy.shiro.realm;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.shuai.boot.shirocodestudy.shiro.entity.SysUser;
-import org.springframework.beans.factory.InitializingBean;
 
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 
 public class CustomRealm extends AuthorizingRealm {
 
@@ -23,6 +24,10 @@ public class CustomRealm extends AuthorizingRealm {
 
     public static final String TEST_USERNAME = "admin";
 
+    public static final String TEST_ROlE = "超级管理员";
+
+    public static final String TEST_PERMISSION = "sys:user:add";
+
     public static void main(String[] args) {
         Sha256Hash Sha256Hash = new Sha256Hash(TEST_PASSWORD, SALT, HASH_ITERATIONS);
         String hex = Sha256Hash.toHex();
@@ -32,12 +37,20 @@ public class CustomRealm extends AuthorizingRealm {
     private SysUser selectUserByUsername(String username) {
         if (StrUtil.equals(username, TEST_USERNAME)){
             return SysUser.builder()
+                    .id(1L)
                     .username(TEST_USERNAME)
                     .password("5bbb772900403596ab58bab5312103cb537fccd0b59bec4d73cd3e8372d1ca8e")
                     .status("1")
                     .build();
         }
         return null;
+    }
+
+    public Set<String> selectRolesByUserId(Long Id) {
+        return CollUtil.newHashSet(TEST_ROlE, "商家");
+    }
+    public Set<String> selectPermissionsByRoleId(Long roleId) {
+        return CollUtil.newHashSet(TEST_PERMISSION, "sys:user:delete","sys:user:update","sys:user:select");
     }
 
     @Override
@@ -65,11 +78,17 @@ public class CustomRealm extends AuthorizingRealm {
         if (!StrUtil.equals(hex, sysUser.getPassword())){
             throw new IncorrectCredentialsException("用户名或密码错误,请重新输入");
         }
-        return new SimpleAuthenticationInfo(username, password,CustomRealm.class.getName());
+        return new SimpleAuthenticationInfo(sysUser, password,CustomRealm.class.getName());
     }
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        SysUser sysUser = (SysUser) principalCollection.getPrimaryPrincipal();
+        Set<String> roles = selectRolesByUserId(sysUser.getId());
+        Set<String> permissions = selectPermissionsByRoleId(sysUser.getId());
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.setRoles(roles);
+        simpleAuthorizationInfo.setStringPermissions(permissions);
+        return simpleAuthorizationInfo;
     }
 }
