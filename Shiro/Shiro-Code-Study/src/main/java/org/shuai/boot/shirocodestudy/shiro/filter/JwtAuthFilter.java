@@ -29,7 +29,7 @@ public class JwtAuthFilter extends AccessControlFilter {
             return false;
         }
         // TODO 解析jwt，这里进行认证jwtToken的内容
-        return true;
+       return JwtUtils.verifyToken(jwtToken);
     }
 
     @Override

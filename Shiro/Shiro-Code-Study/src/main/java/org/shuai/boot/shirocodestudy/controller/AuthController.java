@@ -44,6 +44,6 @@ public class AuthController {
             return "username or password is error";
         }
         // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
-       return JwtUtils.createToken(Collections.emptyMap());
+       return JwtUtils.generateToken(Collections.emptyMap());
     }
 }
