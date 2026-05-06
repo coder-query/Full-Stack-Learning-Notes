@@ -1,6 +1,8 @@
 package org.shuai.boot.shirocodestudy.shiro.config;
 
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
@@ -54,5 +56,24 @@ public class ShiroConfig {
         filterChainMap.put("/**", JWT_AUTH_FILTER);
         defaultShiroFilterChainDefinition.addPathDefinitions(filterChainMap);
         return defaultShiroFilterChainDefinition;
+    }
+
+    /**
+     * Shiro 生命周期处理器
+     */
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
+
+    /**
+     * Shiro 授权注解切面，拦截 @RequiresRoles、@RequiresPermissions 等
+     * 注意：需要配合 spring-boot-starter-aop 使用（由其提供 Advisor 自动代理）
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
     }
 }

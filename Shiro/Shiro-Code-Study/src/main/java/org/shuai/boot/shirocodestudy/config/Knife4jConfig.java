@@ -20,7 +20,7 @@ public class Knife4jConfig {
     @Bean
     public Docket demoApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("demo Controller")
+                .groupName("Demo Controller")
                 .apiInfo(this.apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.shuai.boot.shirocodestudy.controller"))

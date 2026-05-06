@@ -2,7 +2,6 @@ package org.shuai.boot.shirocodestudy.listener;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
@@ -28,7 +27,7 @@ public class ShiroDemoListener implements ApplicationListener<ApplicationReadyEv
         ThreadContext.bind(securityManager);
         try {
             ShiroUtils.login(CustomRealm.TEST_USERNAME, CustomRealm.TEST_PASSWORD);
-            Subject subject = SecurityUtils.getSubject();
+            Subject subject = ShiroUtils.getSubject();
             log.info("登录成功, principal = {}", subject.getPrincipal());
             subject.logout();
         } catch (Exception e) {
