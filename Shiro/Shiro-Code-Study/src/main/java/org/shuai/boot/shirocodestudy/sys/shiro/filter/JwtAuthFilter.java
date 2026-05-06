@@ -1,10 +1,10 @@
-package org.shuai.boot.shirocodestudy.shiro.filter;
+package org.shuai.boot.shirocodestudy.sys.shiro.filter;
 
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.shuai.boot.shirocodestudy.shiro.utils.JwtUtils;
+import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

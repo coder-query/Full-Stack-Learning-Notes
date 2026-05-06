@@ -5,15 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
-import org.shuai.boot.shirocodestudy.shiro.realm.CustomRealm;
-import org.shuai.boot.shirocodestudy.shiro.utils.ShiroUtils;
+import org.shuai.boot.shirocodestudy.sys.shiro.realm.CustomRealm;
+import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@Component
+//@Component
 @Slf4j
 public class ShiroDemoListener implements ApplicationListener<ApplicationReadyEvent> {
 

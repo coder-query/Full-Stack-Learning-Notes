@@ -1,4 +1,4 @@
-package org.shuai.boot.shirocodestudy.shiro.utils;
+package org.shuai.boot.shirocodestudy.sys.shiro.utils;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.Sha1Hash;

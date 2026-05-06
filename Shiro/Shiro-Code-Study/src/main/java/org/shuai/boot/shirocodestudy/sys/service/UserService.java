@@ -1,4 +1,4 @@
-package org.shuai.boot.shirocodestudy.service;
+package org.shuai.boot.shirocodestudy.sys.service;
 
 public interface UserService {
     String addUser(String username, String password);

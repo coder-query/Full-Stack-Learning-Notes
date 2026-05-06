@@ -23,7 +23,7 @@ public class Knife4jConfig {
                 .groupName("Demo Controller")
                 .apiInfo(this.apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.shuai.boot.shirocodestudy.controller"))
+                .apis(RequestHandlerSelectors.basePackage("org.shuai.boot.shirocodestudy.sys.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

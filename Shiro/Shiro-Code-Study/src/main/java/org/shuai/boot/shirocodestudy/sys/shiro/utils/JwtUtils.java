@@ -1,4 +1,4 @@
-package org.shuai.boot.shirocodestudy.shiro.utils;
+package org.shuai.boot.shirocodestudy.sys.shiro.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

@@ -1,9 +1,9 @@
-package org.shuai.boot.shirocodestudy.shiro.utils;
+package org.shuai.boot.shirocodestudy.sys.shiro.utils;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.shuai.boot.shirocodestudy.shiro.entity.SysUser;
+import org.shuai.boot.shirocodestudy.sys.shiro.entity.SysUser;
 
 public class ShiroUtils {
 

@@ -1,17 +1,17 @@
-package org.shuai.boot.shirocodestudy.shiro.realm;
+package org.shuai.boot.shirocodestudy.sys.shiro.realm;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.shuai.boot.shirocodestudy.shiro.entity.SysUser;
-import org.shuai.boot.shirocodestudy.shiro.utils.ShiroPwdUtils;
+import org.apache.shiro.subject.Subject;
+import org.shuai.boot.shirocodestudy.sys.shiro.entity.SysUser;
+import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroPwdUtils;
+import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
 
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -77,6 +77,10 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        Subject subject = ShiroUtils.getSubject();
+        if (Objects.isNull(subject) || !subject.isAuthenticated()){
+            throw  new AuthenticationException("用户未认证，请先登录认证...");
+        }
         SysUser sysUser = (SysUser) principalCollection.getPrimaryPrincipal();
         Set<String> roles = selectRolesByUserId(sysUser.getId());
         Set<String> permissions = selectPermissionsByRoleId(sysUser.getId());

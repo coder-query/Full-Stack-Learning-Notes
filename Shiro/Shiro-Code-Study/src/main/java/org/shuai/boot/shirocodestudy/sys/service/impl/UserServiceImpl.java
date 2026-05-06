@@ -1,7 +1,7 @@
-package org.shuai.boot.shirocodestudy.service.impl;
+package org.shuai.boot.shirocodestudy.sys.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.shuai.boot.shirocodestudy.service.UserService;
+import org.shuai.boot.shirocodestudy.sys.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,15 +1,20 @@
-package org.shuai.boot.shirocodestudy.shiro.entity;
+package org.shuai.boot.shirocodestudy.sys.shiro.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SysUser {
+public class SysUser implements Serializable {
+
+
+
     private Long id;
     private String username;
     private String password;
