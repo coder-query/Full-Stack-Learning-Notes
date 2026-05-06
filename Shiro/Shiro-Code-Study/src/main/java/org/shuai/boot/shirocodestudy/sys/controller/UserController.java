@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.shuai.boot.shirocodestudy.sys.service.UserService;
-import org.shuai.boot.shirocodestudy.sys.shiro.entity.SysUser;
+import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

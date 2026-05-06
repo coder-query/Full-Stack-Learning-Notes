@@ -3,13 +3,17 @@ package org.shuai.boot.shirocodestudy.sys.shiro.filter;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.shuai.boot.shirocodestudy.sys.shiro.token.JwtToken;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Slf4j
 public class JwtAuthFilter extends AccessControlFilter {
@@ -25,8 +29,19 @@ public class JwtAuthFilter extends AccessControlFilter {
             log.info("jwtToken is empty");
             return false;
         }
-        // TODO 解析jwt，这里进行认证jwtToken的内容
-       return JwtUtils.verifyToken(jwtToken);
+        // 验证JWT并提取用户信息
+        Map<String, Object> claims = JwtUtils.verifyAndGetClaims(jwtToken);
+        if (claims == null) {
+            log.info("jwtToken is invalid or expired");
+            return false;
+        }
+        // 用JWT中的用户名执行Shiro登录，让Subject变为已认证状态
+        String username = (String) claims.get("username");
+        Subject subject = SecurityUtils.getSubject();
+        if (!subject.isAuthenticated()) {
+            subject.login(new JwtToken(jwtToken, username));
+        }
+        return true;
     }
 
     @Override

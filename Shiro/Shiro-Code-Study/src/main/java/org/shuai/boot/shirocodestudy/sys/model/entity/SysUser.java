@@ -1,4 +1,4 @@
-package org.shuai.boot.shirocodestudy.sys.shiro.entity;
+package org.shuai.boot.shirocodestudy.sys.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

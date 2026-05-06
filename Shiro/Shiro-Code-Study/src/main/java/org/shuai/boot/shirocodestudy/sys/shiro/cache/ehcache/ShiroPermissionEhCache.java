@@ -1,25 +1,28 @@
-package org.shuai.boot.shirocodestudy.sys.shiro.cache;
+package org.shuai.boot.shirocodestudy.sys.shiro.cache.ehcache;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-public class ShiroPermissionEhCache implements Cache<String, Object> {
+@Component
+public class ShiroPermissionEhCache<K, V> implements Cache<K, V> {
+
     @Override
-    public Object get(String s) throws CacheException {
+    public V get(K k) throws CacheException {
         return null;
     }
 
     @Override
-    public Object put(String s, Object o) throws CacheException {
+    public V put(K k, V v) throws CacheException {
         return null;
     }
 
     @Override
-    public Object remove(String s) throws CacheException {
+    public V remove(K k) throws CacheException {
         return null;
     }
 
@@ -34,12 +37,12 @@ public class ShiroPermissionEhCache implements Cache<String, Object> {
     }
 
     @Override
-    public Set<String> keys() {
+    public Set<K> keys() {
         return Collections.emptySet();
     }
 
     @Override
-    public Collection<Object> values() {
+    public Collection<V> values() {
         return Collections.emptyList();
     }
 }

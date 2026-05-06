@@ -1,28 +1,20 @@
 package org.shuai.boot.shirocodestudy.sys.shiro.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.SessionListener;
-import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.shuai.boot.shirocodestudy.sys.constants.CacheConstant;
 import org.shuai.boot.shirocodestudy.sys.shiro.filter.JwtAuthFilter;
-import org.shuai.boot.shirocodestudy.sys.shiro.listener.BDSessionListener;
 import org.shuai.boot.shirocodestudy.sys.shiro.realm.CustomRealm;
-import org.shuai.boot.shirocodestudy.sys.shiro.session.RedisSessionDAO;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,19 +22,22 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    @Value("${spring.cache.type:ehcache}")
+    private String cacheType;
+
+    @Value("${shiro.session-timeout:7200}")
+    private int shiroSessionTimeout;
+
     public static final String JWT_AUTH_FILTER = "jwtAuthFilter";
 
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        // 添加自定义的jwt过滤器
-        Map<String, Filter> filtersMap = new LinkedHashMap<>(2);
+        Map<String, Filter> filtersMap = new LinkedHashMap<>();
         filtersMap.put(JWT_AUTH_FILTER,  new JwtAuthFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
-        // 设置securityManager
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-        // 配置请求路径的认证
-        Map<String, String> filterChainMap = new LinkedHashMap<>(8);
+        shiroFilterFactoryBean.setSecurityManager((DefaultWebSecurityManager)securityManager);
+        Map<String, String> filterChainMap = new LinkedHashMap<>();
         filterChainMap.put("/doc.html", "anon");
         filterChainMap.put("/webjars/**", "anon");
         filterChainMap.put("/swagger-resources/**", "anon");
@@ -55,20 +50,13 @@ public class ShiroConfig {
     }
 
     @Bean
-    public CustomRealm customRealm(){
-        return new CustomRealm();
-    }
-
-    @Bean
-    public SecurityManager securityManager(CustomRealm customRealm){
+    public SecurityManager securityManager(CustomRealm customRealm, @Qualifier("shiroPermissionRedisCacheManager") CacheManager shiroPermissionRedisCacheManager) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        // 设置自定义账号密码认证和授权方式realm
         defaultWebSecurityManager.setRealm(customRealm);
-        //
-//        defaultWebSecurityManager.setCacheManager();
+        // 设置权限缓存，避免每次校验权限字符时，频繁查询数据库
+        defaultWebSecurityManager.setCacheManager(shiroPermissionRedisCacheManager);
         return defaultWebSecurityManager;
     }
-
 
     /**
      * Shiro 生命周期处理器
@@ -89,10 +77,6 @@ public class ShiroConfig {
         return advisor;
     }
 
-
-    /**
-     * 下面是基于cookie + Session的配置 ，如果是jwt，则注释掉下面的配制即可
-     */
 //    /**
 //     * RedisSessionDAO shiro sessionDao层的实现 通过redis
 //     * 使用的是shiro-redis开源插件
@@ -100,7 +84,7 @@ public class ShiroConfig {
 //
 //
 //    @Bean
-//    public SessionDAO sessionDAO(@Value("${spring.cache.type:ehcache}") String cacheType) {
+//    public SessionDAO sessionDAO() {
 //        if (CacheConstant.Redis_Type.equals(cacheType)) {
 //            log.warn("当前Session存储类型为 cacheType = {}",cacheType);
 //            return new RedisSessionDAO();
@@ -109,14 +93,13 @@ public class ShiroConfig {
 //            return new MemorySessionDAO();
 //        }
 //    }
-
+//
 //
 //    /**
 //     * shiro session的管理
 //     */
 //    @Bean
-//    public DefaultWebSessionManager sessionManager(SessionDAO sessionDAO,
-//                                                   @Value("${shiro.session-timeout:7200}") int shiroSessionTimeout) {
+//    public DefaultWebSessionManager sessionManager(SessionDAO sessionDAO) {
 //        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 //        sessionManager.setGlobalSessionTimeout(shiroSessionTimeout * 1000L);
 ////        sessionManager.setSessionDAO(sessionDAO);

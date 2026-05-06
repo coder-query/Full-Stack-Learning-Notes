@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -40,7 +41,9 @@ public class AuthController {
             return "username or password is error";
         }
         // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
-       return JwtUtils.generateToken(Collections.emptyMap());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("username", username);
+        return JwtUtils.generateToken(claims);
 //        return "login success";
     }
 }

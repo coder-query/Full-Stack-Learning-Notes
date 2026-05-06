@@ -8,13 +8,16 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
-import org.shuai.boot.shirocodestudy.sys.shiro.entity.SysUser;
+import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
+import org.shuai.boot.shirocodestudy.sys.shiro.token.JwtToken;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroPwdUtils;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Set;
 
+@Component
 public class CustomRealm extends AuthorizingRealm {
 
     public static final String TEST_PASSWORD = "123456";
@@ -24,6 +27,16 @@ public class CustomRealm extends AuthorizingRealm {
     public static final String TEST_ROlE = "超级管理员";
 
     public static final String TEST_PERMISSION = "sys:user:add";
+
+    public CustomRealm() {
+        super();
+        // 支持JwtToken和UsernamePasswordToken两种类型
+    }
+
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof UsernamePasswordToken || token instanceof JwtToken;
+    }
 
     public static void main(String[] args) {
         String hex = ShiroPwdUtils.encryptWithSha256(TEST_PASSWORD);
@@ -52,6 +65,18 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
+        // JWT Token 认证：JWT已在Filter中验证通过，直接根据用户名构造认证信息
+        if (authenticationToken instanceof JwtToken) {
+            JwtToken jwtToken = (JwtToken) authenticationToken;
+            String username = (String) jwtToken.getPrincipal();
+            SysUser sysUser = selectUserByUsername(username);
+            if (Objects.isNull(sysUser)) {
+                throw new UnknownAccountException("用户不存在");
+            }
+            return new SimpleAuthenticationInfo(sysUser, jwtToken.getCredentials(), CustomRealm.class.getName());
+        }
+
+        // 用户名密码认证
         String username = (String) authenticationToken.getPrincipal();
 
         char[] passwordChars = (char[]) authenticationToken.getCredentials();
@@ -81,6 +106,7 @@ public class CustomRealm extends AuthorizingRealm {
         if (Objects.isNull(subject) || !subject.isAuthenticated()){
             throw  new AuthenticationException("用户未认证，请先登录认证...");
         }
+        System.out.println("doGetAuthorizationInfo 数据库查询权限");
         SysUser sysUser = (SysUser) principalCollection.getPrimaryPrincipal();
         Set<String> roles = selectRolesByUserId(sysUser.getId());
         Set<String> permissions = selectPermissionsByRoleId(sysUser.getId());
