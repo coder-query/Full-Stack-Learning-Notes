@@ -81,7 +81,6 @@ public class ShiroConfig {
 
 //    /**
 //     * RedisSessionDAO shiro sessionDao层的实现 通过redis
-//     * 使用的是shiro-redis开源插件
 //     */
 //
 //
