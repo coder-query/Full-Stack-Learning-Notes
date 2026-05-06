@@ -33,17 +33,19 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        Map<String, Filter> filtersMap = new LinkedHashMap<>();
+        // 自定义 jwt filter
+        Map<String, Filter> filtersMap = new LinkedHashMap<>(2);
         filtersMap.put(JWT_AUTH_FILTER,  new JwtAuthFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
-        shiroFilterFactoryBean.setSecurityManager((DefaultWebSecurityManager)securityManager);
-        Map<String, String> filterChainMap = new LinkedHashMap<>();
+        // 设置securityManager
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        // 自定义 filterChain 路径过滤拦截规则
+        Map<String, String> filterChainMap = new LinkedHashMap<>(8);
         filterChainMap.put("/doc.html", "anon");
         filterChainMap.put("/webjars/**", "anon");
         filterChainMap.put("/swagger-resources/**", "anon");
         filterChainMap.put("/v2/api-docs/**", "anon");
         filterChainMap.put("/auth/**", "anon");
-//        filterChainMap.put("/**","authc");
         filterChainMap.put("/**", JWT_AUTH_FILTER);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
         return shiroFilterFactoryBean;

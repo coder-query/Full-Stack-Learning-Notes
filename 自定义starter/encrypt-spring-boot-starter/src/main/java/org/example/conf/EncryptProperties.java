@@ -4,7 +4,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "encrypt")
 public class EncryptProperties {
-
     private boolean enabled = true;
     private String algorithm = "SHA-256";
     private int saltLength = 8;
@@ -33,6 +32,7 @@ public class EncryptProperties {
     public void setSaltLength(int saltLength) {
         this.saltLength = saltLength;
     }
+
 
     public boolean isUppercase() {
         return uppercase;

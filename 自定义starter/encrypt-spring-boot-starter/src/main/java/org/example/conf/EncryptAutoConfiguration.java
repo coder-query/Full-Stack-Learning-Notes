@@ -14,4 +14,5 @@ public class EncryptAutoConfiguration {
     public EncryptUtils encryptUtils(EncryptProperties properties) {
         return new EncryptUtils(properties);
     }
+
 }

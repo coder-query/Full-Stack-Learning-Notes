@@ -2,6 +2,7 @@ package org.shuai.boot.shirocodestudy.sys.shiro.realm;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 import java.util.Set;
 
+@Slf4j
 @Component
 public class CustomRealm extends AuthorizingRealm {
 
