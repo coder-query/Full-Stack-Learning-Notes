@@ -49,17 +49,17 @@ public class JwtRealm extends AuthorizingRealm {
                 log.error("JwtRealm ---> token不存在");
                 throw new AuthenticationException("token不存在");
             }
-        // 提取claims，根据userId从数据库查询用户
+            // 提取claims，根据userId从数据库查询用户
             Map<String, Object> claims = JwtUtils.extractClaims(token);
             SysUser sysUser = null;
-            if (MapUtil.isNotEmpty(claims)){
+            if (MapUtil.isNotEmpty(claims)) {
                 Object userIdObj = claims.get(JwtUtils.USER_ID);
-                if (userIdObj != null){
+                if (userIdObj != null) {
                     Long userId = ((Number) userIdObj).longValue();
                     sysUser = SysUser.builder().id(userId).build();
                 }
             }
-            if (Objects.isNull(sysUser)){
+            if (Objects.isNull(sysUser)) {
                 log.error("JwtRealm ---> sysUser用户不存在");
                 throw new AuthenticationException("用户不存在");
             }
@@ -72,8 +72,8 @@ public class JwtRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         Subject subject = ShiroUtils.getSubject();
-        if (Objects.isNull(subject) || !subject.isAuthenticated()){
-            throw  new AuthenticationException("用户未认证，请先登录认证...");
+        if (Objects.isNull(subject) || !subject.isAuthenticated()) {
+            throw new AuthenticationException("用户未认证，请先登录认证...");
         }
         log.info("doGetAuthorizationInfo 数据库查询权限");
         SysUser sysUser = (SysUser) principalCollection.getPrimaryPrincipal();
