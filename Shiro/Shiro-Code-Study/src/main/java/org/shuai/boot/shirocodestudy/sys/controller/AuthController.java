@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.shuai.boot.shirocodestudy.response.Response;
 import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
 import org.shuai.boot.shirocodestudy.sys.service.UserService;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
@@ -32,7 +33,7 @@ public class AuthController {
 
     @ApiOperation(value = "登录接口")
     @PostMapping(value = "/login")
-    public String login(
+    public Response<String> login(
             @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password
     ){
@@ -59,6 +60,7 @@ public class AuthController {
         // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
         Map<String, Object> claims = new HashMap<>(2);
         claims.put(JwtUtils.SYS_USER_INFO, sysUser);
-        return JwtUtils.generateToken(claims);
+        return Response.success(JwtUtils.generateToken(claims));
+
     }
 }

@@ -1,21 +1,18 @@
 package org.shuai.boot.shirocodestudy.sys.shiro.token;
 
+import lombok.Getter;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
 
 /**
  * JWT Token，用于Shiro认证
  */
+@Getter
 public class JwtToken implements AuthenticationToken {
 
     private final String token;
 
     public JwtToken(String token) {
         this.token = token;
-    }
-
-    public String getToken() {
-        return token;
     }
 
     @Override

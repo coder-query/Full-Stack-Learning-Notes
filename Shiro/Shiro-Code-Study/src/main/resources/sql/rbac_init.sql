@@ -98,12 +98,12 @@ CREATE TABLE `sys_role_menu` (
 -- ============================================================
 
 -- ------------------- 初始化用户 -------------------
--- 密码均为 admin123, 通过 ShiroPwdUtils.sha256("admin123") 加密
--- 即 SHA256("admin123", salt="123456@~realm~salt", iterations=10)
+-- 密码均为 123456, 通过 ShiroPwdUtils.sha256("admin") 加密
+-- 即 SHA256("123456", salt="123456@~realm~salt", iterations=10)
 INSERT INTO `sys_user` (`id`, `username`, `password`, `salt`, `status`) VALUES
-(1, 'admin',  'b1a4981a8096ce52cf83b49cf5b0e6a0e253ea49bc4d4c4f56c464d', '123456@~realm~salt', '1'),
-(2, 'shuai',  'b1a4981a8096ce52cf83b49cf5b0e6a0e253ea49bc4d4c4f56c464d', '123456@~realm~salt', '1'),
-(3, 'merchant','b1a4981a8096ce52cf83b49cf5b0e6a0e253ea49bc4d4c4f56c464d','123456@~realm~salt', '1');
+(1, 'admin',  'fb6d6a86368e7dc6973a976a055a91194180b2b7e000207cd88d87158dc831c4', '123456@~realm~salt', '1'),
+(2, 'shuai',  'fb6d6a86368e7dc6973a976a055a91194180b2b7e000207cd88d87158dc831c4', '123456@~realm~salt', '1'),
+(3, 'merchant','fb6d6a86368e7dc6973a976a055a91194180b2b7e000207cd88d87158dc831c4','123456@~realm~salt', '1');
 
 -- ------------------- 初始化角色 -------------------
 INSERT INTO `sys_role` (`id`, `role_name`, `role_code`, `description`) VALUES

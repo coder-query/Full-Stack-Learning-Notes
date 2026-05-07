@@ -28,4 +28,10 @@ public class ShiroHashUtils {
     public static Boolean verifyWithSha256(String password, String encryptPassword) {
         return ShiroHashUtils.encryptWithSha256(password).equals(encryptPassword);
     }
+
+    public static void main(String[] args) {
+        String password = "123456";
+        String hex = ShiroHashUtils.encryptWithSha256(password);
+        System.out.println(hex);
+    }
 }
