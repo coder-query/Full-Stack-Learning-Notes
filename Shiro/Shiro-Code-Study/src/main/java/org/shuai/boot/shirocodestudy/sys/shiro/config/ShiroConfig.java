@@ -34,12 +34,20 @@ public class ShiroConfig {
         // 设置securityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 自定义 filterChain 路径过滤拦截规则
-        Map<String, String> filterChainMap = new LinkedHashMap<>(8);
+        Map<String, String> filterChainMap = new LinkedHashMap<>(16);
+        // Knife4j / Swagger 放行
         filterChainMap.put("/doc.html", "anon");
+        filterChainMap.put("/swagger-ui.html", "anon");
         filterChainMap.put("/webjars/**", "anon");
+        filterChainMap.put("/swagger-resources", "anon");
         filterChainMap.put("/swagger-resources/**", "anon");
+        filterChainMap.put("/v2/api-docs", "anon");
         filterChainMap.put("/v2/api-docs/**", "anon");
+        filterChainMap.put("/csrf", "anon");
+        filterChainMap.put("/favicon.ico", "anon");
+        // 业务放行
         filterChainMap.put("/auth/**", "anon");
+        // 其余所有请求走JWT认证
         filterChainMap.put("/**", JWT_AUTH_FILTER);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
         return shiroFilterFactoryBean;
