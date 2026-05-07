@@ -55,7 +55,7 @@ public class AuthController {
             throw new IncorrectCredentialsException("用户名或密码错误,请重新输入");
         }
         // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
-        Map<String, Object> claims = new HashMap<>(4);
+        Map<String, Object> claims = new HashMap<>(2);
         claims.put(JwtUtils.USER_ID, sysUser.getId());
         claims.put(JwtUtils.USERNAME, sysUser.getUsername());
         return Response.success(JwtUtils.generateToken(claims));
