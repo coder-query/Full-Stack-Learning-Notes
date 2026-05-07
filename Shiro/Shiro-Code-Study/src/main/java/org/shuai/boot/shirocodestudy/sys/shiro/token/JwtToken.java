@@ -1,6 +1,7 @@
 package org.shuai.boot.shirocodestudy.sys.shiro.token;
 
 import org.apache.shiro.authc.AuthenticationToken;
+import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
 
 /**
  * JWT Token，用于Shiro认证
@@ -8,11 +9,9 @@ import org.apache.shiro.authc.AuthenticationToken;
 public class JwtToken implements AuthenticationToken {
 
     private final String token;
-    private final String username;
 
-    public JwtToken(String token, String username) {
+    public JwtToken(String token) {
         this.token = token;
-        this.username = username;
     }
 
     public String getToken() {
@@ -20,12 +19,12 @@ public class JwtToken implements AuthenticationToken {
     }
 
     @Override
-    public Object getPrincipal() {
-        return username;
+    public String getPrincipal() {
+        return token;
     }
 
     @Override
-    public Object getCredentials() {
+    public String getCredentials() {
         return token;
     }
 }

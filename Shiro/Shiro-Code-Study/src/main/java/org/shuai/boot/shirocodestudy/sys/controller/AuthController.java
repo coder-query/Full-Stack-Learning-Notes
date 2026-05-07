@@ -6,15 +6,20 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
+import org.shuai.boot.shirocodestudy.sys.service.UserService;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
+import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroHashUtils;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -22,28 +27,38 @@ import java.util.Map;
 @Api(tags = "认证接口（登录、注册、退出等）")
 public class AuthController {
 
+    @Resource
+    private UserService userService;
+
     @ApiOperation(value = "登录接口")
     @PostMapping(value = "/login")
     public String login(
             @RequestParam(value = "username") String username,
             @RequestParam(value = "password") String password
     ){
+
         if (StrUtil.isBlank(username) || StrUtil.isBlank(password)){
-            return "username or password is empty";
+            throw new UnknownAccountException("用户名或密码不能为空");
         }
-        try{
-            ShiroUtils.login(username, password);
-        }catch (UnknownAccountException e){
-            log.error("账号名不正确, e = ", e);
-            return "username or password is error";
-        }catch (IncorrectCredentialsException e){
-            log.error("密码不正确, e = ", e);
-            return "username or password is error";
+
+        // 查询数据库
+        SysUser sysUser = userService.getUserByUsername(username);
+
+        if (Objects.isNull(sysUser)){
+            log.error("用户名或密码错误,请重新输入");
+            throw new UnknownAccountException("用户名或密码错误,请重新输入");
         }
+
+        // 校验密码
+        if (!ShiroHashUtils.verifyWithSha256(password, sysUser.getPassword())){
+            log.error("用户名或密码错误,请重新输入");
+            throw new IncorrectCredentialsException("用户名或密码错误,请重新输入");
+        }
+        // 数据脱敏
+        sysUser.setPassword(null);
         // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", username);
+        Map<String, Object> claims = new HashMap<>(2);
+        claims.put(JwtUtils.SYS_USER_INFO, sysUser);
         return JwtUtils.generateToken(claims);
-//        return "login success";
     }
 }

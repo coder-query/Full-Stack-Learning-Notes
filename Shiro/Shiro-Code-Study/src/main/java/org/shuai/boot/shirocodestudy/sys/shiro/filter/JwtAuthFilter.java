@@ -4,16 +4,19 @@ import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.shuai.boot.shirocodestudy.sys.shiro.token.JwtToken;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
+import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public class JwtAuthFilter extends AccessControlFilter {
@@ -27,20 +30,20 @@ public class JwtAuthFilter extends AccessControlFilter {
         String jwtToken = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
         if (StringUtils.isBlank(jwtToken)) {
             log.error("jwtToken is empty");
-            return false;
+            throw new AuthenticationException("token is empty");
         }
-        // 验证JWT并提取用户信息
-        Map<String, Object> claims = JwtUtils.verifyAndGetClaims(jwtToken);
-        if (claims == null) {
-            log.error("jwtToken is invalid or expired");
-            return false;
-        }
-        // 用JWT中的用户名执行Shiro登录，让Subject变为已认证状态
-        String username = (String) claims.get("username");
+        // 调用Shiro的登录逻辑，进入自定义的realm
         Subject subject = SecurityUtils.getSubject();
-        if (!subject.isAuthenticated()) {
-            subject.login(new JwtToken(jwtToken, username));
+        if (Objects.isNull(subject)){
+            throw new AuthenticationException("subject is null");
         }
+       try {
+           subject.login(new JwtToken(jwtToken));
+       }catch (AuthenticationException e){
+           log.error("JwtAuthFilter 验证出报错, e = ",e);
+           throw e;
+       }
+       // 认证通过，返回true，放行
         return true;
     }
 
