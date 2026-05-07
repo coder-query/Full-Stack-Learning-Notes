@@ -48,13 +48,22 @@ public class CustomRealm extends AuthorizingRealm {
             JwtToken jwtToken = (JwtToken) authenticationToken;
             String token = jwtToken.getToken();
             if (StrUtil.isBlank(token)) {
+                log.error("CustomRealm ---> token不存在");
                 throw new AuthenticationException("token不存在");
             }
-        // 提取clams
+        // 提取claims，根据userId从数据库查询用户
             Map<String, Object> claims = JwtUtils.extractClaims(token);
             SysUser sysUser = null;
             if (MapUtil.isNotEmpty(claims)){
-                sysUser = (SysUser) claims.getOrDefault(JwtUtils.SYS_USER_INFO,null);
+                Object userIdObj = claims.get(JwtUtils.USER_ID);
+                if (userIdObj != null){
+                    Long userId = ((Number) userIdObj).longValue();
+                    sysUser = SysUser.builder().id(userId).build();
+                }
+            }
+            if (Objects.isNull(sysUser)){
+                log.error("CustomRealm ---> sysUser用户不存在");
+                throw new AuthenticationException("用户不存在");
             }
             return new SimpleAuthenticationInfo(sysUser, jwtToken.getCredentials(), CustomRealm.class.getName());
         }

@@ -11,7 +11,6 @@ import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
 import org.shuai.boot.shirocodestudy.sys.service.UserService;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroHashUtils;
-import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,11 +54,10 @@ public class AuthController {
             log.error("用户名或密码错误,请重新输入");
             throw new IncorrectCredentialsException("用户名或密码错误,请重新输入");
         }
-        // 数据脱敏
-        sysUser.setPassword(null);
         // 上面如果没有抛出任何异常，则说明登录校验完成，生成jwt
-        Map<String, Object> claims = new HashMap<>(2);
-        claims.put(JwtUtils.SYS_USER_INFO, sysUser);
+        Map<String, Object> claims = new HashMap<>(4);
+        claims.put(JwtUtils.USER_ID, sysUser.getId());
+        claims.put(JwtUtils.USERNAME, sysUser.getUsername());
         return Response.success(JwtUtils.generateToken(claims));
 
     }

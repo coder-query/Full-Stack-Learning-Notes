@@ -24,7 +24,9 @@ public class JwtUtils {
     // Token 过期时间：12小时
     private static final long EXPIRE_TIME = 12 * 60 * 60 * 1000L;
 
-    public static final String SYS_USER_INFO = "sys_user_info";
+    public static final String USER_ID = "userId";
+
+    public static final String USERNAME = "username";
 
     /**
      * 1. 生成 Token
