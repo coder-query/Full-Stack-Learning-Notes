@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
-public class LocalCacheConfig {
+public class LocalEhCacheConfig {
 
     // ==================== EhCache 本地缓存 ====================
 

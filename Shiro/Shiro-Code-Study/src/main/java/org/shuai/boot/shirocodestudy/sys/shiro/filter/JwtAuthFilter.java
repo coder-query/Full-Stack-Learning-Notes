@@ -26,13 +26,13 @@ public class JwtAuthFilter extends AccessControlFilter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String jwtToken = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
         if (StringUtils.isBlank(jwtToken)) {
-            log.info("jwtToken is empty");
+            log.error("jwtToken is empty");
             return false;
         }
         // 验证JWT并提取用户信息
         Map<String, Object> claims = JwtUtils.verifyAndGetClaims(jwtToken);
         if (claims == null) {
-            log.info("jwtToken is invalid or expired");
+            log.error("jwtToken is invalid or expired");
             return false;
         }
         // 用JWT中的用户名执行Shiro登录，让Subject变为已认证状态

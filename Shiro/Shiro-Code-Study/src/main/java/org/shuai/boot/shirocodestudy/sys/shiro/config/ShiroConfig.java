@@ -22,12 +22,6 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    @Value("${spring.cache.type:ehcache}")
-    private String cacheType;
-
-    @Value("${shiro.session-timeout:7200}")
-    private int shiroSessionTimeout;
-
     public static final String JWT_AUTH_FILTER = "jwtAuthFilter";
 
     @Bean
@@ -78,36 +72,5 @@ public class ShiroConfig {
         advisor.setSecurityManager(securityManager);
         return advisor;
     }
-
-//    /**
-//     * RedisSessionDAO shiro sessionDao层的实现 通过redis
-//     */
-//
-//
-//    @Bean
-//    public SessionDAO sessionDAO() {
-//        if (CacheConstant.Redis_Type.equals(cacheType)) {
-//            log.warn("当前Session存储类型为 cacheType = {}",cacheType);
-//            return new RedisSessionDAO();
-//        } else {
-//            log.warn("当前Session存储类型为 cacheType = {}",cacheType);
-//            return new MemorySessionDAO();
-//        }
-//    }
-//
-//
-//    /**
-//     * shiro session的管理
-//     */
-//    @Bean
-//    public DefaultWebSessionManager sessionManager(SessionDAO sessionDAO) {
-//        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-//        sessionManager.setGlobalSessionTimeout(shiroSessionTimeout * 1000L);
-////        sessionManager.setSessionDAO(sessionDAO);
-//        Collection<SessionListener> listeners = new ArrayList<SessionListener>();
-//        listeners.add(new BDSessionListener());
-//        sessionManager.setSessionListeners(listeners);
-//        return sessionManager;
-//    }
 
 }

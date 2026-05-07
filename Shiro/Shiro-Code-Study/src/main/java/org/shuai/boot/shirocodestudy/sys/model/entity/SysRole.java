@@ -13,13 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(value = "sys_user")
-public class SysUser implements Serializable {
+@Table(value = "sys_role")
+public class SysRole implements Serializable {
 
     private Long id;
-    private String username;
-    private String password;
-    private String salt;
+    private String roleName;
+    private String roleCode;
+    private String description;
     private String status;
     private Date createTime;
     private Date updateTime;

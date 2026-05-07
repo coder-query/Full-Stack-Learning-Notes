@@ -13,13 +13,17 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(value = "sys_user")
-public class SysUser implements Serializable {
+@Table(value = "sys_menu")
+public class SysMenu implements Serializable {
 
     private Long id;
-    private String username;
-    private String password;
-    private String salt;
+    private Long parentId;
+    private String menuName;
+    private String menuType;
+    private String permission;
+    private String path;
+    private String icon;
+    private Integer sortOrder;
     private String status;
     private Date createTime;
     private Date updateTime;
