@@ -2,7 +2,6 @@ package org.shuai.boot.shirocodestudy.sys.shiro.realm;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -14,7 +13,6 @@ import org.shuai.boot.shirocodestudy.sys.model.entity.SysUser;
 import org.shuai.boot.shirocodestudy.sys.service.UserService;
 import org.shuai.boot.shirocodestudy.sys.shiro.token.JwtToken;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.JwtUtils;
-import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroHashUtils;
 import org.shuai.boot.shirocodestudy.sys.shiro.utils.ShiroUtils;
 import org.springframework.stereotype.Component;
 
@@ -25,12 +23,12 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class CustomRealm extends AuthorizingRealm {
+public class JwtRealm extends AuthorizingRealm {
 
     @Resource
     private UserService userService;
 
-    public CustomRealm() {
+    public JwtRealm() {
         super();
     }
 
@@ -48,7 +46,7 @@ public class CustomRealm extends AuthorizingRealm {
             JwtToken jwtToken = (JwtToken) authenticationToken;
             String token = jwtToken.getToken();
             if (StrUtil.isBlank(token)) {
-                log.error("CustomRealm ---> token不存在");
+                log.error("JwtRealm ---> token不存在");
                 throw new AuthenticationException("token不存在");
             }
         // 提取claims，根据userId从数据库查询用户
@@ -62,10 +60,10 @@ public class CustomRealm extends AuthorizingRealm {
                 }
             }
             if (Objects.isNull(sysUser)){
-                log.error("CustomRealm ---> sysUser用户不存在");
+                log.error("JwtRealm ---> sysUser用户不存在");
                 throw new AuthenticationException("用户不存在");
             }
-            return new SimpleAuthenticationInfo(sysUser, jwtToken.getCredentials(), CustomRealm.class.getName());
+            return new SimpleAuthenticationInfo(sysUser, jwtToken.getCredentials(), JwtRealm.class.getName());
         }
         return null;
 

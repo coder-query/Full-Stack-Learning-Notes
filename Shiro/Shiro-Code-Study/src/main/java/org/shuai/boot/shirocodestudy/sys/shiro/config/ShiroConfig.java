@@ -8,9 +8,8 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.shuai.boot.shirocodestudy.sys.shiro.filter.JwtAuthFilter;
-import org.shuai.boot.shirocodestudy.sys.shiro.realm.CustomRealm;
+import org.shuai.boot.shirocodestudy.sys.shiro.realm.JwtRealm;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -54,9 +53,9 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(CustomRealm customRealm, @Qualifier("shiroPermissionRedisCacheManager") CacheManager shiroPermissionRedisCacheManager) {
+    public SecurityManager securityManager(JwtRealm jwtRealm, @Qualifier("shiroPermissionRedisCacheManager") CacheManager shiroPermissionRedisCacheManager) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(customRealm);
+        defaultWebSecurityManager.setRealm(jwtRealm);
         // 设置权限缓存，避免每次校验权限字符时，频繁查询数据库
         defaultWebSecurityManager.setCacheManager(shiroPermissionRedisCacheManager);
         return defaultWebSecurityManager;

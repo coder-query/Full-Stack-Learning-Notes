@@ -28,7 +28,7 @@ CREATE TABLE `sys_user` (
 
 -- -----------------------------------------------------------
 -- 2. sys_role 角色表
--- 对应 CustomRealm 中硬编码的角色: 超级管理员、商家 等
+-- 对应 JwtRealm 中硬编码的角色: 超级管理员、商家 等
 -- -----------------------------------------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
@@ -45,7 +45,7 @@ CREATE TABLE `sys_role` (
 
 -- -----------------------------------------------------------
 -- 3. sys_menu 菜单/权限表
--- 对应 CustomRealm 中硬编码的权限: sys:user:add, sys:user:delete 等
+-- 对应 JwtRealm 中硬编码的权限: sys:user:add, sys:user:delete 等
 -- permission 格式: 模块:资源:操作 (如 sys:user:add)
 -- -----------------------------------------------------------
 DROP TABLE IF EXISTS `sys_menu`;
@@ -94,7 +94,7 @@ CREATE TABLE `sys_role_menu` (
 
 
 -- ============================================================
--- 初始化数据 (与现有 CustomRealm 硬编码逻辑对齐)
+-- 初始化数据 (与现有 JwtRealm 硬编码逻辑对齐)
 -- ============================================================
 
 -- ------------------- 初始化用户 -------------------
@@ -120,7 +120,7 @@ INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_name`, `menu_type`, `permission
 INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_name`, `menu_type`, `permission`, `sort_order`) VALUES
 (2,  1, '用户管理', '2', NULL, 1);
 
--- 三级按钮/权限 (对应 CustomRealm 中的 sys:user:* 权限标识)
+-- 三级按钮/权限 (对应 JwtRealm 中的 sys:user:* 权限标识)
 INSERT INTO `sys_menu` (`id`, `parent_id`, `menu_name`, `menu_type`, `permission`, `sort_order`) VALUES
 (3,  2, '用户新增', '3', 'sys:user:add',    1),
 (4,  2, '用户删除', '3', 'sys:user:delete',  2),
