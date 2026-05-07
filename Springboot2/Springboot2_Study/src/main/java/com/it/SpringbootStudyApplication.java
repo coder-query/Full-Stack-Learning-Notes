@@ -1,24 +1,14 @@
 package com.it;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.hash.Hash;
 import com.it.service.HelloWorldService;
 import org.example.conf.EncryptUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import cn.hutool.http.HttpUtil;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @SpringBootApplication
 @PropertySource(value = "classpath:application.properties")
@@ -40,4 +30,5 @@ public class SpringbootStudyApplication implements CommandLineRunner {
         String s = encryptUtils.sha1("123456");
         System.out.println("encryptUtils.sha1 = "+s);
     }
+
 }

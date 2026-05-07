@@ -1,5 +1,8 @@
 package org.shuai.boot.jdbc;
 
+/**
+ * jdbc规范
+ */
 public interface MyDataBaseConnection {
 
     /**
