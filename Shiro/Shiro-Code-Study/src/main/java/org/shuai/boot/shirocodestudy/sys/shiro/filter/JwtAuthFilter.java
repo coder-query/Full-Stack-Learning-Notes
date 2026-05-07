@@ -25,7 +25,7 @@ public class JwtAuthFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-        log.info("isAccessAllowed");
+        log.info("JwtAuthFilter ----> isAccessAllowed");
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String jwtToken = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
         if (StringUtils.isBlank(jwtToken)) {
@@ -49,7 +49,7 @@ public class JwtAuthFilter extends AccessControlFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        log.info("onAccessDenied");
+        log.info("JwtAuthFilter ----> onAccessDenied");
         HttpServletResponse resp = (HttpServletResponse) response;
         resp.setContentType("application/json;charset=UTF-8");
         resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

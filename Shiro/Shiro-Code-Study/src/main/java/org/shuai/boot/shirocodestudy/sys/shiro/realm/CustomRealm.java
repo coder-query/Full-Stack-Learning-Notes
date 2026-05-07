@@ -46,7 +46,7 @@ public class CustomRealm extends AuthorizingRealm {
         // JWT Token 认证，直接根据用户名构造认证信息
         if (authenticationToken instanceof JwtToken) {
             JwtToken jwtToken = (JwtToken) authenticationToken;
-            String token = jwtToken.getPrincipal();
+            String token = jwtToken.getToken();
             if (StrUtil.isBlank(token)) {
                 throw new AuthenticationException("token不存在");
             }
