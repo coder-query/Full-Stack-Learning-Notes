@@ -1,5 +1,7 @@
 package org.shuai.boot.shirocodestudy.sys.model.entity;
 
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +17,10 @@ import java.io.Serializable;
 @Table(value = "sys_user_role")
 public class SysUserRole implements Serializable {
 
+    @Id(keyType = KeyType.Auto)
     private Long id;
+
     private Long userId;
+
     private Long roleId;
 }

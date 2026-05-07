@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
 
@@ -78,6 +80,7 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
             }
         } catch (Exception e) {
             // 反序列化失败
+            log.error("ShiroPermissionRedisCache");
         }
         return null;
     }
