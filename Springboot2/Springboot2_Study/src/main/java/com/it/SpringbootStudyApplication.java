@@ -1,7 +1,7 @@
 package com.it;
 
 import com.it.service.HelloWorldService;
-import org.example.conf.EncryptUtils;
+import org.shaui.encrypt.bean.AesEncryptTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 public class SpringbootStudyApplication implements CommandLineRunner {
 
     @Autowired
-    private EncryptUtils encryptUtils;
+    private AesEncryptTemplate aesEncryptTemplate;
 
     public static void main(String[] args) {
         // 启动Spring Boot
@@ -27,8 +27,8 @@ public class SpringbootStudyApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String s = encryptUtils.sha1("123456");
-        System.out.println("encryptUtils.sha1 = "+s);
+        String hex = aesEncryptTemplate.encryptWithAES_CBC("123");
+        System.out.println(hex);
     }
 
 }

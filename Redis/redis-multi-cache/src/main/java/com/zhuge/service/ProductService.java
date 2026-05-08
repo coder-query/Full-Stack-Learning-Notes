@@ -6,6 +6,7 @@ import com.zhuge.common.RedisUtil;
 import com.zhuge.dao.ProductDao;
 import com.zhuge.model.Product;
 import org.redisson.Redisson;
+import org.redisson.RedissonReadLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RReadWriteLock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,15 @@ public class ProductService {
     @Transactional
     public Product create(Product product) {
         Product productResult = productDao.create(product);
-        redisUtil.set(RedisKeyPrefixConst.PRODUCT_CACHE + productResult.getId(), JSON.toJSONString(productResult),
-                genProductCacheTimeout(), TimeUnit.SECONDS);
+        redisUtil.set(RedisKeyPrefixConst.PRODUCT_CACHE + productResult.getId(), JSON.toJSONString(productResult), genProductCacheTimeout(), TimeUnit.SECONDS);
         return productResult;
     }
 
+    /**
+     * 更新缓存
+     * @param product
+     * @return
+     */
     @Transactional
     public Product update(Product product) {
         Product productResult = null;
@@ -53,8 +58,7 @@ public class ProductService {
         writeLock.lock();
         try {
             productResult = productDao.update(product);
-            redisUtil.set(RedisKeyPrefixConst.PRODUCT_CACHE + productResult.getId(), JSON.toJSONString(productResult),
-                    genProductCacheTimeout(), TimeUnit.SECONDS);
+            redisUtil.set(RedisKeyPrefixConst.PRODUCT_CACHE + productResult.getId(), JSON.toJSONString(productResult), genProductCacheTimeout(), TimeUnit.SECONDS);
             productMap.put(RedisKeyPrefixConst.PRODUCT_CACHE + productResult.getId(), product);
         } finally {
             writeLock.unlock();
@@ -82,13 +86,12 @@ public class ProductService {
 
             //RLock updateProductLock = redisson.getLock(LOCK_PRODUCT_UPDATE_PREFIX + productId);
             RReadWriteLock readWriteLock = redisson.getReadWriteLock(LOCK_PRODUCT_UPDATE_PREFIX + productId);
-            RLock rLock = readWriteLock.readLock();
+            RedissonReadLock rLock = (RedissonReadLock) readWriteLock.readLock();
             rLock.lock();
             try {
                 product = productDao.get(productId);
                 if (product != null) {
-                    redisUtil.set(productCacheKey, JSON.toJSONString(product),
-                            genProductCacheTimeout(), TimeUnit.SECONDS);
+                    redisUtil.set(productCacheKey, JSON.toJSONString(product), genProductCacheTimeout(), TimeUnit.SECONDS);
                     productMap.put(productCacheKey, product);
                 } else {
                     redisUtil.set(productCacheKey, EMPTY_CACHE, genEmptyCacheTimeout(), TimeUnit.SECONDS);
