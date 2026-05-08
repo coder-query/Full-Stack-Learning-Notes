@@ -5,13 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.org.zsh</groupId>
-    <artifactId>encrypt-utils-spring-boot-starter</artifactId>
+    <artifactId>encrypt-utils-spring-boot2-starter</artifactId>
     <version>2.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>Encrypt Spring Boot Starter</name>
     <description>Spring Boot Starter for Encryption Tools with Property Hints</description>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
