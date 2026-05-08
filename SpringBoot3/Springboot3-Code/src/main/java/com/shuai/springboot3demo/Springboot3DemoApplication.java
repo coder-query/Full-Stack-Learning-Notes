@@ -34,5 +34,23 @@ public class Springboot3DemoApplication implements CommandLineRunner {
         String data = "123456";
         String s = signEncryptTemplate.encryptWithSha256(data);
         System.out.println(s);
+
+        /**
+         * aes-cbc
+         */
+        String aesData = "123456";
+        String aesEncrypt = aesEncryptTemplate.encryptWithAES_CBC(aesData);
+        System.out.println(aesEncrypt);
+        String aesDecrypt = aesEncryptTemplate.decryptWithAES_CBC(aesEncrypt);
+        System.out.println(aesDecrypt);
+
+        /**
+         * aes-gcm
+         */
+        String aesGcmData = "123456";
+        String aesGcmEncrypt = aesEncryptTemplate.encryptWithAES_GCM(aesGcmData);
+        System.out.println(aesGcmEncrypt);
+        String aesGcmDecrypt = aesEncryptTemplate.decryptWithAES_GCM(aesGcmEncrypt);
+        System.out.println(aesGcmDecrypt);
     }
 }
