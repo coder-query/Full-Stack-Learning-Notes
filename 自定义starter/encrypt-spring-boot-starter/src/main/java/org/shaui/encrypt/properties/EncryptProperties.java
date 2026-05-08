@@ -18,4 +18,10 @@ public class EncryptProperties {
 
     /** AES GCM 模式加密密码 */
     private String aesPwdGcm = "08642)*^$@~";
+
+    /** RSA 公钥（Base64编码） */
+    private String rsaPublicKey;
+
+    /** RSA 私钥（Base64编码） */
+    private String rsaPrivateKey;
 }

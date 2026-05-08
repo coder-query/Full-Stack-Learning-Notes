@@ -6,6 +6,8 @@ public enum EncryptionExceptionEnums {
 
     CONTENT_DECRYPT_ERROR("解密内容失败！！！，请检查密钥是否正确"),
 
+    RSA_KEY_BLANK("RSA密钥未配置！！！"),
+
     ;
 
     private String msg;

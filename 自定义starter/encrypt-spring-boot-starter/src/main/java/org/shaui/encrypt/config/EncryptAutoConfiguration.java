@@ -1,5 +1,6 @@
 package org.shaui.encrypt.config;
 
+import org.shaui.encrypt.bean.RsaEncryptTemplate;
 import org.shaui.encrypt.bean.SignEncryptTemplate;
 import org.shaui.encrypt.properties.EncryptProperties;
 import org.shaui.encrypt.bean.AesEncryptTemplate;
@@ -26,6 +27,11 @@ public class EncryptAutoConfiguration {
     @Bean
     public SignEncryptTemplate signEncryptTemplate(EncryptProperties properties) {
         return new SignEncryptTemplate(properties);
+    }
+
+    @Bean
+    public RsaEncryptTemplate rsaEncryptTemplate(EncryptProperties properties) {
+        return new RsaEncryptTemplate(properties);
     }
 
 }
