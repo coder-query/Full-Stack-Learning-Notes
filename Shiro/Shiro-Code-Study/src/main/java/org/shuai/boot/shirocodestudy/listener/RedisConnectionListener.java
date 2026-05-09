@@ -13,6 +13,8 @@ import redis.clients.jedis.JedisPool;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 @Component
 public class RedisConnectionListener implements ApplicationListener<ApplicationReadyEvent> {
@@ -34,6 +36,9 @@ public class RedisConnectionListener implements ApplicationListener<ApplicationR
     @Value("${redis.pool.max-idle:8}")
     private int maxIdle;
 
+    @Value("${redis.pool.min-idle:0}")
+    private int minIdle;
+
     @Override
     public void onApplicationEvent(@NonNullDecl ApplicationReadyEvent event) {
         // redis 连接池的预热
@@ -42,14 +47,15 @@ public class RedisConnectionListener implements ApplicationListener<ApplicationR
         testRedisConnection();
     }
     private void preWarmRedisPool() {
-        List<Jedis> minIdleJedisList = new ArrayList<Jedis>(maxIdle);
-
-        for (int i = 0; i < maxIdle; i++) {
+        List<Jedis> minIdleJedisList = new ArrayList<Jedis>(minIdle);
+        AtomicInteger successCount = new AtomicInteger(0);
+        for (int i = 0; i < minIdle; i++) {
             Jedis jedis = null;
             try {
                 jedis = jedisPool.getResource();
                 minIdleJedisList.add(jedis);
                 jedis.ping();
+                logger.info("✅ 开始redis 连接池预热！successCount:{}" , successCount.incrementAndGet());
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
             } finally {
@@ -58,7 +64,7 @@ public class RedisConnectionListener implements ApplicationListener<ApplicationR
             }
         }
          //统一将预热的连接还回连接池
-        for (int i = 0; i < maxIdle; i++) {
+        for (int i = 0; i < minIdle; i++) {
             Jedis jedis = null;
             try {
                 jedis = minIdleJedisList.get(i);
