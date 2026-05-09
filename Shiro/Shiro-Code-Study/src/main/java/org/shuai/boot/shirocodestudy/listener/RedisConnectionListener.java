@@ -11,6 +11,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RedisConnectionListener implements ApplicationListener<ApplicationReadyEvent> {
@@ -29,15 +31,47 @@ public class RedisConnectionListener implements ApplicationListener<ApplicationR
     @Value("${redis.database:0}")
     private int database;
 
+    @Value("${redis.pool.max-idle:8}")
+    private int maxIdle;
+
     @Override
     public void onApplicationEvent(@NonNullDecl ApplicationReadyEvent event) {
+        // redis 连接池的预热
+        preWarmRedisPool();
+        // 打印 redis 连接信息
         testRedisConnection();
+    }
+    private void preWarmRedisPool() {
+        List<Jedis> minIdleJedisList = new ArrayList<Jedis>(maxIdle);
+
+        for (int i = 0; i < maxIdle; i++) {
+            Jedis jedis = null;
+            try {
+                jedis = jedisPool.getResource();
+                minIdleJedisList.add(jedis);
+                jedis.ping();
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+            } finally {
+                //注意，这里不能马上close将连接还回连接池，否则最后连接池里只会建立1个连接。。
+                //jedis.close();
+            }
+        }
+         //统一将预热的连接还回连接池
+        for (int i = 0; i < maxIdle; i++) {
+            Jedis jedis = null;
+            try {
+                jedis = minIdleJedisList.get(i);
+                //将连接归还回连接池
+                jedis.close();
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+            } finally {
+            }
+        }
     }
 
     private void testRedisConnection() {
-        // 查询 mysql
-        // 调用jedis缓存预热
-        // redisson 布隆过滤器预热
         try (Jedis jedis = jedisPool.getResource()) {
             String pingResult = jedis.ping();
             if ("PONG".equals(pingResult)) {
