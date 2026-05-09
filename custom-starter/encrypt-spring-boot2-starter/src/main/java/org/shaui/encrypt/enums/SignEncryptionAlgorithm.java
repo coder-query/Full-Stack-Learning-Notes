@@ -1,6 +1,5 @@
 package org.shaui.encrypt.enums;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 
 public enum SignEncryptionAlgorithm {
     MD2("MD2"),
