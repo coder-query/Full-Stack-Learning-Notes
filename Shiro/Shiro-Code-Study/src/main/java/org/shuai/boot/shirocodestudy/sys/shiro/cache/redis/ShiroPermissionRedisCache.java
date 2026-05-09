@@ -25,7 +25,7 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
     @Resource
     private JedisPool jedisPool;
 
-    public static final String SHIRO_PERMISSION_CACHE_KEY = "shiro_permission_cache_key:";
+    public static final String SHIRO_PERMISSION_CACHE_KEY = "shiro_permission_cache_key:user_id:";
 
     public static final long SHIRO_PERMISSION_CACHE_EXPIRE_TIME = 60 * 60 * 24L;
 
@@ -34,8 +34,22 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
     /** 存储JSON中标记值数据的Key */
     private static final String DATA_KEY = "@data";
 
-    public static String buildShiroPermissionCacheKey(String k){
-        return SHIRO_PERMISSION_CACHE_KEY + k;
+    public static String buildShiroPermissionCacheKey(Integer userId){
+        return SHIRO_PERMISSION_CACHE_KEY + userId;
+    }
+
+    public static Integer getUserIdFromKey(String jsonKey){
+        JSONObject jsonObject = JSON.parseObject(jsonKey);
+        if (jsonObject != null){
+            String jsonObjectString = jsonObject.getString("primaryPrincipal");
+            if (StrUtil.isNotBlank(jsonObjectString)){
+                JSONObject jsonObj = JSON.parseObject(jsonObjectString);
+                if (jsonObj != null){
+                    return jsonObj.getInteger("id");
+                }
+            }
+        }
+        return -1;
     }
 
     /**
@@ -88,9 +102,15 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
     @Override
     public V get(K k) throws CacheException {
         try(Jedis jedis = jedisPool.getResource()){
-            String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(JSON.toJSONString(k));
+            Integer userIdFromKey = getUserIdFromKey(JSON.toJSONString(k));
+            if (userIdFromKey == -1){
+                log.error("ShiroPermissionRedisCache put 获取用户id失败");
+                throw new RuntimeException("ShiroPermissionRedisCache put 获取用户id失败");
+            }
+            String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(userIdFromKey);
             String value = jedis.get(cacheKey);
             System.out.println("ShiroPermissionRedisCache redis查询权限");
+            log.info("ShiroPermissionRedisCache redis查询权限。key = {},value = {}",cacheKey, value);
             if (StrUtil.isNotBlank(value)){
                 jedis.expire(cacheKey, SHIRO_PERMISSION_CACHE_EXPIRE_TIME);
                 return deserializeValue(value);
@@ -102,10 +122,16 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
     @Override
     public V put(K k, V v) throws CacheException {
         try(Jedis jedis = jedisPool.getResource()){
-            String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(JSON.toJSONString(k));
+            Integer userIdFromKey = getUserIdFromKey(JSON.toJSONString(k));
+            if (userIdFromKey == -1){
+                log.error("ShiroPermissionRedisCache put 获取用户id失败");
+                throw new RuntimeException("ShiroPermissionRedisCache put 获取用户id失败");
+            }
+            String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(userIdFromKey);
             SetParams setParams = new SetParams().ex(SHIRO_PERMISSION_CACHE_EXPIRE_TIME);
             jedis.set(cacheKey, serializeValue(v), setParams);
             System.out.println("ShiroPermissionRedisCache redis设置权限");
+            log.info("ShiroPermissionRedisCache redis设置权限。 key = {},value = {}",cacheKey, serializeValue(v));
             return v;
         }
     }
@@ -113,11 +139,17 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
     @Override
     public V remove(K k) throws CacheException {
         try(Jedis jedis = jedisPool.getResource()){
-            String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(JSON.toJSONString(k));
+            Integer userIdFromKey = getUserIdFromKey(JSON.toJSONString(k));
+            if (userIdFromKey == -1){
+                log.error("ShiroPermissionRedisCache put 获取用户id失败");
+                throw new RuntimeException("ShiroPermissionRedisCache put 获取用户id失败");
+            }
+            String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(userIdFromKey);
             String value = jedis.get(cacheKey);
             if (StrUtil.isNotBlank(value)){
                 jedis.del(cacheKey);
                 System.out.println("ShiroPermissionRedisCache redis移除权限");
+                log.info("ShiroPermissionRedisCache redis移除权限。 key = {},value = {}",cacheKey, value);
                 return deserializeValue(value);
             }
             return null;

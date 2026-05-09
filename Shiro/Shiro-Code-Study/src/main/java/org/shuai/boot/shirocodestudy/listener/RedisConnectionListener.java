@@ -54,8 +54,8 @@ public class RedisConnectionListener implements ApplicationListener<ApplicationR
             try {
                 jedis = jedisPool.getResource();
                 minIdleJedisList.add(jedis);
-                jedis.ping();
-                logger.info("✅ 开始redis 连接池预热！successCount:{}" , successCount.incrementAndGet());
+                String pong = jedis.ping();
+                logger.info("✅ 开始 redis 连接池预热！ping：{} successCount:{}" , pong,successCount.incrementAndGet());
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
             } finally {
