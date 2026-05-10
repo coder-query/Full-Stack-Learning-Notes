@@ -27,6 +27,7 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
 
     public static final String SHIRO_PERMISSION_CACHE_KEY = "shiro_permission_cache_key:user_id:";
 
+    // 24 小时
     public static final long SHIRO_PERMISSION_CACHE_EXPIRE_TIME = 60 * 60 * 24L;
 
     /** 存储JSON中标记值类型的Key */
