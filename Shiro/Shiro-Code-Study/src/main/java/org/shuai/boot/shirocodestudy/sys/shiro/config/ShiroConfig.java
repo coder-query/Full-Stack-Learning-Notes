@@ -26,7 +26,11 @@ public class ShiroConfig {
     public static final String JWT_AUTH_FILTER = "jwtAuthFilter";
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager") SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean
+            (
+                    @Qualifier("defaultWebSecurityManager") SecurityManager securityManager
+            )
+    {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         // 自定义 jwt filter
         Map<String, Filter> filtersMap = new LinkedHashMap<>(2);
@@ -55,7 +59,12 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager defaultWebSecurityManager(@Qualifier("jwtRealm") JwtRealm jwtRealm, @Qualifier("shiroPermissionRedisCacheManager") CacheManager shiroPermissionRedisCacheManager) {
+    public SecurityManager defaultWebSecurityManager
+            (
+                    @Qualifier("jwtRealm") JwtRealm jwtRealm,
+                    @Qualifier("shiroPermissionRedisCacheManager") CacheManager shiroPermissionRedisCacheManager
+            )
+    {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(jwtRealm);
         // 设置权限缓存，避免每次校验权限字符时，频繁查询数据库
@@ -82,7 +91,11 @@ public class ShiroConfig {
      * 注意：需要配合 spring-boot-starter-aop 使用（由其提供 Advisor 自动代理）
      */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("defaultWebSecurityManager") SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor
+            (
+                    @Qualifier("defaultWebSecurityManager") SecurityManager securityManager
+            )
+    {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;
