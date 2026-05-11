@@ -2,6 +2,8 @@ package org.shuai.boot.shirocodestudy.sys.shiro.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -58,6 +60,12 @@ public class ShiroConfig {
         defaultWebSecurityManager.setRealm(jwtRealm);
         // 设置权限缓存，避免每次校验权限字符时，频繁查询数据库
         defaultWebSecurityManager.setCacheManager(shiroPermissionRedisCacheManager);
+        // 禁用session，当前shiro没有session的存储用户认证信息，目前是基于jwt
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator evaluator = new DefaultSessionStorageEvaluator();
+        evaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(evaluator);
+        defaultWebSecurityManager.setSubjectDAO(subjectDAO);
         return defaultWebSecurityManager;
     }
 
