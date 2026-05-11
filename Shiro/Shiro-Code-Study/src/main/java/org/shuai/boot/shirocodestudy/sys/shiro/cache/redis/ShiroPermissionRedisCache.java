@@ -129,7 +129,8 @@ public class ShiroPermissionRedisCache<K, V> implements Cache<K, V>{
                 throw new RuntimeException("ShiroPermissionRedisCache put 获取用户id失败");
             }
             String cacheKey = ShiroPermissionRedisCache.buildShiroPermissionCacheKey(userIdFromKey);
-            SetParams setParams = new SetParams().ex(SHIRO_PERMISSION_CACHE_EXPIRE_TIME);
+            SetParams setParams = new SetParams()
+                            .ex(SHIRO_PERMISSION_CACHE_EXPIRE_TIME);
             jedis.set(cacheKey, serializeValue(v), setParams);
             System.out.println("ShiroPermissionRedisCache redis设置权限");
             log.info("ShiroPermissionRedisCache redis设置权限。 key = {},value = {}",cacheKey, serializeValue(v));
