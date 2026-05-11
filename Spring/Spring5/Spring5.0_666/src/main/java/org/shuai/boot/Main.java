@@ -10,7 +10,10 @@ import java.util.stream.Stream;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext ioc = new AnnotationConfigApplicationContext(BootConfig.class);
-        Stream.of(ioc.getBeanDefinitionNames()).forEach(System.out::println);
+        ApplicationContext ioc1 = new AnnotationConfigApplicationContext("org.shuai.boot.config");
+        ApplicationContext ioc2 = new AnnotationConfigApplicationContext(BootConfig.class);
+        Stream.of(ioc1.getBeanDefinitionNames()).forEach(System.out::println);
+        System.out.println("------------------------");
+        Stream.of(ioc2.getBeanDefinitionNames()).forEach(System.out::println);
     }
 }
