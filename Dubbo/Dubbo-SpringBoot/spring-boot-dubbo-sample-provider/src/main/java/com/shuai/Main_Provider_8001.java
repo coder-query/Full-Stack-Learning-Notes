@@ -14,14 +14,11 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  * @version : 1.0
  * @date : 2025/6/5 0005
  */
-@PropertySources({
-        @PropertySource("classpath:sentinel.properties")
-})
+
 @EnableDubbo(scanBasePackages = "com.shuai.provider.service")
 @SpringBootApplication
 public class Main_Provider_8001 {
     public static void main(String[] args) {
         SpringApplication.run(Main_Provider_8001.class, args);
-        AtomicStampedReference atomicStampedReference = new AtomicStampedReference(1, 1);
     }
 }

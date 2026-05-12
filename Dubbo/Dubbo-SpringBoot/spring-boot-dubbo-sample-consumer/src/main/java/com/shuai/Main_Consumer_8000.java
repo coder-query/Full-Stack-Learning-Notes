@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @SpringBootApplication
-@PropertySources({
-        @PropertySource("classpath:sentinel.properties")
-})
 public class Main_Consumer_8000 {
     public static void main(String[] args) {
         SpringApplication.run(Main_Consumer_8000.class, args);
