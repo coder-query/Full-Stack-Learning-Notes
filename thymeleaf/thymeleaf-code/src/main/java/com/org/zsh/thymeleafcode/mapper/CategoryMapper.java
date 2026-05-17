@@ -4,6 +4,9 @@ package com.org.zsh.thymeleafcode.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.org.zsh.thymeleafcode.model.entity.Category;
 
+import java.util.List;
+import java.util.Map;
+
 /**
 * @author 27986
 * @description 针对表【category(图书分类表)】的数据库操作Mapper
@@ -11,6 +14,13 @@ import com.org.zsh.thymeleafcode.model.entity.Category;
 * @Entity generator.domain.Category
 */
 public interface CategoryMapper extends BaseMapper<Category> {
+
+    /**
+     * 查询分类列表
+     * @param pageMap 分页参数
+     * @return
+     */
+    List<Category>categoryPageList(Map<String,Object> pageMap);
 
 }
 
