@@ -1,4 +1,4 @@
-package com.org.zsh.thymeleafcode.vo;
+package com.org.zsh.thymeleafcode.model.vo;
 
 import lombok.Data;
 

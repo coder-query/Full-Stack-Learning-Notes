@@ -1,0 +1,44 @@
+# tomcat 端口
+server:
+  port: 8066
+
+spring:
+  # 文件上传大小
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  # 路径匹配策略，适配swagger2
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  # Thymeleaf 配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: LEGACYHTML5
+  # Jackson 配置
+  Jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/book?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: 'root'
+    password: '123456'
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+# Knife4j 配置
+knife4j:
+  enable: true
+  basic:
+    enable: false
+    username: swagger
+    password: swagger

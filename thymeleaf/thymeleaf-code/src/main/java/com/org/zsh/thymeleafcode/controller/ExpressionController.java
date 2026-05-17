@@ -1,6 +1,6 @@
 package com.org.zsh.thymeleafcode.controller;
 
-import com.org.zsh.thymeleafcode.vo.UserVO;
+import com.org.zsh.thymeleafcode.model.vo.UserVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
