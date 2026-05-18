@@ -8,19 +8,20 @@
      web + app + 小程序
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--    layui.css -->
     <link rel="stylesheet" href="/ui/layui-v2.13.5/layui/css/layui.css"/>
+    <!--    layui.js  -->
     <script src="/ui/layui-v2.13.5/layui/js/layui.js"></script>
     <!-- Axios + 全局配置 -->
     <script src="/js/axios.min.js"></script>
     <script src="/js/config/axios-config.js"></script>
-    <!-- API 接口 -->
+    <!-- Axios API 接口 -->
     <script src="/js/api/book.js"></script>
 </head>
 <body>
     <div class="layui-fluid" style="margin-top: 100px; padding: 0 20px;">
         <table class="layui-hide" id="test" lay-filter="test"></table>
     </div>
-
 </body>
 <script>
     layui.use(['table', 'layer'], function() {
