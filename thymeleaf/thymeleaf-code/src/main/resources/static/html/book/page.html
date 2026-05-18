@@ -10,6 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../layui-v2.13.5/layui/css/layui.css"/>
     <script src="../../layui-v2.13.5/layui/layui.js"></script>
+    <!-- Axios + 全局配置 -->
+    <script src="../../../static/js/axios.min.js"></script>
+    <script src="../../../static/js/config/axios-config.js"></script>
+    <!-- API 接口 -->
+    <script src="../../../static/js/api/book.js"></script>
 </head>
 <body>
     <div class="layui-fluid" style="margin-top: 100px; padding: 0 20px;">
@@ -18,18 +23,29 @@
 
 </body>
 <script>
-    layui.use(['table'], function() {
+    layui.use(['table', 'layer'], function() {
         var table = layui.table;
         // 创建渲染实例
         table.render({
             elem: '#test',
-            toolbar: true, // 开启工具栏
-            defaultToolbar: ['filter', 'exports', 'print'],
+            // 自定义工具栏
+            toolbar: `
+                <div>
+                    <button type="button" class="layui-btn layui-bg-blue lay-event='add'">
+                        <i class="layui-icon layui-icon-add-1"></i> 新增
+                    </button>
+                    <button class="layui-btn layui-btn-primary layui-bg-red lay-event='batch-del'">
+                        <i class="layui-icon layui-icon-close-fill"></i> 批量删除
+                    </button>
+                </div>
+            `,
+            loading: '<i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop" style="color: #7aaff7"></i>',
             // 固定表格区域高度，内容超出内部滚动，分页位置不变
             height: 520,
+            // 奇偶行背景色
             even: true,
+            //
             cellMinWidth: 80,
-            // lineStyle:'height: 60px;',
             page: {
                 /**
                  * count 数据总数区域
@@ -80,6 +96,7 @@
                 {
                     field: 'bookName',
                     title: '书籍名称',
+                    fixed: 'left',
                     width: 160
                 },
                 {
@@ -140,11 +157,11 @@
                     fixed: 'right',
                     align: 'center',
                     templet: function (d) {
-                        return '<div style="display:flex; gap:5px; justify-content:center;">' +
-                            '  <button type="button" class="layui-btn layui-btn-sm layui-bg-blue" lay-event="edit">' +
+                        return '<div style="display:flex; gap:5px; justify-content:center; align-items:center">' +
+                            '  <button type="button" class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">' +
                             '    <i class="layui-icon layui-icon-edit"></i> 编辑' +
                             '  </button>' +
-                            '  <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">' +
+                            '  <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">' +
                             '    <i class="layui-icon layui-icon-delete"></i> 删除' +
                             '  </button>' +
                             '</div>';
@@ -168,46 +185,38 @@
                     break;
                 case 'del':
                     console.log(data)
-                    layer.confirm('确定删除《' + data.bookName + '》吗？', {btn: ['确定', '取消']}, function (index) {
-                         /**
-                             * 向后端发送删除请求，执行完毕后，可通过 reloadData 方法完成数据重载
-                          */
-                        // 拿到当前行数据的id
-                        let id = data.bookId;
-                        // ajax请求删除数据
-                        let $ = layui.$;
-                        $.ajax({
-                            url: 'http://127.0.0.1:8066/book/del',
-                            method: 'post',
-                            data: {
-                                id: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded',
-                            success: function (res) {
-                               switch (res.code){
-                                   case 200:
-                                       console.log(res)
-                                       layer.msg(res.data)
-                                       // 删除对应行（tr）的 DOM 结构，并更新缓存
-                                       obj.del();
-                                       // 关闭提示框
-                                       layer.close(index)
-                                       // 刷新表格数据
-                                       table.reload('test');
-                                       break;
-                                   case 500:
-                                       console.log(res)
-                                       layer.msg(res.data);
-                                       break;
-                               }
-                            }
-                        })
-                    ;
+                    layer.confirm('确定删除《' + data.bookName + '》吗？', {btn: ['确定', '取消']}, async function (index) {
+                       const res = await BookApi.del(data.bookId)
+                        if(res.code === 200){
+                            layer.msg(res.data);
+                            obj.del();
+                            layer.close(index);
+                            table.reload('test');
+                        } else {
+                            layer.msg(res.data || '删除失败');
+                        }
                     });
                     break;
             }
         });
 
+        // 工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            let data = obj.data;
+            let ops_event = obj.event;
+            let layer = layui.layer;
+            var options = obj.config; // 获取当前表格属性选项
+            var checkStatus = table.checkStatus(options.id); // 获取选中行相关数据
+            console.log(obj); // 查看对象所有成员
+            switch (ops_event) {
+                case 'add':
+                    layer.msg('新增');
+                    break;
+                case 'batch-del':
+                    layer.msg('批量删除');
+                    break;
+            }
+        });
     });
 </script>
 </html>
