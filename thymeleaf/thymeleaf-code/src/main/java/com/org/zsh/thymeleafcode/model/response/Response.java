@@ -1,8 +1,9 @@
-package com.org.zsh.thymeleafcode.response;
+package com.org.zsh.thymeleafcode.model.response;
 
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class Response<T> implements Serializable {
@@ -48,4 +49,10 @@ public class Response<T> implements Serializable {
     public static <T> Response<T> forbidden(String message) {
         return new Response<>(403, message, null);
     }
+
+    public static <T> Response<PageResult<T>> page(List<T> list, long total, int pageNo, int pageSize) {
+        PageResult<T> pageResult = new PageResult<>(total, pageNo, pageSize, list);
+        return new Response<>(200, "success", pageResult);
+    }
+
 }
