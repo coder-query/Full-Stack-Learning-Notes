@@ -12,37 +12,44 @@
     <script src="../../layui-v2.13.5/layui/layui.js"></script>
 </head>
 <body>
-    <div class="layui-container" style="margin-top: 100px">
-        <table class="layui-hide  lay-even" id="test" lay-filter="test"></table>
+    <div class="layui-fluid" style="margin-top: 100px; padding: 0 20px;">
+        <table class="layui-hide" id="test" lay-filter="test"></table>
     </div>
 
 </body>
 <script>
-    layui.use(['table', 'dropdown'], function(){
+    layui.use(['table'], function() {
         var table = layui.table;
-        var dropdown = layui.dropdown;
-
         // 创建渲染实例
         table.render({
             elem: '#test',
-            defaultToolbar: ['filter', 'exports', 'print', { // 右上角工具图标
-                title: '提示',
-                layEvent: 'LAYTABLE_TIPS',
-                icon: 'layui-icon-tips',
-                onClick: function(obj) { // 2.9.12+
-                    layer.alert('自定义工具栏图标按钮');
-                }
-            }],
-            // 不设固定高度，让表格根据数据自适应
-            skin: 'grid', // 行边框风格
-            even: true,  // 是否开启隔行背景
-            size: 'md', // 表格大小
-            css: [ // 重设当前表格样式
-                '.layui-table-tool-temp{padding-right: 145px;}'
-            ].join(''),
+            toolbar: true, // 开启工具栏
+            defaultToolbar: ['filter', 'exports', 'print'],
+            // 固定表格区域高度，内容超出内部滚动，分页位置不变
+            height: 520,
+            even: true,
             cellMinWidth: 80,
-            // totalRow: true, // 开启合计行
-            page: true, // 开启分页
+            // lineStyle:'height: 60px;',
+            page: {
+                /**
+                 * count 数据总数区域
+                 * prev 上一页区域
+                 * page 分页区域
+                 * next 下一页区
+                 * limit 条目选项区域
+                 * refresh 页面刷新区
+                 * skip 快捷跳页区
+                 */
+                layout: ['prev', 'page', 'next', 'skip', 'count', 'limit', 'refresh'],
+                first: '首页',
+                last: '尾页',
+                groups: 8,
+                prev: '上一页',
+                next: '下一页',
+                limit: 30,
+                limits: [1, 5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
+                theme: '#31bdec'
+            },
             method: 'post', // 请求方式
             url: 'http://127.0.0.1:8066/book/page', // 此处为静态模拟数据，实际使用时需换成真实接口
             contentType: 'application/x-www-form-urlencoded',
@@ -50,7 +57,7 @@
                 pageName: 'pageNo', // 页码的参数名称，默认：page
                 limitName: 'pageSize' // 每页数据条数的参数名，默认：limit
             },
-            parseData: function(res){ // res 即为原始返回的数据
+            parseData: function (res) { // res 即为原始返回的数据
                 return {
                     "code": res.code === 200 ? 0 : res.code, // Layui 要求 0 表示成功
                     "msg": res.message, // 解析提示文本
@@ -59,136 +66,148 @@
                 };
             },
             cols: [[
-                {type: 'checkbox', fixed: 'left'},
-                {field:'bookId',  title: '书籍id'},
-                {field:'bookName',  title: '书籍名称'},
-                {field:'authorName', title: '作者'},
-                {field:'price',  title: '价格', sort: true},
-                {field:'categoryId', title: '分类id'},
-                {field:'createTime',  title: '创建时间', sort: true},
-                {field:'bookUrl', title:'书籍链接'},
-                {field:'bookAddress', title:'书籍地址'},
+                {
+                    type: 'checkbox',
+                    fixed: 'left',
+                    width: 50
+                },
+                {
+                    field: 'bookId',
+                    title: '书籍id',
+                    fixed: 'left',
+                    width: 80
+                },
+                {
+                    field: 'bookName',
+                    title: '书籍名称',
+                    width: 160
+                },
+                {
+                    field: 'authorName',
+                    title: '作者',
+                    width: 140
+                },
+                {
+                    field: 'price',
+                    title: '价格',
+                    sort: true,
+                    width: 80
+                },
+                {
+                    field: 'categoryName',
+                    title: '分类',
+                    width: 100
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间',
+                    sort: true,
+                    width: 170
+                },
+                {
+                    field: 'bookUrl',
+                    title: '书籍链接',
+                    width: 220
+                },
+                {
+                    field: 'bookUrl',
+                    title: '书籍链接',
+                    width: 220
+                },
+                {
+                    field: 'bookUrl',
+                    title: '书籍链接',
+                    width: 220
+                },
+                {
+                    field: 'bookUrl',
+                    title: '书籍链接',
+                    width: 220
+                },
+                {
+                    field: 'bookUrl',
+                    title: '书籍链接',
+                    width: 220
+                },
+                {
+                    field: 'bookAddress',
+                    title: '书籍地址',
+                    width: 200
+                },
+                {
+                    title: '操作',
+                    width: 180,
+                    fixed: 'right',
+                    align: 'center',
+                    templet: function (d) {
+                        return '<div style="display:flex; gap:5px; justify-content:center;">' +
+                            '  <button type="button" class="layui-btn layui-btn-sm layui-bg-blue" lay-event="edit">' +
+                            '    <i class="layui-icon layui-icon-edit"></i> 编辑' +
+                            '  </button>' +
+                            '  <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">' +
+                            '    <i class="layui-icon layui-icon-delete"></i> 删除' +
+                            '  </button>' +
+                            '</div>';
+                    }
+                },
             ]],
-            error: function(res, msg){
+            error: function (res, msg) {
                 console.log(res, msg)
             }
         });
 
-        // 工具栏事件
-        table.on('toolbar(test)', function(obj){
-            var id = obj.config.id;
-            var checkStatus = table.checkStatus(id);
-            var othis = lay(this);
-            switch(obj.event){
-                case 'getCheckData':
-                    var data = checkStatus.data;
-                    layer.alert(layui.util.escape(JSON.stringify(data)));
+        // 单元格事件（编辑、删除按钮）
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            let ops_event = obj.event;
+            let layer = layui.layer;
+            switch (ops_event) {
+                case 'edit':
+                    console.log(data)
+                    layer.msg('编辑：' + data.bookName);
                     break;
-                case 'getData':
-                    var getData = table.getData(id);
-                    console.log(getData);
-                    layer.alert(layui.util.escape(JSON.stringify(getData)));
+                case 'del':
+                    console.log(data)
+                    layer.confirm('确定删除《' + data.bookName + '》吗？', {btn: ['确定', '取消']}, function (index) {
+                         /**
+                             * 向后端发送删除请求，执行完毕后，可通过 reloadData 方法完成数据重载
+                          */
+                        // 拿到当前行数据的id
+                        let id = data.bookId;
+                        // ajax请求删除数据
+                        let $ = layui.$;
+                        $.ajax({
+                            url: 'http://127.0.0.1:8066/book/del',
+                            method: 'post',
+                            data: {
+                                id: id
+                            },
+                            contentType: 'application/x-www-form-urlencoded',
+                            success: function (res) {
+                               switch (res.code){
+                                   case 200:
+                                       console.log(res)
+                                       layer.msg(res.data)
+                                       // 删除对应行（tr）的 DOM 结构，并更新缓存
+                                       obj.del();
+                                       // 关闭提示框
+                                       layer.close(index)
+                                       // 刷新表格数据
+                                       table.reload('test');
+                                       break;
+                                   case 500:
+                                       console.log(res)
+                                       layer.msg(res.data);
+                                       break;
+                               }
+                            }
+                        })
+                    ;
+                    });
                     break;
-            };
-        });
-        // 表头自定义元素工具事件 --- 2.8.8+
-        table.on('colTool(test)', function(obj){
-            var event = obj.event;
-            console.log(obj);
-            if(event === 'email-tips'){
-                layer.alert(layui.util.escape(JSON.stringify(obj.col)), {
-                    title: '当前列属性选项'
-                });
             }
         });
 
-        // 触发单元格工具事件
-        table.on('tool(test)', function(obj){ // 双击 toolDouble
-            var data = obj.data; // 获得当前行数据
-            // console.log(obj)
-            if(obj.event === 'edit'){
-                layer.open({
-                    title: '编辑 - id:'+ data.id,
-                    type: 1,
-                    area: ['80%','80%'],
-                    content: '<div style="padding: 16px;">自定义表单元素</div>'
-                });
-            } else if(obj.event === 'more'){
-                // 更多 - 下拉菜单
-                dropdown.render({
-                    elem: this, // 触发事件的 DOM 对象
-                    show: true, // 外部事件触发即显示
-                    data: [{
-                        title: '查看',
-                        id: 'detail'
-                    },{
-                        title: '删除',
-                        id: 'del'
-                    }],
-                    click: function(menudata){
-                        if(menudata.id === 'detail'){
-                            layer.msg('查看操作，当前行 ID:'+ data.id);
-                        } else if(menudata.id === 'del'){
-                            layer.confirm('真的删除行 [id: '+ data.id +'] 么', function(index){
-                                obj.del(); // 删除对应行（tr）的DOM结构
-                                layer.close(index);
-                                // 向服务端发送删除指令
-                            });
-                        }
-                    },
-                    id: 'dropdown-table-tool',
-                    align: 'right', // 右对齐弹出
-                    style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
-                });
-            }
-        });
-        // table 滚动时移除内部弹出的元素
-        var tableInst = table.getOptions('test');
-        tableInst.elem.next().find('.layui-table-main').on('scroll', function() {
-            dropdown.close('dropdown-table-tool');
-        });
-
-        // 触发表格复选框选择
-        table.on('checkbox(test)', function(obj){
-            console.log(obj)
-        });
-
-        // 触发表格单选框选择
-        table.on('radio(test)', function(obj){
-            console.log(obj)
-        });
-
-        // 行单击事件
-        table.on('row(test)', function(obj){
-            //console.log(obj);
-            //layer.closeAll('tips');
-        });
-        // 行双击事件
-        table.on('rowDouble(test)', function(obj){
-            console.log(obj);
-        });
-
-        // 单元格编辑事件
-        table.on('edit(test)', function(obj){
-            var field = obj.field; // 得到字段
-            var value = obj.value; // 得到修改后的值
-            var data = obj.data; // 得到所在行所有键值
-            // 值的校验
-            if(field === 'email'){
-                if(!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(obj.value)){
-                    layer.tips('输入的邮箱格式不正确，请重新编辑', this, {tips: 1});
-                    return obj.reedit(); // 重新编辑 -- v2.8.0 新增
-                }
-            }
-            // 编辑后续操作，如提交更新请求，以完成真实的数据更新
-            // …
-            layer.msg('编辑成功', {icon: 1});
-
-            // 其他更新操作
-            var update = {};
-            update[field] = value;
-            obj.update(update);
-        });
     });
 </script>
 </html>

@@ -10,6 +10,13 @@
         status,book_url,book_address
     </sql>
     <select id="bookPageList" resultType="com.org.zsh.thymeleafcode.model.entity.Book">
-        select * from book
+        select
+            b.*,
+            c.category_name as categoryName
+        from book as b
+        left join category as c on b.category_id = c.category_id
+        <where>
+            b.status  = 1
+        </where>
     </select>
 </mapper>
