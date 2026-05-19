@@ -16,13 +16,13 @@ spring:
   web:
     resources:
       static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, classpath:/static/html
-  # Thymeleaf 配置
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    encoding: UTF-8
-    mode: HTML
+#  # Thymeleaf 配置
+#  thymeleaf:
+#    cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    encoding: UTF-8
+#    mode: HTML
   # Jackson 配置
   Jackson:
     date-format: yyyy-MM-dd HH:mm:ss
