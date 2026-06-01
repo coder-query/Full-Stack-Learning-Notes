@@ -1,0 +1,20 @@
+spring:
+    application:
+        name: Boot-Excel
+    profiles:
+        active: dev
+    servlet:
+        multipart:
+            max-file-size: 100MB      # 单个文件最大 100MB
+            max-request-size: 500MB   # 单次请求最大 500MB
+server:
+    port: 9089
+
+
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+    enable: true
+    setting:
+        language: zh_cn
+
+
