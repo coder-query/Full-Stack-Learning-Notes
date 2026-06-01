@@ -18,6 +18,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 统一POI版本，解决EasyPoi和EasyExcel的版本冲突 -->
+        <poi.version>5.2.5</poi.version>
     </properties>
 
     <dependencies>
@@ -53,7 +55,32 @@
                     <groupId>cn.hutool</groupId>
                     <artifactId>hutool-all</artifactId>
                 </exclusion>
+                <!-- 排除EasyPoi自带的POI依赖，使用统一版本 -->
+                <exclusion>
+                    <groupId>org.apache.poi</groupId>
+                    <artifactId>poi</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.poi</groupId>
+                    <artifactId>poi-ooxml</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.poi</groupId>
+                    <artifactId>poi-ooxml-schemas</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- 统一引入POI依赖 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
         </dependency>
 
         <dependency>

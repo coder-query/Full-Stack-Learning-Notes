@@ -1,4 +1,4 @@
-package org.shuai.utils;
+package com.shuai.utils;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ContentDisposition;

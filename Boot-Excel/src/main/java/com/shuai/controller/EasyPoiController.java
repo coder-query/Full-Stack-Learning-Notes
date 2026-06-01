@@ -1,4 +1,4 @@
-package org.shuai.controller;
+package com.shuai.controller;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
@@ -10,8 +10,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.shuai.model.EasyPoiUser;
-import org.shuai.utils.EasyResponseUtils;
+import com.shuai.model.EasyPoiUser;
+import com.shuai.utils.EasyResponseUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,4 +1,4 @@
-package org.shuai.config;
+package com.shuai.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -49,7 +49,6 @@ public class Knife4jConfig {
         return GroupedOpenApi.builder()
                 .group("EasyPoi")
                 .pathsToMatch("/easyPoi/**")
-//                .packagesToScan("com.shuai.controller.EasyPoiController")
                 .build();
     }
 
@@ -61,7 +60,6 @@ public class Knife4jConfig {
         return GroupedOpenApi.builder()
                 .group("EasyExcel")
                 .pathsToMatch("/easyExcel/**")
-//                .packagesToScan("com.shuai.controller.EasyExcelController")
                 .build();
     }
 

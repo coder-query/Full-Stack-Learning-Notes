@@ -1,28 +1,20 @@
 
-package org.shuai.controller;
+package com.shuai.controller;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.ExcelImportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.ImportParams;
-import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.excel.EasyExcel;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.shuai.listener.EasyExcelUserDataListener;
-import org.shuai.model.EasyExcelUser;
-import org.shuai.model.EasyPoiUser;
-import org.shuai.utils.EasyResponseUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.shuai.listener.EasyExcelUserDataListener;
+import com.shuai.model.EasyExcelUser;
+import com.shuai.model.EasyPoiUser;
+import com.shuai.utils.EasyResponseUtils;
+import lombok.Getter;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -65,28 +57,28 @@ public class EasyExcelController {
     /**
      * 导出数据
      */
-    @Tag(name = "export", description = "导出数据")
-    @PostMapping("/export")
+    @Operation(summary = "导出数据")
+    @GetMapping("/export")
     public void export(HttpServletResponse response) throws IOException {
         List<EasyExcelUser> data = buildMockData();
         EasyResponseUtils.buildResponseHeader(response, "用户数据.xls");
         EasyExcel.write(response.getOutputStream(), EasyExcelUser.class)
                         .sheet("用户数据")
                         .doWrite(data);
-        response.flushBuffer();
+//        response.flushBuffer();
     }
 
     /**
      * 导出Excel 模版
      */
-    @Tag(name = "exportTemplate", description = "导出Excel模版")
-    @PostMapping("/exportTemplate")
+    @Operation(summary = "导出Excel模版")
+    @GetMapping("/exportTemplate")
     public void exportTemplate(HttpServletResponse response) throws IOException {
-        EasyExcelUser easyExcelUser = new EasyExcelUser("张三", 18);
+        EasyExcelUser data = new EasyExcelUser("张三", 18);
         EasyResponseUtils.buildResponseHeader(response, "用户数据模版.xlsx");
         EasyExcel.write(response.getOutputStream(), EasyExcelUser.class)
                 .sheet("用户数据模版")
-                .doWrite(CollUtil.newArrayList(easyExcelUser));
+                .doWrite(CollUtil.newArrayList(data));
         response.flushBuffer();
     }
 
@@ -95,12 +87,12 @@ public class EasyExcelController {
      * @param file 上传的Excel文件
      * @return 导入结果
      */
-    @Tag(name = "import", description = "导入数据")
+    @Operation(summary = "导入数据")
     @PostMapping("/import")
-    public List<EasyPoiUser> importData(@RequestParam("file") MultipartFile file) {
+    public List<EasyPoiUser> importData(@RequestParam("file") MultipartFile file) throws IOException {
         EasyExcelUserDataListener listener = new EasyExcelUserDataListener();
         return EasyExcel.read(
-                "",
+                file.getInputStream(),
                 EasyExcelUser.class,
                 listener
         ).sheet("用户数据").doReadSync();

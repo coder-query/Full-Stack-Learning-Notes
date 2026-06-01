@@ -1,4 +1,4 @@
-package org.shuai.model;
+package com.shuai.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.AllArgsConstructor;

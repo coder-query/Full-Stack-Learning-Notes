@@ -1,4 +1,4 @@
-package org.shuai.model;
+package com.shuai.model;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.AllArgsConstructor;
