@@ -1,5 +1,0 @@
-hello world
-123
-true
-123.456
-a
