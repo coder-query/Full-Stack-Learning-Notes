@@ -1,0 +1,32 @@
+package com.org.zsh.thymeleafcode.model.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import lombok.Data;
+
+/**
+ * 图书分类表
+ * @TableName category
+ */
+@TableName(value ="category")
+@Data
+public class Category implements Serializable {
+    /**
+     * 分类ID
+     */
+    @TableId(value = "category_id", type = IdType.AUTO)
+    private Integer categoryId;
+
+    /**
+     * 分类名称
+     */
+    @TableField(value = "category_name")
+    private String categoryName;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+}

@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: Boot_MongoDB_MongoPlus_Code
+# DataSource Config
+mongo-plus:
+    configuration:
+        field:
+            camelToUnderline: true
+    data:
+        mongodb:
+            host: 192.168.211.166  #ip
+            port: 27017   #端口
+            database: zsh_db    #数据库名
+            username: root    #用户名，没有可不填（若账号中出现@,!等等符号，不需要再进行转码！！！）
+            password: 123456    #密码，同上（若密码中出现@,!等等符号，不需要再进行转码！！！）
+            authenticationDatabase: admin     #验证数据库
+            connectTimeoutMS: 50000   #在超时之前等待连接打开的最长时间（以毫秒为单位）

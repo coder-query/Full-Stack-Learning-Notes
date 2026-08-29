@@ -1,0 +1,11 @@
+server:
+    port: 7111
+
+spring:
+    config:
+        import:
+            - optional:classpath:bootstrap.yml
+
+target:
+    server:
+        name : product-server

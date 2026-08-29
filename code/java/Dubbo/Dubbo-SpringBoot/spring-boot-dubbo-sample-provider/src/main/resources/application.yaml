@@ -1,0 +1,19 @@
+dubbo:
+  application:
+    name: ${spring.application.name}             # Dubbo应用名
+  registry:
+    address: zookeeper://192.168.211.101:2181
+    group: dubbo-group
+  protocol:
+    name: dubbo     # 协议类型
+    port: 20880     # Dubbo服务暴露端口（提供者之间的端口不能冲突）
+  provider:
+    timeout: 5000   # 提供者端默认超时
+    retries: 2      # 提供者端默认重试次数
+
+server:
+  port: 8001
+
+spring:
+  application:
+    name: sample-dubbo-provider

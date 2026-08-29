@@ -1,0 +1,12 @@
+#server.port=8001
+#spring.application.name=boot-simple-provider
+#dubbo.scan.base-packages=com.shuai.provider.service
+#dubbo.protocol.name=dubbo
+#dubbo.protocol.port=20882
+## 单个注册中心
+#dubbo.registry.address=zookeeper://123.56.89.181:2181
+#dubbo.registry.timeout=10000
+## 多个注册中心
+##dubbo.registries.beijing.address=zookeeper://123.56.89.181:2181
+##dubbo.registries.beijing.timeout=10000
+##dubbo.registries.hunan.address=nacos://123.56.89.181:8848

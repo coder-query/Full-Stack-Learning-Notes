@@ -1,0 +1,21 @@
+spring:
+    application:
+        # Nacos帮助文档: https://nacos.io/zh-cn/docs/concepts.html
+        name: nacos-service-consumer-rest-template
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+                namespace: public
+                group: DEFAULT_GROUP
+        sentinel:
+            transport:
+                dashboard: localhost:8035  # Sentinel控制台地址
+                port: 8002  # 应用与Sentinel控制台通信端口
+server:
+    port: 7002
+
+rest:
+    server:
+        url: http://nacos-service-provider
+

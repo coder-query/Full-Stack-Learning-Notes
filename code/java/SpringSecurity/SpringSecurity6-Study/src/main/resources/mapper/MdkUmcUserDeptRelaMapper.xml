@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mdk.springsecurity6study.mapper.MdkUmcUserDeptRelaMapper">
+
+    <resultMap id="BaseResultMap" type="com.mdk.springsecurity6study.common.entity.user.MdkUmcUserDeptRela">
+        <id property="id" column="id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,dept_id,user_id,create_by,create_time,update_by,
+        update_time
+    </sql>
+</mapper>

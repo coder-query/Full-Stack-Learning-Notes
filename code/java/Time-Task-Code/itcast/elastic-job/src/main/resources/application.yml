@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+#spring:
+#  datasource:
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://26.26.26.1:3306/elastic_job?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+#    username: root
+#    password: root
+
+elasticjob:
+  regCenter:
+    serverLists: 192.168.200.201:2181
+    namespace: elasticjob-lite-springboot
+  tracing:
+    type: RDB
+  jobs:
+    mySimpjob:
+      # spring中Bean的class类型
+      elasticJobClass: cn.itcast.task.MySimpleJob
+      # 任务调度表达式
+      cron: 0/5 * * * * ?
+      # 时区
+      timeZone: GMT+08:00
+      # 分片数量
+      shardingTotalCount: 3
+      # 分片参数
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+
+#    myDataFlowJob:
+#      # spring中Bean的class类型
+#      elasticJobClass: cn.itcast.task.MyDataFlowJob
+#      # 任务调度表达式
+#      cron: 0/10 * * * * ?
+#      # 时区
+#      timeZone: GMT+08:00
+#      # 分片数量
+#      shardingTotalCount: 3
+#      # 分片参数
+#      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou

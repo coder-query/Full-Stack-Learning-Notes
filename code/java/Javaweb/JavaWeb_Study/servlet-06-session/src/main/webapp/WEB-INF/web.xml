@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+
+	<servlet>
+		<servlet-name>setSession</servlet-name>
+		<servlet-class>com.itheima.servlet.SetSessionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>setSession</servlet-name>
+		<url-pattern>/set_session</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>getSession</servlet-name>
+		<servlet-class>com.itheima.servlet.GetSessionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getSession</servlet-name>
+		<url-pattern>/get_session</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>rmSession</servlet-name>
+		<servlet-class>com.itheima.servlet.RemoveSessionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>rmSession</servlet-name>
+		<url-pattern>/rm_session</url-pattern>
+	</servlet-mapping>
+</web-app>

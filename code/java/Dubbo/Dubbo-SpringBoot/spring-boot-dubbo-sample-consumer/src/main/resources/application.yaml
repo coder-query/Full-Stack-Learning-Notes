@@ -1,0 +1,15 @@
+dubbo:
+    application:
+        name: ${spring.application.name}              # Dubbo应用名，建议跟spring.application.name一致
+    registry:
+        address: zookeeper://192.168.211.101:2181    # 注册中心地址（Zookeeper）
+        group: dubbo-group                             # 注册分组，不同分组的服务相互隔离
+    consumer:
+        check: false        # 启动时不检查提供者是否存在（false=懒加载，true=启动就报错）
+        timeout: 5000       # 调用超时时间（毫秒）
+        retries: 2          # 失败重试次数（不含第一次调用）
+server:
+    port: 8000            # 消费者Web服务端口（Spring Boot端口，不是Dubbo端口）
+spring:
+    application:
+        name: sample-dubbo-consumer    # 应用名称

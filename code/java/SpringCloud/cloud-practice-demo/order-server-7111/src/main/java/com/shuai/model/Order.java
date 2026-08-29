@@ -1,0 +1,17 @@
+package com.shuai.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Order {
+    private Integer id;
+    private String name;
+    private String price;
+    private String status;
+    private String createTime;
+    private String updateTime;
+}

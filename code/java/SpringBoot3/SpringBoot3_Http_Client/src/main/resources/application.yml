@@ -1,0 +1,27 @@
+server:
+  port: 6869
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.shuai.springboot3_http_client
+# knife4j的增强配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+remote:
+  base-url:
+    user-server: http://localhost:7777
+    order-server: http://localhost:8888
+#    open-server: https://api.apiopen.top/api
+    open-server: http://127.0.0.1:30000

@@ -1,0 +1,11 @@
+server:
+  port: 6677
+
+# 此配置说明 ： 本地代码开发时的环境，连接测试服务器 mysql
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sql_test?useUnicode=true&characterEncoding=UTF-8&&allowMultiQueries=true
+    username: 'root'
+    password: '123456'

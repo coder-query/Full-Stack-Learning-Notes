@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+ <!--    id ： bean的唯一标识，bean的名称 -->
+    <!--    class ： 全类名-->
+    <bean id="userService" class="org.shuai.boot.service.UserService"/>
+</beans>

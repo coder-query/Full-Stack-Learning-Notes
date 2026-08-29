@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace要和mapper接口全类名保持一致-->
+<mapper namespace="com.it.mapper.TestPageHelperMapper">
+
+    <select id="getAllStudent" resultType="student">
+        select * from student
+    </select>
+</mapper>

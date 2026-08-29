@@ -1,0 +1,45 @@
+# 应用服务 WEB 访问端口
+server:
+    port: 9195
+    # 应用服务 WEB 访问路径
+    servlet:
+        context-path: /
+
+# 应用服务名称
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    application:
+        name: maven-dynamic-datasource
+    # 应用服务环境 dev,prod,test,local
+    profiles:
+        active: local
+
+    # 多数据源配置
+    datasource:
+        dynamic:
+            # 主数据源 (master)
+            primary: master #设置默认的数据源或者数据源组,默认值即为master
+            strict: false #严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+            datasource:
+                master:
+                    ########## JDBC 基本配置 ##########
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+                    url: jdbc:mysql://${zsh.mysql.master.host}:${zsh.mysql.master.port}/${zsh.mysql.master.db-name}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+                    username: ${zsh.mysql.master.username}
+                    password: ${zsh.mysql.master.password}
+                slave:
+                    ########## JDBC 基本配置 ##########
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+                    url: jdbc:mysql://${zsh.mysql.slave.host}:${zsh.mysql.slave.port}/${zsh.mysql.slave.db-name}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+                    username: ${zsh.mysql.slave.username}
+                    password: ${zsh.mysql.slave.password}
+
+mybatis-plus:
+    configuration:
+        map-underscore-to-camel-case: true
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+        cache-enabled: false
+    mapper-locations: classpath*:mapper/**/*.xml

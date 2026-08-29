@@ -1,0 +1,12 @@
+spring:
+    cloud:
+        nacos:
+            discovery:
+                # 可以覆盖主配置中的discovery设置
+                server-addr: 127.0.0.1:8848
+                namespace: public
+                group: DEFAULT_GROUP
+# 开发环境特定的其他配置
+logging:
+    level:
+        com.shuai: debug
