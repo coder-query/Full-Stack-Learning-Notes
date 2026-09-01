@@ -251,4 +251,4 @@ mvn spring-boot:run
 
 ## 许可证
 
-本项目基于 [LICENSE](../LICENSE) 协议开源。
+本项目基于 [LICENSE](../../../LICENSE) 协议开源。
