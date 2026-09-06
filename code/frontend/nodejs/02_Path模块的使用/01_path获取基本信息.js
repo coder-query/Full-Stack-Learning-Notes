@@ -10,8 +10,8 @@ console.log(path.dirname(filepath))
 
 const path1 = "/abc/cba"
 const path2 = "../why/kobe/james.txt"
-// console.log(path1 + path2)
+console.log(path1 + path2)
 
 // 2.将多个路径拼接在一起: path.join
-// console.log(path.join(path1, path2))
+console.log(path.join(path1, path2))
 
