@@ -4,7 +4,7 @@
 1，安装基础软件；
 2，linux系统；
 	- centos7.9
-	- Ubuntu22.04（sshd服务的配置文件）
+	- Ubuntu22.04-Linux核心命令（sshd服务的配置文件）
 	- Kylin-v10-sp3
 3，解释器的含义；
 4，命令的格式：命令 [参数选项] 操作的目标；
@@ -56,19 +56,19 @@
 [root@Kylin-oldboy ~]# ll /
 总用量 16
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin  #系统命令
-dr-xr-xr-x.   6 root root 4096  2月 28 10:41 boot    #系统内核存储位置
+dr-xr-xr-x.   6 root root 4096  2月 28 09-权限管理:41 boot    #系统内核存储位置
 drwxr-xr-x   19 root root 4000  2月 28 15:34 dev     #（硬盘）外接硬件的文件目录；
 drwxr-xr-x  121 root root 8192  2月 28 15:40 etc     #系统软件服务的配置文件存放地；
-drwxr-xr-x    3 root root   20  2月 28 11:40 home    #普通用户的家目录
+drwxr-xr-x    3 root root   20  2月 28 10-软件管理:40 home    #普通用户的家目录
 ....
 drwxr-xr-x    2 root root    6  3月  6  2021 mnt     #默认的挂载目录
-drwxr-xr-x    4 root root   53  2月 28 10:43 opt     #三方软件包的安装位置；
+drwxr-xr-x    4 root root   53  2月 28 09-权限管理:43 opt     #三方软件包的安装位置；
 dr-xr-xr-x  204 root root    0  2月 28 15:34 proc    #系统服务进程信息（类似于汽车的仪表盘）
 dr-xr-x---    3 root root  142  2月 28 15:52 root    #管理员的家目录
 lrwxrwxrwx    1 root root    8  3月  6  2021 sbin -> usr/sbin #系统命令
 drwxrwxrwt   10 root root  200  2月 28 15:46 tmp     #临时文件的存储位置（回收站）
-drwxr-xr-x   12 root root  144  2月 28 10:37 usr   
-drwxr-xr-x   22 root root  303  2月 28 10:56 var     #存放系统服务日志的目录；
+drwxr-xr-x   12 root root  144  2月 28 09-权限管理:37 usr   
+drwxr-xr-x   22 root root  303  2月 28 09-权限管理:56 var     #存放系统服务日志的目录；
 ```
 
 # 三、linux系统核心命令（必会）
@@ -174,24 +174,24 @@ boot  etc  lib   media  opt  root  sbin  sys  usr
 [root@Kylin-oldboy ~]# ll /
 总用量 16
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin
-dr-xr-xr-x.   6 root root 4096  2月 28 10:41 boot
+dr-xr-xr-x.   6 root root 4096  2月 28 09-权限管理:41 boot
 drwxr-xr-x   19 root root 4000  2月 28 15:34 dev
 drwxr-xr-x  121 root root 8192  2月 28 15:40 etc
-drwxr-xr-x    3 root root   20  2月 28 11:40 home
+drwxr-xr-x    3 root root   20  2月 28 10-软件管理:40 home
 lrwxrwxrwx    1 root root    7  3月  6  2021 lib -> usr/lib
 lrwxrwxrwx    1 root root    9  3月  6  2021 lib64 -> usr/lib64
 drwxr-xr-x    2 root root    6  3月  6  2021 media
 drwxr-xr-x    2 root root    6  3月  6  2021 mnt
-drwxr-xr-x    4 root root   53  2月 28 10:43 opt
+drwxr-xr-x    4 root root   53  2月 28 09-权限管理:43 opt
 dr-xr-xr-x  201 root root    0  2月 28 15:34 proc
-dr-xr-x---    5 root root  162  2月 28 17:08 root
+dr-xr-x---    5 root root  162  2月 28 17:07-文件属性信息（2） root
 drwxr-xr-x   38 root root 1080  2月 28 15:34 run
 lrwxrwxrwx    1 root root    8  3月  6  2021 sbin -> usr/sbin
 drwxr-xr-x    2 root root    6  3月  6  2021 srv
 dr-xr-xr-x   14 root root    0  2月 28 15:39 sys
 drwxrwxrwt   10 root root  200  2月 28 17:45 tmp
-drwxr-xr-x   12 root root  144  2月 28 10:37 usr
-drwxr-xr-x   22 root root  303  2月 28 10:56 var
+drwxr-xr-x   12 root root  144  2月 28 09-权限管理:37 usr
+drwxr-xr-x   22 root root  303  2月 28 09-权限管理:56 var
 ```
 
 > -h  人类可读的方式显示
@@ -200,19 +200,19 @@ drwxr-xr-x   22 root root  303  2月 28 10:56 var
 [root@Kylin-oldboy ~]# ls -lh /
 总用量 16K
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin
-dr-xr-xr-x.   6 root root 4.0K  2月 28 10:41 boot
+dr-xr-xr-x.   6 root root 4.0K  2月 28 09-权限管理:41 boot
 drwxr-xr-x   19 root root 4.0K  2月 28 15:34 dev
 drwxr-xr-x  121 root root 8.0K  2月 28 15:40 etc
 
 [root@Kylin-oldboy ~]# ll -h /
 总用量 16K
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin
-dr-xr-xr-x.   6 root root 4.0K  2月 28 10:41 boot
+dr-xr-xr-x.   6 root root 4.0K  2月 28 09-权限管理:41 boot
 drwxr-xr-x   19 root root 4.0K  2月 28 15:34 dev
 drwxr-xr-x  121 root root 8.0K  2月 28 15:40 etc
 
 ###########################
-#扩展：2^10=1024
+#扩展：2^09-权限管理=1024
 	1byte = 8bit
 	1kb   = 1024byte
 	1mb   = 1024kb
@@ -235,15 +235,15 @@ drwxr-xr-x 121 root root 8192  2月 28 15:40 /etc
 ```bash
 [root@Kylin-oldboy ~]# ll
 总用量 0
-drwxr-xr-x 3 root root 15  2月 28 17:08 1
+drwxr-xr-x 3 root root 15  2月 28 17:07-文件属性信息（2） 1
 drwxr-xr-x 3 root root 17  2月 28 16:57 111
 
 
 [root@Kylin-oldboy ~]# ll -a
 总用量 28
-dr-xr-x---   5 root root 162  2月 28 17:08 .
-dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
-drwxr-xr-x   3 root root  15  2月 28 17:08 1
+dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
+dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
+drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
 drwxr-xr-x   3 root root  17  2月 28 16:57 111
 -rw-------   1 root root 326  2月 28 17:45 .bash_history
 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
@@ -251,7 +251,7 @@ drwxr-xr-x   3 root root  17  2月 28 16:57 111
 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
 -rw-r--r--   1 root root 100  3月 13  2020 .cshrc
 drwx------   3 root root 108  2月 28 15:34 .gnupg
--rw-------   1 root root  20  2月 28 15:14 .lesshst
+-rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
 -rw-r--r--   1 root root 129  3月 13  2020 .tcshrc
 ```
 
@@ -263,12 +263,12 @@ drwx------   3 root root 108  2月 28 15:34 .gnupg
 [root@Kylin-oldboy ~]# ll -at
 总用量 28
 -rw-------   1 root root 326  2月 28 17:45 .bash_history
-dr-xr-x---   5 root root 162  2月 28 17:08 .
-drwxr-xr-x   3 root root  15  2月 28 17:08 1
+dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
+drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
 drwxr-xr-x   3 root root  17  2月 28 16:57 111
 drwx------   3 root root 108  2月 28 15:34 .gnupg
--rw-------   1 root root  20  2月 28 15:14 .lesshst
-dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
+-rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
+dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
 -rw-r--r--   1 root root 176  3月 13  2020 .bash_profile
 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
@@ -282,12 +282,12 @@ dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
 -rw-r--r--   1 root root 176  3月 13  2020 .bash_profile
 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
-dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
--rw-------   1 root root  20  2月 28 15:14 .lesshst
+dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
+-rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
 drwx------   3 root root 108  2月 28 15:34 .gnupg
 drwxr-xr-x   3 root root  17  2月 28 16:57 111
-drwxr-xr-x   3 root root  15  2月 28 17:08 1
-dr-xr-x---   5 root root 162  2月 28 17:08 .
+drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
+dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
 -rw-------   1 root root 326  2月 28 17:45 .bash_history
 ```
 
@@ -308,12 +308,12 @@ ls
 136159993 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
 136159992 -rw-r--r--   1 root root 176  3月 13  2020 .bash_profile
 136159991 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
-      128 dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
-134337496 -rw-------   1 root root  20  2月 28 15:14 .lesshst
+      128 dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
+134337496 -rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
  68032713 drwx------   3 root root 108  2月 28 15:34 .gnupg
 134337492 drwxr-xr-x   3 root root  17  2月 28 16:57 111
-   899628 drwxr-xr-x   3 root root  15  2月 28 17:08 1
-134317953 dr-xr-x---   5 root root 162  2月 28 17:08 .
+   899628 drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
+134317953 dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
 134609353 -rw-------   1 root root 326  2月 28 17:45 .bash_history
 ```
 
@@ -326,10 +326,10 @@ ls
 drwxr-xr-x 2 root root 6  2月 28 18:23 111
 
 #-p递归创建目录
-[root@Kylin-oldboy ~]# mkdir 11/22/33/44
-mkdir: 无法创建目录 “11/22/33/44”: 没有那个文件或目录
+[root@Kylin-oldboy ~]# mkdir 10-软件管理/22/33/44
+mkdir: 无法创建目录 “10-软件管理/22/33/44”: 没有那个文件或目录
 
-[root@Kylin-oldboy ~]# mkdir -p 11/22/33/44
+[root@Kylin-oldboy ~]# mkdir -p 10-软件管理/22/33/44
 [root@Kylin-oldboy ~]# tree
 .
 ├── 11
@@ -416,9 +416,9 @@ drwxr-xr-x 3 root root 18  2月 28 18:27 1111
 ```bash
 #复制文件
 [root@Kylin-oldboy ~]# touch 1.txt
-[root@Kylin-oldboy ~]# cp 1.txt 11
-11/   111/  1111/ 
-[root@Kylin-oldboy ~]# cp 1.txt 11/22/33/
+[root@Kylin-oldboy ~]# cp 1.txt 10-软件管理
+10-软件管理/   111/  1111/ 
+[root@Kylin-oldboy ~]# cp 1.txt 10-软件管理/22/33/
 [root@Kylin-oldboy ~]# tree
 .
 ├── 11
@@ -493,15 +493,15 @@ drwxr-xr-x 3 root root 18  2月 28 18:27 1111
 
 ```bash
 #1，-r参数删除目录
-[root@Kylin-oldboy ~]# rm -r 11 
-rm：是否进入目录'11'? y
-rm：是否进入目录'11/22'? y
-rm：是否进入目录'11/22/33'? y
-rm：是否删除目录 '11/22/33/44'？y
-rm：是否删除普通空文件 '11/22/33/1.txt'？y
-rm：是否删除目录 '11/22/33'？y
-rm：是否删除目录 '11/22'？y
-rm：是否删除目录 '11'？y
+[root@Kylin-oldboy ~]# rm -r 10-软件管理 
+rm：是否进入目录'10-软件管理'? y
+rm：是否进入目录'10-软件管理/22'? y
+rm：是否进入目录'10-软件管理/22/33'? y
+rm：是否删除目录 '10-软件管理/22/33/44'？y
+rm：是否删除普通空文件 '10-软件管理/22/33/1.txt'？y
+rm：是否删除目录 '10-软件管理/22/33'？y
+rm：是否删除目录 '10-软件管理/22'？y
+rm：是否删除目录 '10-软件管理'？y
 
 #2，-f参数，删除目录，不提示
 [root@Kylin-oldboy ~]# rm -rf 1111
@@ -619,521 +619,15 @@ drwxr-xr-x 2 root root 6  2月 28 18:47 11111
 #2，将隐藏文件改名为正式文件，或者直接删除隐藏文件。
 ```
 
-## 9，cat查看文件内容
-
-### · cat查看文件
-
-> 企业当中：大文件，慎用~
-
-![image-20250304091752345](linux目录结构与核心命令.assets/image-20250304091752345.png)
+# 四、作业
 
 ```bash
-#查看文件的相关参数
-[root@Kylin-oldboy ~]# cat /etc/hostname 
-Kylin-oldboy
-
-#-n显示行号
-[root@Kylin-oldboy ~]# cat -n 1.txt 
-     1	fjkgdfjkhgjhgjdfghkdfjghdfh
-     2	fghdfghfgh
-     3	fdgdfhfgjhfg
-     4	sdfgdfhfgjghjghjgh
-
-#-E在每行结尾处，显示一个$符号
-[root@Kylin-oldboy ~]# cat -E 1.txt 
-fjkgdfjkhgjhgjdfghkdfjghdfh$
-fghdfghfgh                          $
-fdgdfhfgjhfg     $
-sdfgdfhfgjghjghjgh$
-```
-
-### · cat创建编辑文件
-
-```bash
-[root@Kylin-oldboy ~]# cat > 2.txt<<EOF
-> 111
-> 22222
-> 333
-> 444
-> 5555
-> 6666756756867867867867868
-> EOF
-[root@Kylin-oldboy ~]# ll
-总用量 12
-drwxr-xr-x 2 root root    6  2月 28 18:57 111
-drwxr-xr-x 2 root root    6  2月 28 18:47 11111
--rw-r--r-- 1 root root  102  3月  1 18:08 1.txt
--rw-r--r-- 1 root root   49  3月  1 18:13 2.txt
--rw-r--r-- 1 root root 1856  2月 28 23:27 3.txt
-[root@Kylin-oldboy ~]# cat 2.txt 
-111
-22222
-333
-444
-5555
-6666756756867867867867868
-```
-
-## 10，tail查看文件
-
-> 默认显示文件的后10行
-
-```bash
-[root@Kylin-oldboy ~]# tail /etc/services 
-aigairserver    21221/tcp               # Services for Air Server
-ka-kdp          31016/udp               # Kollective Agent Kollective Delivery
-ka-sddp         31016/tcp               # Kollective Agent Secure Distributed Delivery
-edi_service     34567/udp               # dhanalakshmi.org EDI Service
-axio-disc       35100/tcp               # Axiomatic discovery protocol
-axio-disc       35100/udp               # Axiomatic discovery protocol
-pmwebapi        44323/tcp               # Performance Co-Pilot client HTTP API
-cloudcheck-ping 45514/udp               # ASSIA CloudCheck WiFi Management keepalive
-cloudcheck      45514/tcp               # ASSIA CloudCheck WiFi Management System
-spremotetablet  46998/tcp               # Capture handwritten signatures
-
-#显示文件的后5行
-[root@Kylin-oldboy ~]# tail -n 5 /etc/services 
-axio-disc       35100/udp               # Axiomatic discovery protocol
-pmwebapi        44323/tcp               # Performance Co-Pilot client HTTP API
-cloudcheck-ping 45514/udp               # ASSIA CloudCheck WiFi Management keepalive
-cloudcheck      45514/tcp               # ASSIA CloudCheck WiFi Management System
-spremotetablet  46998/tcp               # Capture handwritten signatures
-[root@Kylin-oldboy ~]# tail -5 /etc/services 
-axio-disc       35100/udp               # Axiomatic discovery protocol
-pmwebapi        44323/tcp               # Performance Co-Pilot client HTTP API
-cloudcheck-ping 45514/udp               # ASSIA CloudCheck WiFi Management keepalive
-cloudcheck      45514/tcp               # ASSIA CloudCheck WiFi Management System
-spremotetablet  46998/tcp               # Capture handwritten signatures
-
-#tail监控文件变化（当文件发生变化，就将变化的内容打印在屏幕中）
-[root@Kylin-oldboy ~]# tail -f /var/log/secure
-```
-
-## 11，head查看文件
-
-> 默认显示文件的前10行
-
-```bash
-[root@Kylin-oldboy ~]# head /etc/services 
-# /etc/services:
-# $Id: services,v 1.49 2017/08/18 12:43:23 ovasik Exp $
-#
-# Network services, Internet style
-# IANA services version: last updated 2016-07-08
-#
-# Note that it is presently the policy of IANA to assign a single well-known
-# port number for both TCP and UDP; hence, most entries here have two entries
-# even if the protocol doesn't support UDP operations.
-# Updated from RFC 1700, ``Assigned Numbers'' (October 1994).  Not all ports
-
-#显示文件的前2行
-[root@Kylin-oldboy ~]# head -2 /etc/services 
-# /etc/services:
-# $Id: services,v 1.49 2017/08/18 12:43:23 ovasik Exp $
-```
-
-## 12，more/less分页查看文件
-
-```bash
-#准备大文件环境
-[root@Kylin-oldboy ~]# seq 10000 > 1.txt
-
-#1，less/more查看文件
-[root@Kylin-oldboy ~]# more 1.txt
-[root@Kylin-oldboy ~]# less 1.txt
-	f   #向下翻页
-	b   #向上翻页
-	q   #退出
+#1，做好自己的命令笔记；
 ```
 
 
 
-# 四、linux系统配置下载源
 
-## 1，配置下载源
-
-> centos配置下载源
-
-```bash
-curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-curl -o /etc/yum.repos.d/epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
-```
-
-> kylin配置下载源
-
-```bash
-curl -o /etc/yum.repos.d/epel.repo https://mirrors.aliyun.com/repo/epel-7.repo
-```
-
-> ubuntu配置下载源
-
-```bash
-root@oldboy:~# vim /etc/apt/sources.list
-deb https://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb-src https://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-
-deb https://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb-src https://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-
-deb https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb-src https://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-
-# deb https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-# deb-src https://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-
-deb https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
-deb-src https://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
-
-#配置完需要更新下载源
-root@oldboy:~# apt update
-```
-
-## 2，下载常用的软件
-
-```bash
-#1,centos、kylin下载：
-yum -y install tree vim wget bash-completion bash-completion-extras lrzsz net-tools sysstat iotop iftop htop unzip nc nmap telnet bc psmisc httpd-tools bind-utils methogs expect dos2unix cowsay sl
-
-#2，ubuntu下载：apt只能一个一个安装~
-apt -y install 软件名称
-tree 
-vim 
-wget 
-bash-completion 
-bash-completion-extras 
-lrzsz 
-net-tools 
-sysstat 
-iotop 
-iftop 
-htop 
-unzip 
-nc 
-nmap 
-telnet 
-bc 
-psmisc 
-httpd-tools 
-bind-utils 
-methogs 
-expect 
-dos2unix 
-cowsay 
-sl
-
-#Ubuntu黑客帝国代码雨
-root@oldboy:~# apt -y install cmatrix
-root@oldboy:~# cmatrix
-```
-
-# 五、linux系统核心命令-续集（必会）
-
-## 1，echo打印
-
-```bash
-[root@Kylin-oldboy ~]# echo hahahahahahaha
-hahahahahahaha
-[root@Kylin-oldboy ~]# echo "网安26期"
-网安26期
-```
-
-### · echo与重定向配合
-
-```bash
-#重定向符号
->    #标准输出【覆盖】重定向，先清空，在覆盖；
->>   #标准输出【追加】重定向，追加到文件末尾；
-
-[root@Kylin-oldboy ~]# cat 1.txt 
-[root@Kylin-oldboy ~]# echo "111" 
-111
-[root@Kylin-oldboy ~]# echo "111" >1.txt 
-[root@Kylin-oldboy ~]# cat 1.txt 
-111
-[root@Kylin-oldboy ~]# echo "222" >1.txt 
-[root@Kylin-oldboy ~]# cat 1.txt 
-222
-[root@Kylin-oldboy ~]# echo "333" >>1.txt 
-[root@Kylin-oldboy ~]# cat 1.txt 
-222
-333
-[root@Kylin-oldboy ~]# echo "444" >>1.txt 
-[root@Kylin-oldboy ~]# cat 1.txt 
-222
-333
-444
-
-#清空文件
-[root@Kylin-oldboy ~]# >1.txt 
-[root@Kylin-oldboy ~]# cat 1.txt 
-```
-
-### · echo与输出序列配合{}
-
-```bash
-[root@Kylin-oldboy ~]# echo {1..10}
-1 2 3 4 5 6 7 8 9 10
-[root@Kylin-oldboy ~]# echo {a..z}
-a b c d e f g h i j k l m n o p q r s t u v w x y z
-[root@Kylin-oldboy ~]# echo {a..Z}
-a ` _ ^ ]  [ Z
-[root@Kylin-oldboy ~]# echo {A..Z}
-A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-[root@Kylin-oldboy ~]# echo {A..F}
-A B C D E F
-[root@Kylin-oldboy ~]# echo {1..10000} > 1.txt
-[root@Kylin-oldboy ~]# cat 1.txt 
-
-```
-
-> 附加：序列化符号的使用
-
-```bash
-[root@Kylin-oldboy ~]# rm -rf ./*
-[root@Kylin-oldboy ~]# ll
-总用量 0
-
-#一起创建10个文件
-[root@Kylin-oldboy ~]# touch {1..10}.txt
-[root@Kylin-oldboy ~]# ll
-总用量 0
--rw-r--r-- 1 root root 0  3月  1 20:23 10.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 1.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 2.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 3.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 4.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 5.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 6.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 7.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 8.txt
--rw-r--r-- 1 root root 0  3月  1 20:23 9.txt
-
-#输出序列seq  n 
-[root@Kylin-oldboy ~]# echo {1..10} >1.txt 
-
-[root@Kylin-oldboy ~]# cat -n 1.txt 
-     1	1 2 3 4 5 6 7 8 9 10
-
-[root@Kylin-oldboy ~]# seq 10 > 1.txt
-[root@Kylin-oldboy ~]# cat 1.txt 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-```
-
-## 2，tree命令树形显示目录结构
-
-> 需要单独安装tree软件
-
-```bash
-[root@Kylin-oldboy ~]# mkdir -p 11/22/33/44/55/66/77/88/99/
-[root@Kylin-oldboy ~]# tree ./
-./
-├── 1
-│   └── 2
-│       └── 3
-│           └── 4
-│               └── 5
-│                   └── 6
-│                       └── 7
-│                           └── 8
-│                               └── 9
-└── 11
-    └── 22
-        └── 33
-            └── 44
-                └── 55
-                    └── 66
-                        └── 77
-                            └── 88
-                                └── 99
-
-#-a显示隐藏文件
-[root@Kylin-oldboy ~]# tree -a ./
-./
-├── 1
-│   └── 2
-│       └── 3
-│           └── 4
-│               └── 5
-│                   └── 6
-│                       └── 7
-│                           └── 8
-│                               └── 9
-├── 11
-│   └── 22
-│       └── 33
-│           └── 44
-│               └── 55
-│                   └── 66
-│                       └── 77
-│                           └── 88
-│                               └── 99
-├── .3.txt.swp
-├── .bash_history
-├── .bash_logout
-├── .bash_profile
-├── .bashrc
-├── .cshrc
-├── .gnupg
-│   ├── private-keys-v1.d
-│   ├── pubring.kbx
-│   ├── pubring.kbx~
-│   ├── random_seed
-│   └── trustdb.gpg
-├── .lesshst
-├── .tcshrc
-└── .viminfo
-
-#-d只显示目录
-[root@Kylin-oldboy ~]# tree -ad ./
-./
-├── 1
-│   └── 2
-│       └── 3
-│           └── 4
-│               └── 5
-│                   └── 6
-│                       └── 7
-│                           └── 8
-│                               └── 9
-├── 11
-│   └── 22
-│       └── 33
-│           └── 44
-│               └── 55
-│                   └── 66
-│                       └── 77
-│                           └── 88
-│                               └── 99
-└── .gnupg
-    └── private-keys-v1.d
-    
-#-L控制像是的目录深度
-[root@Kylin-oldboy ~]# tree -L 2 ./
-./
-├── 1
-│   └── 2
-└── 11
-    └── 22
-
-#-o将结果写入到一个文件中
-[root@Kylin-oldboy ~]# tree -L 3 ./ > 1.txt
-[root@Kylin-oldboy ~]# cat 1.txt 
-./
-├── 1
-│   └── 2
-│       └── 3
-├── 11
-│   └── 22
-│       └── 33
-└── 1.txt
-
-6 directories, 1 file
-[root@Kylin-oldboy ~]# tree -L 3 ./ -o 1.txt
-[root@Kylin-oldboy ~]# cat 1.txt 
-./
-├── 1
-│   └── 2
-│       └── 3
-├── 11
-│   └── 22
-│       └── 33
-└── 1.txt
-
-#-F在目录后面加一个/（为了与文件区分开）
-[root@Kylin-oldboy ~]# tree -LF 3 ./ 
-./
-├── 1/
-│   └── 2/
-│       └── 3/
-├── 11/
-│   └── 22/
-│       └── 33/
-└── 1.txt
-
-#-f显示完整的路径
-[root@Kylin-oldboy ~]# tree -Lf 3 ./ 
-.
-├── ./1
-│   └── ./1/2
-│       └── ./1/2/3
-├── ./11
-│   └── ./11/22
-│       └── ./11/22/33
-└── ./1.txt
-
-#-i不显示结构缩进线
-[root@Kylin-oldboy ~]# tree -Lfi 3 ./ 
-.
-./1
-./1/2
-./1/2/3
-./11
-./11/22
-./11/22/33
-./1.txt
-```
-
-## 3，查询命令文件的位置
-
-### · which
-
-```bash
-[root@Kylin-oldboy ~]# which vim
-/usr/bin/vim
-[root@Kylin-oldboy ~]# ll /usr/bin/vim
--rwxr-xr-x 1 root root 3035088 10月 10  2022 /usr/bin/vim
-[root@Kylin-oldboy ~]# ll -h /usr/bin/vim
--rwxr-xr-x 1 root root 2.9M 10月 10  2022 /usr/bin/vim
-```
-
-### · whereis
-
-> 顺带找到man帮助文件路径
-
-```bash
-[root@Kylin-oldboy ~]# whereis vim
-vim: /usr/bin/vim /usr/share/vim /usr/share/man/man1/vim.1.gz
-[root@Kylin-oldboy ~]# whereis cp
-cp: /usr/bin/cp
-[root@Kylin-oldboy ~]# whereis mkdir
-mkdir: /usr/bin/mkdir /usr/share/man/man2/mkdir.2.gz
-```
-
-## 4，seq生成序列
-
-```bash
-[root@Kylin-oldboy ~]# seq 5
-1
-2
-3
-4
-5
-
-#从1一直输出到10，每隔2数字输出1个
-[root@Kylin-oldboy ~]# seq 1 2 10
-1
-3
-5
-7
-9
-[root@Kylin-oldboy ~]# seq 1 3 10
-1
-4
-7
-10
-[root@Kylin-oldboy ~]# seq 1 5 10
-1
-6
-```
 
 
 
