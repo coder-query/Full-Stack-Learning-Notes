@@ -21,9 +21,9 @@
 **示例：**
 
 ```bash
-git commit -m "feat: 新增Vue Router学习模块"
-git commit -m "fix: 修复MyBatis批量插入空指针问题"
-git commit -m "docs: 更新后端Linux笔记"
+git commit -m "【feat: 新增Vue Router学习模块】"
+git commit -m "【fix: 修复MyBatis批量插入空指针问题】"
+git commit -m "【docs: 更新后端Linux笔记】"
 ```
 
 ---
