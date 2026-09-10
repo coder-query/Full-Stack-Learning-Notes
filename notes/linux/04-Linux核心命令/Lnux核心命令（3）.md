@@ -366,7 +366,7 @@ wa
 [root@Kylin-oldboy ~]# date
 2025年 03月 02日 星期日 22:17:16 CST
 [root@Kylin-oldboy ~]# date +%F
-2025-03-linux目录结构与核心命令（2）-02-linux目录结构与核心命令（）
+2025-03-02
 [root@Kylin-oldboy ~]# date +%T
 22:18:56
 [root@Kylin-oldboy ~]# date +%w
@@ -374,11 +374,11 @@ wa
 [root@Kylin-oldboy ~]# date +%Y
 2025
 [root@Kylin-oldboy ~]# date +%Y-%m
-2025-03-linux目录结构与核心命令（2）
+2025-03
 [root@Kylin-oldboy ~]# date +%Y/%m
-2025/03-linux目录结构与核心命令（2）
+2025/03
 [root@Kylin-oldboy ~]# date +%Y-%m-%d
-2025-03-linux目录结构与核心命令（2）-02-linux目录结构与核心命令（）
+2025-03-02
 [root@Kylin-oldboy ~]# date +%H
 22
 [root@Kylin-oldboy ~]# date +%H:%M
@@ -386,18 +386,18 @@ wa
 [root@Kylin-oldboy ~]# date +%H:%M:%S
 22:21:45
 [root@Kylin-oldboy ~]# date +%Y-%m-%d\ %H:%M:%S
-2025-03-linux目录结构与核心命令（2）-02-linux目录结构与核心命令（） 22:22:23
+2025-03-02 22:22:23
 [root@Kylin-oldboy ~]# date +%Y-%m-%d/%H:%M:%S
-2025-03-linux目录结构与核心命令（2）-02-linux目录结构与核心命令（）/22:22:43
+2025-03-02/22:22:43
 ```
 
 ### · 修改时间
 
 ```bash
 [root@Kylin-oldboy ~]# date -s '20111225 8:00:22'
-2011年 12月 25日 星期日 07-文件属性信息（2）:00:22 CST
+2011年 12月 25日 星期日 08:00:22 CST
 [root@Kylin-oldboy ~]# date
-2011年 12月 25日 星期日 07-文件属性信息（2）:00:26 CST
+2011年 12月 25日 星期日 08:00:26 CST
 ```
 
 > ubuntu默认开始了自动时间同步功能，想要修改时间，需要关闭systemd-timesyncd服务
@@ -405,12 +405,12 @@ wa
 ```bash
 root@oldboy:~# systemctl stop systemd-timesyncd.service 
 root@oldboy:~# date -s '20111222 15:30:55'
-Thu Dec 22 03-linux目录结构与核心命令（2）:30:55 PM UTC 2011
+Thu Dec 22 03:30:55 PM UTC 2011
 root@oldboy:~# date
-Thu Dec 22 03-linux目录结构与核心命令（2）:30:57 PM UTC 2011
+Thu Dec 22 03:30:57 PM UTC 2011
 root@oldboy:~# systemctl start systemd-timesyncd.service 
 root@oldboy:~# date
-Wed Mar  5 03-linux目录结构与核心命令（2）:34:45 AM UTC 2025
+Wed Mar  5 03:34:45 AM UTC 2025
 ```
 
 ### · 时间同步
@@ -420,9 +420,9 @@ Wed Mar  5 03-linux目录结构与核心命令（2）:34:45 AM UTC 2025
 ```bash
 #1，查看系统时间
 [root@Kylin-oldboy ~]# timedatectl 
-               Local time: 日 2011-11-进程与服务管理-25 10-软件管理:51:25 CST
-           Universal time: 日 2011-11-进程与服务管理-25 03-linux目录结构与核心命令（2）:51:25 UTC
-                 RTC time: 三 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 06-文件属性信息（1）:03-linux目录结构与核心命令（2）:35
+               Local time: 日 2011-12-25 11:51:25 CST
+           Universal time: 日 2011-12-25 03:51:25 UTC
+                 RTC time: 三 2025-03-05 07:03:35
                 #本机时区
                 Time zone: Asia/Shanghai (CST, +0800)
                 #是否自动同步时间；
@@ -434,9 +434,9 @@ System clock synchronized: no
 root@oldboy:~# timedatectl list-timezones
 root@oldboy:~# timedatectl set-timezone Asia/Shanghai
 root@oldboy:~# timedatectl 
-               Local time: Wed 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 15:10-软件管理:06 CST
-           Universal time: Wed 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 06-文件属性信息（1）:10-软件管理:06 UTC
-                 RTC time: Wed 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 06-文件属性信息（1）:10-软件管理:06
+               Local time: Wed 2025-03-05 15:11:06 CST
+           Universal time: Wed 2025-03-05 07:11:06 UTC
+                 RTC time: Wed 2025-03-05 07:11:06
                 Time zone: Asia/Shanghai (CST, +0800)
 System clock synchronized: yes
               NTP service: active
@@ -451,9 +451,9 @@ System clock synchronized: yes
 
 #手动同步时间
 [root@Kylin-oldboy ~]# ntpdate ntp1.aliyun.com
- 5 Mar 15:13-系统服务管理与三剑客（2）:46 ntpdate[13713]: step time server 118.31.3.89 offset +1052394249.468763 sec
+ 5 Mar 15:14:46 ntpdate[13713]: step time server 118.31.3.89 offset +1052394249.468763 sec
 [root@Kylin-oldboy ~]# date
-2025年 03月 05日 星期三 15:13-系统服务管理与三剑客（2）:49 CST
+2025年 03月 05日 星期三 15:14:49 CST
 ```
 
 #### 3，自动同步时间
@@ -474,9 +474,9 @@ server ntp2.aliyun.com iburst
 
 [root@Kylin-oldboy ~]# systemctl restart chronyd.service 
 [root@Kylin-oldboy ~]# timedatectl 
-               Local time: 三 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 15:46:54 CST
-           Universal time: 三 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 06-文件属性信息（1）:46:54 UTC
-                 RTC time: 三 2025-03-linux目录结构与核心命令（2）-05-系统重要的配置文件-etc 06-文件属性信息（1）:46:54
+               Local time: 三 2025-03-05 15:46:54 CST
+           Universal time: 三 2025-03-05 07:46:54 UTC
+                 RTC time: 三 2025-03-05 07:46:54
                 Time zone: Asia/Shanghai (CST, +0800)
 System clock synchronized: yes
               NTP service: active

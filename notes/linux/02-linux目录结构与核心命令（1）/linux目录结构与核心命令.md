@@ -4,7 +4,7 @@
 1，安装基础软件；
 2，linux系统；
 	- centos7.9
-	- Ubuntu22.04-Linux核心命令（sshd服务的配置文件）
+	- Ubuntu22.04（sshd服务的配置文件）
 	- Kylin-v10-sp3
 3，解释器的含义；
 4，命令的格式：命令 [参数选项] 操作的目标；
@@ -56,19 +56,19 @@
 [root@Kylin-oldboy ~]# ll /
 总用量 16
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin  #系统命令
-dr-xr-xr-x.   6 root root 4096  2月 28 09-权限管理:41 boot    #系统内核存储位置
+dr-xr-xr-x.   6 root root 4096  2月 28 10:41 boot    #系统内核存储位置
 drwxr-xr-x   19 root root 4000  2月 28 15:34 dev     #（硬盘）外接硬件的文件目录；
 drwxr-xr-x  121 root root 8192  2月 28 15:40 etc     #系统软件服务的配置文件存放地；
-drwxr-xr-x    3 root root   20  2月 28 10-软件管理:40 home    #普通用户的家目录
+drwxr-xr-x    3 root root   20  2月 28 11:40 home    #普通用户的家目录
 ....
 drwxr-xr-x    2 root root    6  3月  6  2021 mnt     #默认的挂载目录
-drwxr-xr-x    4 root root   53  2月 28 09-权限管理:43 opt     #三方软件包的安装位置；
+drwxr-xr-x    4 root root   53  2月 28 10:43 opt     #三方软件包的安装位置；
 dr-xr-xr-x  204 root root    0  2月 28 15:34 proc    #系统服务进程信息（类似于汽车的仪表盘）
 dr-xr-x---    3 root root  142  2月 28 15:52 root    #管理员的家目录
 lrwxrwxrwx    1 root root    8  3月  6  2021 sbin -> usr/sbin #系统命令
 drwxrwxrwt   10 root root  200  2月 28 15:46 tmp     #临时文件的存储位置（回收站）
-drwxr-xr-x   12 root root  144  2月 28 09-权限管理:37 usr   
-drwxr-xr-x   22 root root  303  2月 28 09-权限管理:56 var     #存放系统服务日志的目录；
+drwxr-xr-x   12 root root  144  2月 28 10:37 usr   
+drwxr-xr-x   22 root root  303  2月 28 10:56 var     #存放系统服务日志的目录；
 ```
 
 # 三、linux系统核心命令（必会）
@@ -174,24 +174,24 @@ boot  etc  lib   media  opt  root  sbin  sys  usr
 [root@Kylin-oldboy ~]# ll /
 总用量 16
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin
-dr-xr-xr-x.   6 root root 4096  2月 28 09-权限管理:41 boot
+dr-xr-xr-x.   6 root root 4096  2月 28 10:41 boot
 drwxr-xr-x   19 root root 4000  2月 28 15:34 dev
 drwxr-xr-x  121 root root 8192  2月 28 15:40 etc
-drwxr-xr-x    3 root root   20  2月 28 10-软件管理:40 home
+drwxr-xr-x    3 root root   20  2月 28 11:40 home
 lrwxrwxrwx    1 root root    7  3月  6  2021 lib -> usr/lib
 lrwxrwxrwx    1 root root    9  3月  6  2021 lib64 -> usr/lib64
 drwxr-xr-x    2 root root    6  3月  6  2021 media
 drwxr-xr-x    2 root root    6  3月  6  2021 mnt
-drwxr-xr-x    4 root root   53  2月 28 09-权限管理:43 opt
+drwxr-xr-x    4 root root   53  2月 28 10:43 opt
 dr-xr-xr-x  201 root root    0  2月 28 15:34 proc
-dr-xr-x---    5 root root  162  2月 28 17:07-文件属性信息（2） root
+dr-xr-x---    5 root root  162  2月 28 17:08 root
 drwxr-xr-x   38 root root 1080  2月 28 15:34 run
 lrwxrwxrwx    1 root root    8  3月  6  2021 sbin -> usr/sbin
 drwxr-xr-x    2 root root    6  3月  6  2021 srv
 dr-xr-xr-x   14 root root    0  2月 28 15:39 sys
 drwxrwxrwt   10 root root  200  2月 28 17:45 tmp
-drwxr-xr-x   12 root root  144  2月 28 09-权限管理:37 usr
-drwxr-xr-x   22 root root  303  2月 28 09-权限管理:56 var
+drwxr-xr-x   12 root root  144  2月 28 10:37 usr
+drwxr-xr-x   22 root root  303  2月 28 10:56 var
 ```
 
 > -h  人类可读的方式显示
@@ -200,19 +200,19 @@ drwxr-xr-x   22 root root  303  2月 28 09-权限管理:56 var
 [root@Kylin-oldboy ~]# ls -lh /
 总用量 16K
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin
-dr-xr-xr-x.   6 root root 4.0K  2月 28 09-权限管理:41 boot
+dr-xr-xr-x.   6 root root 4.0K  2月 28 10:41 boot
 drwxr-xr-x   19 root root 4.0K  2月 28 15:34 dev
 drwxr-xr-x  121 root root 8.0K  2月 28 15:40 etc
 
 [root@Kylin-oldboy ~]# ll -h /
 总用量 16K
 lrwxrwxrwx    1 root root    7  3月  6  2021 bin -> usr/bin
-dr-xr-xr-x.   6 root root 4.0K  2月 28 09-权限管理:41 boot
+dr-xr-xr-x.   6 root root 4.0K  2月 28 10:41 boot
 drwxr-xr-x   19 root root 4.0K  2月 28 15:34 dev
 drwxr-xr-x  121 root root 8.0K  2月 28 15:40 etc
 
 ###########################
-#扩展：2^09-权限管理=1024
+#扩展：2^10=1024
 	1byte = 8bit
 	1kb   = 1024byte
 	1mb   = 1024kb
@@ -235,15 +235,15 @@ drwxr-xr-x 121 root root 8192  2月 28 15:40 /etc
 ```bash
 [root@Kylin-oldboy ~]# ll
 总用量 0
-drwxr-xr-x 3 root root 15  2月 28 17:07-文件属性信息（2） 1
+drwxr-xr-x 3 root root 15  2月 28 17:08 1
 drwxr-xr-x 3 root root 17  2月 28 16:57 111
 
 
 [root@Kylin-oldboy ~]# ll -a
 总用量 28
-dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
-dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
-drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
+dr-xr-x---   5 root root 162  2月 28 17:08 .
+dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
+drwxr-xr-x   3 root root  15  2月 28 17:08 1
 drwxr-xr-x   3 root root  17  2月 28 16:57 111
 -rw-------   1 root root 326  2月 28 17:45 .bash_history
 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
@@ -251,7 +251,7 @@ drwxr-xr-x   3 root root  17  2月 28 16:57 111
 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
 -rw-r--r--   1 root root 100  3月 13  2020 .cshrc
 drwx------   3 root root 108  2月 28 15:34 .gnupg
--rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
+-rw-------   1 root root  20  2月 28 15:14 .lesshst
 -rw-r--r--   1 root root 129  3月 13  2020 .tcshrc
 ```
 
@@ -263,12 +263,12 @@ drwx------   3 root root 108  2月 28 15:34 .gnupg
 [root@Kylin-oldboy ~]# ll -at
 总用量 28
 -rw-------   1 root root 326  2月 28 17:45 .bash_history
-dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
-drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
+dr-xr-x---   5 root root 162  2月 28 17:08 .
+drwxr-xr-x   3 root root  15  2月 28 17:08 1
 drwxr-xr-x   3 root root  17  2月 28 16:57 111
 drwx------   3 root root 108  2月 28 15:34 .gnupg
--rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
-dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
+-rw-------   1 root root  20  2月 28 15:14 .lesshst
+dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
 -rw-r--r--   1 root root 176  3月 13  2020 .bash_profile
 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
@@ -282,12 +282,12 @@ dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像
 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
 -rw-r--r--   1 root root 176  3月 13  2020 .bash_profile
 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
-dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
--rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
+dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
+-rw-------   1 root root  20  2月 28 15:14 .lesshst
 drwx------   3 root root 108  2月 28 15:34 .gnupg
 drwxr-xr-x   3 root root  17  2月 28 16:57 111
-drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
-dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
+drwxr-xr-x   3 root root  15  2月 28 17:08 1
+dr-xr-x---   5 root root 162  2月 28 17:08 .
 -rw-------   1 root root 326  2月 28 17:45 .bash_history
 ```
 
@@ -308,12 +308,12 @@ ls
 136159993 -rw-r--r--   1 root root 176  3月 13  2020 .bashrc
 136159992 -rw-r--r--   1 root root 176  3月 13  2020 .bash_profile
 136159991 -rw-r--r--   1 root root  18  3月 13  2020 .bash_logout
-      128 dr-xr-xr-x. 18 root root 238  2月 28 10-软件管理:01-vmware安装linux镜像+命令基础入门 ..
-134337496 -rw-------   1 root root  20  2月 28 15:13-系统服务管理与三剑客（2） .lesshst
+      128 dr-xr-xr-x. 18 root root 238  2月 28 11:01 ..
+134337496 -rw-------   1 root root  20  2月 28 15:14 .lesshst
  68032713 drwx------   3 root root 108  2月 28 15:34 .gnupg
 134337492 drwxr-xr-x   3 root root  17  2月 28 16:57 111
-   899628 drwxr-xr-x   3 root root  15  2月 28 17:07-文件属性信息（2） 1
-134317953 dr-xr-x---   5 root root 162  2月 28 17:07-文件属性信息（2） .
+   899628 drwxr-xr-x   3 root root  15  2月 28 17:08 1
+134317953 dr-xr-x---   5 root root 162  2月 28 17:08 .
 134609353 -rw-------   1 root root 326  2月 28 17:45 .bash_history
 ```
 
@@ -326,10 +326,10 @@ ls
 drwxr-xr-x 2 root root 6  2月 28 18:23 111
 
 #-p递归创建目录
-[root@Kylin-oldboy ~]# mkdir 10-软件管理/22/33/44
-mkdir: 无法创建目录 “10-软件管理/22/33/44”: 没有那个文件或目录
+[root@Kylin-oldboy ~]# mkdir 11/22/33/44
+mkdir: 无法创建目录 “11/22/33/44”: 没有那个文件或目录
 
-[root@Kylin-oldboy ~]# mkdir -p 10-软件管理/22/33/44
+[root@Kylin-oldboy ~]# mkdir -p 11/22/33/44
 [root@Kylin-oldboy ~]# tree
 .
 ├── 11
@@ -416,9 +416,9 @@ drwxr-xr-x 3 root root 18  2月 28 18:27 1111
 ```bash
 #复制文件
 [root@Kylin-oldboy ~]# touch 1.txt
-[root@Kylin-oldboy ~]# cp 1.txt 10-软件管理
-10-软件管理/   111/  1111/ 
-[root@Kylin-oldboy ~]# cp 1.txt 10-软件管理/22/33/
+[root@Kylin-oldboy ~]# cp 1.txt 11
+11/   111/  1111/ 
+[root@Kylin-oldboy ~]# cp 1.txt 11/22/33/
 [root@Kylin-oldboy ~]# tree
 .
 ├── 11
@@ -493,15 +493,15 @@ drwxr-xr-x 3 root root 18  2月 28 18:27 1111
 
 ```bash
 #1，-r参数删除目录
-[root@Kylin-oldboy ~]# rm -r 10-软件管理 
-rm：是否进入目录'10-软件管理'? y
-rm：是否进入目录'10-软件管理/22'? y
-rm：是否进入目录'10-软件管理/22/33'? y
-rm：是否删除目录 '10-软件管理/22/33/44'？y
-rm：是否删除普通空文件 '10-软件管理/22/33/1.txt'？y
-rm：是否删除目录 '10-软件管理/22/33'？y
-rm：是否删除目录 '10-软件管理/22'？y
-rm：是否删除目录 '10-软件管理'？y
+[root@Kylin-oldboy ~]# rm -r 11 
+rm：是否进入目录'11'? y
+rm：是否进入目录'11/22'? y
+rm：是否进入目录'11/22/33'? y
+rm：是否删除目录 '11/22/33/44'？y
+rm：是否删除普通空文件 '11/22/33/1.txt'？y
+rm：是否删除目录 '11/22/33'？y
+rm：是否删除目录 '11/22'？y
+rm：是否删除目录 '11'？y
 
 #2，-f参数，删除目录，不提示
 [root@Kylin-oldboy ~]# rm -rf 1111
