@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
-	str := utils.SliceStr("hello world")
-	fmt.Println(str)
+	var strRes string
+	strRes = utils.SliceStr("hello world")
+	fmt.Println(strRes)
 }
