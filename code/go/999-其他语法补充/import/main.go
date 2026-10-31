@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"misc/utils"
+	"import-go-mod/utils"
 )
 
 func main() {
