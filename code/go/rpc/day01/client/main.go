@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-
-	connection, err := jsonrpc.Dial("tcp", "192.168.110.252:8800")
+	// 1.连接远程服务端
+	connection, err := jsonrpc.Dial("tcp", "127.0.0.1:8800")
 	if err != nil {
 		fmt.Println("连接失败:", err)
 		return

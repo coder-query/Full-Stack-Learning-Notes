@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"net"
-	"net/rpc"
 	"net/rpc/jsonrpc"
+	rpcParent "rpc-parent/design"
 )
 
 type World struct {
@@ -17,12 +17,8 @@ func (world *World) Hello(name string, response *string) error {
 
 func main() {
 	// 1.注册服务,绑定对象方法
-	err := rpc.RegisterName("Hello", new(World))
-	if err != nil {
-		fmt.Println("注册服务失败:", err)
-		return
-	}
-	fmt.Println("注册服务成功")
+	rpcParent.RegisterRpcService(new(World))
+
 	// 2.设置监听
 	fmt.Println("开始监听8800端口")
 	listener, err := net.Listen("tcp", "127.0.0.1:8800")
