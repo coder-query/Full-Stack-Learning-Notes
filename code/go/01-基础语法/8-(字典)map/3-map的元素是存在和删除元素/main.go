@@ -9,7 +9,7 @@ func main() {
 	coursesMap["course2"] = "grpc"
 	coursesMap["course3"] = "gin"
 
-	if val, ok := coursesMap["java"]; ok {
+	if val, exists := coursesMap["java"]; exists {
 		fmt.Println("java exists, val:", val)
 	} else {
 		fmt.Println("java not exists")
