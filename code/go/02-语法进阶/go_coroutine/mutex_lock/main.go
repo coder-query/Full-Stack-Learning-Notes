@@ -11,6 +11,8 @@ var num int = 0
 
 func add() {
 	defer wg.Done()
+	lock.Lock()
+	defer lock.Unlock()
 	for i := 0; i < 1000000; i++ {
 		num++
 	}
@@ -18,6 +20,8 @@ func add() {
 }
 
 func sub() {
+	lock.Lock()
+	defer lock.Unlock()
 	defer wg.Done()
 	for i := 0; i < 1000000; i++ {
 		num--
