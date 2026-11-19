@@ -12,8 +12,8 @@ func main() {
 		return
 	}
 	fmt.Println("client:", client)
-	var response string
-	err = client.Call("helloService.CallHelloFun", "hello", &response)
+	var response *string = new(string)
+	err = client.Call("helloService.CallHelloFun", "hello", response)
 	if err != nil {
 		fmt.Println("error:", err)
 		return
