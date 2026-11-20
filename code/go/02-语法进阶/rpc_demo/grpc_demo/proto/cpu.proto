@@ -1,0 +1,16 @@
+syntax = "proto3";
+option go_package = "./proto_go;proto_go";
+
+service CpuService {
+  rpc getCpuInfo(CpuInfoRequest) returns (CpuInfoResponse) {}
+}
+
+message CpuInfoResponse {
+  string name = 1;
+  string value = 2;
+}
+
+message CpuInfoRequest{
+  string name = 1;
+  string value = 2;
+}
