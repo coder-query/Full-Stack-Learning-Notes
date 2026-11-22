@@ -14,7 +14,7 @@ func printSlice(data []string) {
 
 func main() {
 	//go的slice在函数参数传递的时候是值传递还是引用传递： 值传递， 效果又呈现出了引用的效果（不完全是）
-	courses := []string{"go", "grpc", "gin"}
+	courses := []string{"go", "grpc", "gin-validator"}
 	printSlice(courses)
 	fmt.Println(courses)
 

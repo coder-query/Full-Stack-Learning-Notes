@@ -6,7 +6,7 @@ func main() {
 	var coursesMap map[string]string = make(map[string]string, 3)
 	coursesMap["course1"] = "go"
 	coursesMap["course2"] = "grpc"
-	coursesMap["course3"] = "gin"
+	coursesMap["course3"] = "gin-validator"
 	fmt.Println(coursesMap)
 	var ageMap = map[string]int{
 		"张三": 18,

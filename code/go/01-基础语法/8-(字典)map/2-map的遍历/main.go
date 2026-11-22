@@ -6,7 +6,7 @@ func main() {
 	var coursesMap map[string]string = make(map[string]string, 3)
 	coursesMap["course1"] = "go"
 	coursesMap["course2"] = "grpc"
-	coursesMap["course3"] = "gin"
+	coursesMap["course3"] = "gin-validator"
 	// 1. 遍历map，获取key和value
 	for key, value := range coursesMap {
 		fmt.Println("key:", key, "value:", value)
