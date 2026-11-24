@@ -15,9 +15,10 @@ func main() {
 		colly.AllowedDomains("quotes.toscrape.com"),
 	)
 
-	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
+	c.OnHTML("a", func(e *colly.HTMLElement) {
+		fmt.Println("e: ", e)
 		link := e.Attr("href")
-		fmt.Printf("发现链接 depth=%d %s -> %s\n", e.Request.Depth, e.Text, link)
+		fmt.Printf("发现链接 depth=%d e.Text: %s -> link: %s\n", e.Request.Depth, e.Text, link)
 		// Request.Visit 会沿用当前请求的 depth，并在内部 +1 作为子请求深度。
 		_ = e.Request.Visit(link)
 	})

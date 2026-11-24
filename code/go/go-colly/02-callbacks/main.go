@@ -1,4 +1,4 @@
-// 示例 02：演示一次成功请求里各回调的触发顺序。
+// 示例 02：演示一次成功请求里各回调的触发顺序（XPath 专题见 13-xpath）。
 // v1.2.0 无 OnResponseHeaders，成功路径一般为：
 // OnRequest → OnResponse → OnHTML → OnXML → OnScraped
 // 若请求失败：OnRequest → OnError（OnHTML 等解析回调不会执行）。

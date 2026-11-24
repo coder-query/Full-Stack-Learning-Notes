@@ -16,6 +16,7 @@ func main() {
 			regexp.MustCompile(`https://quotes\.toscrape\.com/$`),
 			regexp.MustCompile(`https://quotes\.toscrape\.com/tag/.+`),
 		),
+		colly.MaxDepth(1),
 	)
 
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {

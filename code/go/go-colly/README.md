@@ -17,6 +17,7 @@ go run ./09-parallel
 go run ./10-queue
 go run ./11-structured-data
 go run ./12-form-post
+go run ./13-xpath
 ```
 
 | 目录 | 对应文档 | 演示内容 |
@@ -33,7 +34,10 @@ go run ./12-form-post
 | `10-queue` | queue | `queue.New` 消费队列 |
 | `11-structured-data` | OnHTML / coursera 示例思路 | 用选择器抽出结构化字段并翻页 |
 | `12-form-post` | login 示例的 `Post` | 向 httpbin 提交表单并读回响应 |
+| `13-xpath` | Getting started 的 `OnXML` | HTML / XML 上用 XPath：`ChildText`、`Attr`、`//note` 等 |
 
 `first-demo` 是原有示例，未改动。
+
+**OnHTML（CSS）与 OnXML（XPath）**：`01-basic`、`11-structured-data` 走 CSS；`02-callbacks` 仅演示回调里的 `//title`；完整 XPath 见 `13-xpath`。
 
 当前 v1.2.0 没有文档里较新的 `OnResponseHeaders`。回调顺序以本版本实际提供的方法为准。
