@@ -28,7 +28,5 @@ func GetMysqlDBConnection() *gorm.DB {
 	if err != nil {
 		panic("连接数据库失败")
 	}
-
 	return db
-
 }
