@@ -1,48 +1,39 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
+// 文档：路由分组。增删改查都挂在 /user 前缀下。
 func main() {
 	engine := gin.Default()
-	// 用户组路由
 	userGroup := engine.Group("/user")
 	{
-		// 增
-		userGroup.POST("/add", addUser)
-		// 删
-		userGroup.DELETE("/delete/:id", deleteUser)
-		// 改
-		userGroup.PUT("/update/:id", updateUser)
-		// 查
+		userGroup.POST("", addUser)
+		userGroup.DELETE("/:id", deleteUser)
+		userGroup.PUT("/:id", updateUser)
 		userGroup.GET("/:id", getUserInfoById)
 	}
-	err := engine.Run(":7675")
-	if err != nil {
-		fmt.Println("error:", err)
-		return
+	if err := engine.Run(":7676"); err != nil {
+		panic(err)
 	}
 }
 
-func updateUser(context *gin.Context) {
-
+func addUser(c *gin.Context) {
+	name := c.PostForm("name")
+	c.JSON(http.StatusCreated, gin.H{"name": name})
 }
 
-func deleteUser(context *gin.Context) {
-
+func deleteUser(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"deleted": c.Param("id")})
 }
 
-func addUser(context *gin.Context) {
-
+func updateUser(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"updated": c.Param("id"), "name": c.PostForm("name")})
 }
+
 func getUserInfoById(c *gin.Context) {
-	paramId := c.Param("id")
-	// 这里直接就返回了，后续做项目是 gorm 查询数据库
-	c.JSON(http.StatusOK, gin.H{
-		"id": paramId,
-	})
+	c.JSON(http.StatusOK, gin.H{"id": c.Param("id")})
 }
