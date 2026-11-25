@@ -2,6 +2,8 @@
 
 学习文档以 [Go 语言中文网标准库文档](https://studygolang.com/pkgdoc) 为主（中文版，目录与官方 `go doc` / [pkg.go.dev](https://pkg.go.dev/std) 一致），每个子目录对应一个常用标准库包的最小可运行示例。
 
+**完整分类与覆盖情况**见 [PKGDOC.md](./PKGDOC.md)（按 pkgdoc 目录整理的常用包清单 + 本仓库示例编号）。
+
 ### 原包 vs util 子包（你要的对照关系）
 
 | 原包 / 基础能力 | util 或配套子包 | 本仓库示例 |
@@ -94,4 +96,19 @@ go run ./46-net-http-httputil
 go run ./47-net-http-httptest
 ```
 
-仓库里 `02-语法进阶/io_demo`、`file_demo`、`net_*` 等也有部分重叠。`01`–`22` 偏 **I/O、网络、基础类型**；`23`–`44` 偏 **其它常用工具包**；`45`–`49` 专讲 **和 `io`、`net/http` 配套的 util 子包**。
+### 常用包补充（`50`–`69`）
+
+对齐 pkgdoc 里高频但原先未单独成例的包，例如 `io/fs`、`os/exec`、`log/slog`、`encoding/binary`、`database/sql`、`net/rpc` 等。详见 [PKGDOC.md](./PKGDOC.md) 各节勾选表。
+
+```bash
+go run ./50-io-fs
+go run ./53-log-slog
+go run ./69-database-sql
+```
+
+仓库里 `02-语法进阶/io_demo`、`file_demo`、`net_*` 等也有部分重叠。
+
+- `01`–`22`：**I/O、网络、基础类型**
+- `23`–`44`：**数学、encoding、压缩、crypto、容器、运行时等**
+- `45`–`49`：**`io` / `net/http` 的 util 子包**
+- `50`–`69`：**pkgdoc 常用清单补全**
