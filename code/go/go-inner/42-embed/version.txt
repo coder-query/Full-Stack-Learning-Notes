@@ -1,0 +1,2 @@
+go-inner embed demo
+pkgdoc: https://studygolang.com/pkgdoc
