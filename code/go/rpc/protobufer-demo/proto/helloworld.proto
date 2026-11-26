@@ -1,8 +1,0 @@
-syntax = "proto3";
-option go_package = ".;proto";
-
-message HelloRequest {
-    string name = 1;  // 编号是1，不是数值
-    int32 age = 2;
-    repeated string hobbies = 4;
-}
