@@ -29,4 +29,5 @@ func main() {
 		panic(err)
 	}
 	log.Printf("n2=%d data=%q", n2, buf2[:n2]) // n2=3 data="abc"
+
 }
